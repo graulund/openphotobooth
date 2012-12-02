@@ -1,8 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxUI.h"
 
-class testApp : public ofBaseApp{
+class opbApp : public ofBaseApp{
 	
 	public:
 		
@@ -18,16 +19,26 @@ class testApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);		
+		void gotMessage(ofMessage msg);
+	
+	void generateFilteredImage(unsigned char * pixels);
+	void takePhoto();
+	void saveTextureToFile(ofTexture pixels, string path);
+	void savePixelsToFile(ofPixels pixels, string path);
 		
 		ofVideoGrabber 		vidGrabber;
-	unsigned char * 	videoInverted;
-	unsigned char * 	videoInverted2;
-	unsigned char * 	videoInverted3;
-	//unsigned char * 	videoInverted4;
+	unsigned char * 	videoModified;
+	unsigned char * 	videoModified2;
+	unsigned char * 	videoModified3;
+	//unsigned char * 	videoModified4;
 	ofTexture			videoTexture;
 	ofTexture			videoTexture2;
 	ofTexture			videoTexture3;
 		int 				camWidth;
 		int 				camHeight;
+		int                 totalPixels;
+	
+	ofxUICanvas *gui;
+	void exit();
+	void guiEvent(ofxUIEventArgs &e);
 };
