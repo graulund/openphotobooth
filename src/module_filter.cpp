@@ -44,5 +44,5 @@ int module_filter::getFilterCount()
 
 void module_filter::getFilters(unsigned char * pxlPtr, int fnctNr)
 {
-	(*this.*ptrArr_[i])(pxlPtr);
+	(*this.*ptrArr_[fnctNr])(pxlPtr);
 }
