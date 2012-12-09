@@ -1,15 +1,42 @@
 #include "module_filter.h"
+#include "ImageAdjustment.h"
 
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <vector>
+#include <string>
+
+//int alist[] = { 2, 3, { 2, 3 } };
 
 module_filter::module_filter(int size) : imageSize_(size)
 {
 	ptrArr_[0] = &module_filter::vibrance;
-	ptrArr_[1] = &module_filter::saturation;
+	ptrArr_[1] = &module_filter::applyTestFilter;
 	ptrArr_[2] = &module_filter::greyscale;
-	ptrArr_[3] = &module_filter::brightness;
+	ptrArr_[3] = &module_filter::applyTestFilter2;
+	
+	/*
+	 // FILTERS CAN BE DEFINED HERE ONCE ARGUMENTS CAN BE PASSED TO THE FUNCTIONS
+	 // UNTIL THEN LOOK AT APPLYTESTFILTER
+	 
+	 std::vector<ImageAdjustment> sinCity;
+	 sinCity.push_back(ImageAdjustment("contrast", 100));
+	 sinCity.push_back(ImageAdjustment("brightness", 15));
+	 //sinCity.push_back(ImageAdjustment("exposure", 10));
+	 sinCity.push_back(ImageAdjustment("posterize", 80));
+	 sinCity.push_back(ImageAdjustment("greyscale"));
+	 
+	 std::vector<ImageAdjustment> love;
+	 love.push_back(ImageAdjustment("brightness", 5));
+	 //love.push_back(ImageAdjustment("exposure", 8));
+	 love.push_back(ImageAdjustment("contrast", 4));
+	 love.push_back(ImageAdjustment("colorize", 30, 196, 32, 7));
+	 love.push_back(ImageAdjustment("vibrance", 50));
+	 love.push_back(ImageAdjustment("gamma", 130));
+	 
+	 */
+	
 }
 
 /**
@@ -282,14 +309,18 @@ void module_filter::sepia(unsigned char * pxlPtr){
 
 /**
  * IMAGE ADJUSTMENT: GAMMA
- * Adjusts the gamma of the image. Range is from 0 to infinity, but usually kept between 0 and 4-5.
- * Values between 0 and 1 will lessen the contrast, while values greater than 1 will increase it.
+ * Adjusts the gamma of the image. Range is from 0 to infinity, but usually kept between 0 and 400-500.
+ * Values between 0 and 100 will lessen the contrast, while values greater than 100 will increase it.
+ * Normally, gamma is a decimal value where above numbers are 0-1 and 4-5, but since we're using ints
+ * for adjust, everything is multiplied by 100 in the argument and divided by 100 inside the function,
+ * resulting in an integer argument.
  */
 void module_filter::gamma(unsigned char * pxlPtr){
-	float adjust = 0.5F; //tmp
+	int adjust = 50; //tmp
+	float x    = adjust / 100.0F;
 	for (int i = 0; i < imageSize_; i++) {
 		pxlPtr[i] = module_filter::unclip(
-						(int)(std::pow((float)(pxlPtr[i] / 255.0F), adjust) * 255.0F)
+						(int)(std::pow((float)(pxlPtr[i] / 255.0F), x) * 255.0F)
 					);
 	}
 }
@@ -332,6 +363,118 @@ void module_filter::noise(unsigned char * pxlPtr){
  * Adjust is from -100 to 100. Values < 0 will decrease exposure, values > 0 will increase exposure.
  */
 //TODO
+
+/**
+ * IMAGE ADJUSTMENT: POSTERIZE
+ * Applies posterization to the image: A continuous gradation of tone to several regions of fewer tones.
+ * Range is from 0 to 100.
+ */
+void module_filter::posterize(unsigned char * pxlPtr){
+	int adjust = 80; //tmp
+	float numOfAreas = 256.0F / adjust;
+	float numOfValues = 255.0F / (adjust - 1);
+	
+	for (int i = 0; i < imageSize_; i++) {
+		pxlPtr[i] = module_filter::unclip(
+						(int)(std::floor(std::floor(pxlPtr[i] / numOfAreas) * numOfValues))
+					);
+	}
+}
+
+// Image adjustment lookup table
+/*struct
+{
+	void(*fn)();
+	string key;
+} function_lookup_table[] =
+{
+	{ &module_filter::brightness, "brightness" },
+	{ &module_filter::saturation, "saturation" },
+	{ NULL,    NULL     }
+};*/
+
+void module_filter::applyFilter(unsigned char * pxlPtr, std::vector<ImageAdjustment> adjustments) {
+	ImageAdjustment* adj;
+	for (int i = 0; i < imageSize_; i++) {
+		std::cout << "Going through pixel " << i << " out of " << imageSize_ << std::endl;
+		for (long j = 0; j < adjustments.size(); j++) {
+			//std::cout << "Going through adjustment " << j << std::endl;
+			try {
+				adj = &adjustments.at(j);
+				
+				// This could probably be done in a smarter way, assuming a
+				// function lookup table could be used, but it does not really
+				// want to work with me. This should suffice.
+				if (adj->name == "brightness") {
+					module_filter::brightness(pxlPtr);
+				} else if (adj->name == "saturation"){
+					module_filter::saturation(pxlPtr);
+				} else if (adj->name == "vibrance"){
+					module_filter::vibrance(pxlPtr);
+				} else if (adj->name == "greyscale"){
+					module_filter::greyscale(pxlPtr);
+				} else if (adj->name == "contrast"){
+					module_filter::contrast(pxlPtr);
+				} else if (adj->name == "hue"){
+					module_filter::hue(pxlPtr);
+				} else if (adj->name == "colorize"){
+					module_filter::colorize(pxlPtr);
+				} else if (adj->name == "invert"){
+					module_filter::invert(pxlPtr);
+				} else if (adj->name == "sepia"){
+					module_filter::sepia(pxlPtr);
+				} else if (adj->name == "gamma"){
+					module_filter::gamma(pxlPtr);
+				} else if (adj->name == "noise"){
+					module_filter::noise(pxlPtr);
+				}
+				
+			} catch (exception& e) {}
+		}
+	}
+}
+
+// TWO TEST FILTERS
+
+void module_filter::applyTestFilter(unsigned char * pxlPtr){
+	/*std::vector<ImageAdjustment> sinCity;
+	sinCity.push_back(ImageAdjustment("contrast", 100));
+	//sinCity.push_back(ImageAdjustment("brightness", 15));
+	//sinCity.push_back(ImageAdjustment("exposure", 10));
+	//sinCity.push_back(ImageAdjustment("posterize", 80));
+	sinCity.push_back(ImageAdjustment("greyscale"));
+	
+	std::cout << "Sin city vector of length " << sinCity.size() << std::endl;
+	
+	module_filter::applyFilter(pxlPtr, sinCity);*/
+	
+	// FORCE IT.
+	// There's a performance issue with the above.
+	// If we can't fix this, then we can say goodbye to user-contributed filters. :(
+	module_filter::contrast(pxlPtr);
+	module_filter::brightness(pxlPtr);
+	module_filter::posterize(pxlPtr);
+	module_filter::greyscale(pxlPtr);
+}
+
+void module_filter::applyTestFilter2(unsigned char * pxlPtr){
+	/*std::vector<ImageAdjustment> love;
+	love.push_back(ImageAdjustment("brightness", 5));
+	//love.push_back(ImageAdjustment("exposure", 8));
+	//love.push_back(ImageAdjustment("contrast", 4));
+	//love.push_back(ImageAdjustment("colorize", 30, 196, 32, 7));
+	//love.push_back(ImageAdjustment("vibrance", 50));
+	love.push_back(ImageAdjustment("gamma", 130));
+	
+	std::cout << "Love vector of length " << love.size() << std::endl;
+	
+	module_filter::applyFilter(pxlPtr, love);*/
+	
+	module_filter::brightness(pxlPtr);
+	module_filter::colorize(pxlPtr);
+	module_filter::vibrance(pxlPtr);
+	module_filter::gamma(pxlPtr);
+}
 
 // The parts remaining:
 // MILESTONE 2:

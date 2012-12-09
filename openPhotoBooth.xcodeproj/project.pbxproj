@@ -20,6 +20,7 @@
 		63b57ac5bf4ef088491e0317dbb2ecaa /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50df87d612c5aae17aafa6c02c6bc570 /* ofxXmlSettings.cpp */; };
 		933a2227713c720ceff80fd967d0a8ee /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2b40eda85beb63e46785bc299a638898 /* tinyxml.cpp */; };
 		9d44dc88ef9e7991b4a09951e2e4769f /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 832bdc407620cdba568b713d2252c43c /* tinyxmlerror.cpp */; };
+		A14AC872167478BA0041A0A7 /* ImageAdjustment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A14AC870167478BA0041A0A7 /* ImageAdjustment.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -116,6 +117,8 @@
 		856bf5ab0322d0689ee63829f6f27a37 /* ofxUIRangeSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIRangeSlider.h; path = ../../../addons/ofxUI/src/ofxUIRangeSlider.h; sourceTree = SOURCE_ROOT; };
 		885850b62fad08eb1d2f0bf4a56e5e01 /* ofxUIRotarySlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIRotarySlider.h; path = ../../../addons/ofxUI/src/ofxUIRotarySlider.h; sourceTree = SOURCE_ROOT; };
 		961de8b564ef22e65c9480ae3fc5936a /* ofxUI2DPad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUI2DPad.h; path = ../../../addons/ofxUI/src/ofxUI2DPad.h; sourceTree = SOURCE_ROOT; };
+		A14AC870167478BA0041A0A7 /* ImageAdjustment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageAdjustment.cpp; sourceTree = "<group>"; };
+		A14AC871167478BA0041A0A7 /* ImageAdjustment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAdjustment.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -192,6 +195,8 @@
 				1F2A391F1672FBB9001FD801 /* Bootstrap.cpp */,
 				1F2A39201672FBB9001FD801 /* Bootstrap.h */,
 				1F2A392F167329E5001FD801 /* module_filter.cpp */,
+				A14AC870167478BA0041A0A7 /* ImageAdjustment.cpp */,
+				A14AC871167478BA0041A0A7 /* ImageAdjustment.h */,
 				1F2A3930167329E5001FD801 /* module_filter.h */,
 			);
 			name = libs;
@@ -502,6 +507,7 @@
 				1F2A39231672FBB9001FD801 /* Bootstrap.cpp in Sources */,
 				1F2A39241672FBB9001FD801 /* FilterController.cpp in Sources */,
 				1F2A3931167329E5001FD801 /* module_filter.cpp in Sources */,
+				A14AC872167478BA0041A0A7 /* ImageAdjustment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

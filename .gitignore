@@ -120,6 +120,7 @@ xcuserdata
 *.exe
 *.o
 *.so
+bin/
 
 # Packages #
 ############
