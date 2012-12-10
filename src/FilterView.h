@@ -13,4 +13,5 @@ public:
 	void drawFilter(ofTexture, int);
 	/* data */
 };
+
 #endif

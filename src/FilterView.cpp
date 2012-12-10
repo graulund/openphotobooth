@@ -1,5 +1,9 @@
 #include "FilterView.h"
 
+/**
+ * Copy Constrcutor. Uses an old View to get the Settings and Initialized
+ * a new Filter Class with those settings.
+ */
 FilterView::FilterView(View * oldView, std::string iconURL, 
 	int width, int height) : View(oldView, iconURL, width, height)
 {
@@ -16,6 +20,11 @@ void FilterView::drawVideoGrabber(ofVideoGrabber * vidGrabber,
 	vidGrabber->draw(0, 0, w, h);
 }
 
+/**
+ * Draws the Filter into the Scene. Poisition is given by the index
+ * @param textureArr texture with applied filter
+ * @param index      [description]
+ */
 void FilterView::drawFilter(ofTexture * textureArr, int index)
 {
 	int y = 0;
@@ -35,7 +44,5 @@ void FilterView::drawFilter(ofTexture * textureArr, int index)
 
 void FilterView::drawFilter(ofTexture texture, int index)
 {
-
-//	std::cout << "
 	texture.draw(0, 0, 213, 160);
 }

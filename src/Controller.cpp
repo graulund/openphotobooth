@@ -1,10 +1,19 @@
 #include "Controller.h"
 
+/**
+ * Default Constructor for the First Call
+ */
 Controller::Controller()
 {
 	init();
+	initName();
 }
 
+/**
+ * Copy Constructor. Uses an old Controller to get the used View and Model
+ * with all the Settings. This way we dont have to create them all again
+ * and prevent interface lag.
+ */
 Controller::Controller(Controller * oldController, bool delOld)
 {
 	model_ = oldController->getModel();
@@ -15,15 +24,18 @@ Controller::Controller(Controller * oldController, bool delOld)
 	view_ = new View(view_, model_->getIconURL(),
 		model_->getCamWidth(), model_->getCamHeight());
 
-	view_->setButtonLabel(1, model_->getButtonLabel(1));
-	view_->setButtonLabel(2, model_->getButtonLabel(2));
+	initName();
 
 	if (delOld)
 		delete oldController;
 }
 
-Controller::~Controller() { }
+Controller::~Controller() {}
 
+/**
+ * Since C++ doesnt support to call another constructor of the same Object
+ * we use a init() method to prevent dublicated code
+ */
 void Controller::init()
 {
 	model_ = new Model();
@@ -32,8 +44,17 @@ void Controller::init()
 	view_ = new View(model_->getIconURL(), model_->getCamWidth(), 
 		model_->getCamHeight(), canvas_);
 
+	initName();
+}
+
+void Controller::initName()
+{
 	view_->setButtonLabel(1, model_->getButtonLabel(1));
 	view_->setButtonLabel(2, model_->getButtonLabel(2));
+	
+	view_->setButtonName(1, model_->getButtonName(1));
+	view_->setButtonName(2, model_->getButtonName(2));
+	view_->setButtonName(3, model_->getButtonName(3));
 }
 
 /**
@@ -74,6 +95,11 @@ void Controller::keyPressed(int key)
 	}
 }
 
+void Controller::mousePressed(int x, int y, int button)
+{
+
+}
+
 /**
  * Controlls all Events happens in the Current View
  * @param newEvent event object including widget which fired the event
@@ -82,7 +108,7 @@ void Controller::guiEvent(ofxUIEventArgs & newEvent)
 {
 	string buttonName = newEvent.widget->getName();
 
-	if (buttonName == "BUTTON_CENT")
+	if (buttonName == "MAINMIDDLE")
 	{
 		ofxUIButton * button = (ofxUIButton *) newEvent.widget;
 		if (button->getValue() == 0)
@@ -90,7 +116,7 @@ void Controller::guiEvent(ofxUIEventArgs & newEvent)
 			model_->saveImage();
 		}
 	}
-	else if (buttonName == "BUTTON_LEFT")
+	else if (buttonName == "MAINLEFT")
 	{
 
 	}
@@ -107,12 +133,25 @@ ofxUICanvas * Controller::getCanvas()
 	return canvas_;
 }
 
+/**
+ * Returns the current used Model
+ * @return the current Model
+ */
 Model * Controller::getModel()
 {
 	return model_;
 }
 
+/**
+ * Returns the current used View
+ * @return the current View
+ */
 View * Controller::getView()
 {
 	return view_;
+}
+
+bool Controller::isSelectable(int x, int y)
+{
+	return model_->selectImage(x, y);
 }

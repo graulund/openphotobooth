@@ -38,5 +38,29 @@
          startingLineNumber = "67"
          endingLineNumber = "67">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/Bootstrap.cpp"
+         timestampString = "376826406.815049"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
+         landmarkName = "Bootstrap::guiEvent(ofxUIEventArgs &amp; newEvent)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/View.cpp"
+         timestampString = "376826616.891018"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "97"
+         endingLineNumber = "97">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

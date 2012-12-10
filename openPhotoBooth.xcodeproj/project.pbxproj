@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F20666A16743CB300FDA409 /* module_wordBubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F20666816743CB300FDA409 /* module_wordBubble.cpp */; };
 		1F2A39231672FBB9001FD801 /* Bootstrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A391F1672FBB9001FD801 /* Bootstrap.cpp */; };
 		1F2A39241672FBB9001FD801 /* FilterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A39211672FBB9001FD801 /* FilterController.cpp */; };
 		1F2A3931167329E5001FD801 /* module_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A392F167329E5001FD801 /* module_filter.cpp */; };
+		1F3D1B911675C2BB00E19AC5 /* PreviewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8B1675C2BB00E19AC5 /* PreviewController.cpp */; };
+		1F3D1B921675C2BB00E19AC5 /* PreviewModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8D1675C2BB00E19AC5 /* PreviewModel.cpp */; };
+		1F3D1B931675C2BB00E19AC5 /* PreviewView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8F1675C2BB00E19AC5 /* PreviewView.cpp */; };
 		1F44623F1670BB9D0011DDD7 /* FilterView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F44623E1670BB9D0011DDD7 /* FilterView.cpp */; };
 		1F4462421670C0E00011DDD7 /* FilterModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4462411670C0E00011DDD7 /* FilterModel.cpp */; };
 		1FF8007C16704F5700CB00F0 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8007A16704F5700CB00F0 /* Controller.cpp */; };
@@ -76,12 +80,20 @@
 		15c99204ff4d8d72ad034b63f410265d /* ofxUINumberDialer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUINumberDialer.h; path = ../../../addons/ofxUI/src/ofxUINumberDialer.h; sourceTree = SOURCE_ROOT; };
 		15e69017b5db282ef100ee15e7bce594 /* ofxUICustomImageButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUICustomImageButton.h; path = ../../../addons/ofxUI/src/ofxUICustomImageButton.h; sourceTree = SOURCE_ROOT; };
 		1902452f5e510a2dbc1e5bd6d62db983 /* ofxUIMultiImageToggle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIMultiImageToggle.h; path = ../../../addons/ofxUI/src/ofxUIMultiImageToggle.h; sourceTree = SOURCE_ROOT; };
+		1F20666816743CB300FDA409 /* module_wordBubble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = module_wordBubble.cpp; sourceTree = "<group>"; };
+		1F20666916743CB300FDA409 /* module_wordBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = module_wordBubble.h; sourceTree = "<group>"; };
 		1F2A391F1672FBB9001FD801 /* Bootstrap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bootstrap.cpp; sourceTree = "<group>"; };
 		1F2A39201672FBB9001FD801 /* Bootstrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bootstrap.h; sourceTree = "<group>"; };
 		1F2A39211672FBB9001FD801 /* FilterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterController.cpp; sourceTree = "<group>"; };
 		1F2A39221672FBB9001FD801 /* FilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterController.h; sourceTree = "<group>"; };
 		1F2A392F167329E5001FD801 /* module_filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = module_filter.cpp; sourceTree = "<group>"; };
 		1F2A3930167329E5001FD801 /* module_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = module_filter.h; sourceTree = "<group>"; };
+		1F3D1B8B1675C2BB00E19AC5 /* PreviewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreviewController.cpp; sourceTree = "<group>"; };
+		1F3D1B8C1675C2BB00E19AC5 /* PreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewController.h; sourceTree = "<group>"; };
+		1F3D1B8D1675C2BB00E19AC5 /* PreviewModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreviewModel.cpp; sourceTree = "<group>"; };
+		1F3D1B8E1675C2BB00E19AC5 /* PreviewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewModel.h; sourceTree = "<group>"; };
+		1F3D1B8F1675C2BB00E19AC5 /* PreviewView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreviewView.cpp; sourceTree = "<group>"; };
+		1F3D1B901675C2BB00E19AC5 /* PreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
 		1F44623D1670BB9D0011DDD7 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
 		1F44623E1670BB9D0011DDD7 /* FilterView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterView.cpp; sourceTree = "<group>"; };
 		1F4462401670C0E00011DDD7 /* FilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterModel.h; sourceTree = "<group>"; };
@@ -189,6 +201,8 @@
 		1F2A393216737F1F001FD801 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				1F20666816743CB300FDA409 /* module_wordBubble.cpp */,
+				1F20666916743CB300FDA409 /* module_wordBubble.h */,
 				1F2A391F1672FBB9001FD801 /* Bootstrap.cpp */,
 				1F2A39201672FBB9001FD801 /* Bootstrap.h */,
 				1F2A392F167329E5001FD801 /* module_filter.cpp */,
@@ -200,6 +214,8 @@
 		1F2A393316737F34001FD801 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F3D1B8B1675C2BB00E19AC5 /* PreviewController.cpp */,
+				1F3D1B8C1675C2BB00E19AC5 /* PreviewController.h */,
 				1FF8007A16704F5700CB00F0 /* Controller.cpp */,
 				1FF8007816704F5700CB00F0 /* Controller.h */,
 				1F2A39211672FBB9001FD801 /* FilterController.cpp */,
@@ -211,6 +227,8 @@
 		1F2A393416737F3D001FD801 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1F3D1B8D1675C2BB00E19AC5 /* PreviewModel.cpp */,
+				1F3D1B8E1675C2BB00E19AC5 /* PreviewModel.h */,
 				1FF8008B167065BF00CB00F0 /* Model.cpp */,
 				1FF8008A167065BF00CB00F0 /* Model.h */,
 				1F4462411670C0E00011DDD7 /* FilterModel.cpp */,
@@ -222,6 +240,8 @@
 		1F2A393516737F53001FD801 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				1F3D1B8F1675C2BB00E19AC5 /* PreviewView.cpp */,
+				1F3D1B901675C2BB00E19AC5 /* PreviewView.h */,
 				1F44623E1670BB9D0011DDD7 /* FilterView.cpp */,
 				1F44623D1670BB9D0011DDD7 /* FilterView.h */,
 				1FF8007E1670510400CB00F0 /* View.cpp */,
@@ -502,6 +522,10 @@
 				1F2A39231672FBB9001FD801 /* Bootstrap.cpp in Sources */,
 				1F2A39241672FBB9001FD801 /* FilterController.cpp in Sources */,
 				1F2A3931167329E5001FD801 /* module_filter.cpp in Sources */,
+				1F20666A16743CB300FDA409 /* module_wordBubble.cpp in Sources */,
+				1F3D1B911675C2BB00E19AC5 /* PreviewController.cpp in Sources */,
+				1F3D1B921675C2BB00E19AC5 /* PreviewModel.cpp in Sources */,
+				1F3D1B931675C2BB00E19AC5 /* PreviewView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

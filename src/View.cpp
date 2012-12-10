@@ -93,3 +93,19 @@ void View::setButtonLabel(int btnNbr, std::string btnLbl)
 		buttonRight_->setLabelText(btnLbl);
 	}
 }
+
+void View::setButtonName(int btnNbr, std::string btnLbl)
+{
+	if (btnNbr == 1)
+	{
+		buttonLeft_->setName(btnLbl);
+	}
+	else if (btnNbr == 2)
+	{
+		buttonRight_->setName(btnLbl);
+	}
+	else if (btnNbr == 3)
+	{
+		buttonCenter_->setName(btnLbl);
+	}
+}

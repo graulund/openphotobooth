@@ -20,16 +20,19 @@ public:
 	Controller(Controller *, bool = false);
 	virtual ~Controller();
 	void init();
+	void initName();
 
 	virtual void update();
 	virtual void draw();
 
 	virtual	void keyPressed(int);
+	virtual	void mousePressed(int, int, int);
 	virtual void guiEvent(ofxUIEventArgs &);
 
 	virtual ofxUICanvas * getCanvas();
 	virtual Model * getModel();
 	virtual View * getView();
+	bool isSelectable(int, int);
 	/* data */	
 };
 

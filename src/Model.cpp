@@ -5,6 +5,7 @@
 Model::Model()
 {
 	init();
+	init(0, 0, 0);
 }
 
 Model::Model(Model * oldModel, bool delOld)
@@ -18,8 +19,20 @@ Model::Model(Model * oldModel, bool delOld)
 	imgSelector_ = oldModel->updateThumbnailSelector(0);
 	thmbCnt_ = oldModel->getThumbnailCount();
 
+	init();
+
 	if (delOld)
 		delete oldModel;
+}
+
+void Model::init()
+{
+	btnLabelL_ = BTN_LABL_L;
+	btnLabelR_ = BTN_LABL_R;
+
+	btnNameL_ = BTN_NAME_L;
+	btnNameM_ = BTN_NAME_M;
+	btnNameR_ = BTN_NAME_R;
 }
 
 void Model::init(int imgCnt, int imgIndex, int imgSelector)
@@ -36,6 +49,11 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	vidGrabber_->initGrabber(CAM_WIDTH, CAM_HEIGHT);
 	texture_->allocate(CAM_WIDTH, CAM_HEIGHT, GL_RGB);
 }
+
+// void Model::loadImage(int index)
+// {
+
+// }
 
 /**
  * Saves the current frame from the Webcam with given Width and
@@ -84,7 +102,7 @@ void Model::saveTextureToFile(std::string name)
 void Model::saveToThumbnail(std::string name)
 {
 	thumbArr_[imgIndex_].loadImage(name);
-	resizeToThumbnail(thumbArr_[imgIndex_], THUMBNAIL_RATIO);
+	// resizeToThumbnail(thumbArr_[imgIndex_], THUMBNAIL_RATIO);
 	updateImgCount();
 }
 
@@ -273,11 +291,35 @@ std::string Model::getButtonLabel(int btnNr)
 {
 	if (btnNr == 1)
 	{
-		return BTN_LABL_L;
+		return btnLabelL_;
 	}
 	else if (btnNr == 2)
 	{
-		return BTN_LABL_R;
+		return btnLabelR_;
+	}
+	else
+	{
+		return "";
+	}
+}
+
+std::string Model::getButtonName(int btnNr)
+{
+	if (btnNr == 1)
+	{
+		return btnNameL_;
+	}
+	else if (btnNr == 2)
+	{
+		return btnNameR_;
+	}
+	else if (btnNr == 3)
+	{
+		return btnNameM_;
+	}
+	else
+	{
+		return "";
 	}
 }
 
@@ -299,6 +341,11 @@ ofTexture * Model::getTexture()
 	return texture_;
 }
 
+ofTexture Model::getThumbnail(int index)
+{
+	return thumbArr_[index].getTextureReference();
+}
+
 /**
  * Returns the Array of Thumbnails
  * @return
@@ -306,4 +353,42 @@ ofTexture * Model::getTexture()
 ofImage * Model::getThumbnails()
 {
 	return thumbArr_;
+}
+
+bool Model::selectImage(int x, int y)
+{
+	bool isSelectable = false;
+
+	if (y >= 564 && y <= 664)
+	{
+		if (x >= 520 && x <= 620 && imgCnt_ > 4)
+		{
+			imgSelector_ = 5;
+			isSelectable = true;
+		}
+	
+		if (x >= 395 && x <= 495 && imgCnt_ > 3)
+		{
+			imgSelector_ = 4;
+			isSelectable = true;
+		}
+		if (x >= 270 && x <= 370 && imgCnt_ > 2)
+		{
+			imgSelector_ = 3;
+			isSelectable = true;
+		}
+
+		if (x >= 145 && x <= 245 && imgCnt_ > 1)
+		{
+			imgSelector_ = 2;
+			isSelectable = true;
+		}
+		if (x >= 20 && x <= 120 && imgCnt_ > 0)
+		{
+			imgSelector_ = 1;
+			isSelectable = true;
+		}
+	}
+
+	return isSelectable;
 }

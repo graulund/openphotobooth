@@ -17,7 +17,11 @@
 //----------------------------------
 #define ICON_URL "./GUI/Images/Icon.png"
 #define BTN_LABL_L "Facebook"
+#define BTN_LABL_M "CNTRL"
 #define BTN_LABL_R "Effects"
+#define BTN_NAME_L "MAINRIGHT"
+#define BTN_NAME_M "MAINMIDDLE"
+#define BTN_NAME_R "MAINRIGHT"
 //----------------------------------
 
 class Model
@@ -26,22 +30,27 @@ protected:
 	int imgCnt_, imgIndex_, imgSelector_, thmbCnt_;
 	
 	unsigned char * pixelArr_;
+	std::string btnLabelL_, btnLabelR_, btnLabelM_, 
+		btnNameL_, btnNameM_, btnNameR_;
 
 	ofVideoGrabber * vidGrabber_;
 	ofTexture * texture_;
 	ofImage * thumbArr_;
 
-	virtual void savePixelsToFile(ofPixels, std::string);
+	
 	virtual void saveTextureToFile(std::string);
 	virtual void saveToThumbnail(std::string);
 	virtual void resizeToThumbnail(ofImage, float);
 public:
 	Model();
 	Model(Model *, bool = false);
-	void init(int = 0, int = 0, int = 0);
+	void init();
+	void init(int , int, int);
 	// ~Model();
 
 	virtual void saveImage();
+	virtual void savePixelsToFile(ofPixels, std::string);
+
 	virtual void update();
 
 	virtual void updateImgCount();
@@ -57,9 +66,12 @@ public:
     virtual std::string getImageName();
     virtual std::string getIconURL();
     virtual std::string getButtonLabel(int);
+    virtual std::string getButtonName(int);
     virtual ofVideoGrabber * getVideoGrabber();
     virtual ofTexture * getTexture();
+    virtual ofTexture getThumbnail(int);
     virtual ofImage * getThumbnails();
+    virtual bool selectImage(int, int);
 };
 
 #endif

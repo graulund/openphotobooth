@@ -10,6 +10,8 @@ void Bootstrap::setup()
 
 	ofAddListener(controller_->getCanvas()->newGUIEvent, 
 		this, &Bootstrap::guiEvent);
+
+	lockModel_ = false;
 }
 
 void Bootstrap::update()
@@ -27,12 +29,22 @@ void Bootstrap::keyPressed(int key)
 	controller_->keyPressed(key);
 }
 
+void Bootstrap::mousePressed(int x, int y, int button)
+{
+	controller_->mousePressed(x, y, button);
+	if (!lockModel_ && controller_->isSelectable(x, y))
+	{
+		controller_ = new PreviewController(controller_);
+		lockModel_ = true;
+	}
+}
+
 void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 {
 	string buttonName = newEvent.widget->getName();
 	ofxUIButton * button = (ofxUIButton *) newEvent.widget;
 
-	if (buttonName == "BUTTON_RIGHT")
+	if (buttonName == "MAINRIGHT")
 	{
 		if (button->getValue() == 1)
 		{
@@ -42,6 +54,10 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 		{
 			controller_ = new Controller(controller_, true);
 		}
+	}
+	if (buttonName == "PREVMIDDLE")
+	{
+		controller_ = new Controller(controller_, true);
 	}
 	else
 	{
