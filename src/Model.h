@@ -1,6 +1,8 @@
 #ifndef __myOpenPhotoBooth__Model__
 #define __myOpenPhotoBooth__Model__ 
 
+#include "module_filter.h"
+
 #include "ofMain.h"
 
 #include <string>
@@ -27,7 +29,7 @@
 class Model
 {
 protected:
-	int imgCnt_, imgIndex_, imgSelector_, thmbCnt_;
+	int imgCnt_, imgIndex_, imgSelector_, thmbCnt_, filterSelector_;
 	
 	unsigned char * pixelArr_;
 	std::string btnLabelL_, btnLabelR_, btnLabelM_, 
@@ -36,7 +38,7 @@ protected:
 	ofVideoGrabber * vidGrabber_;
 	ofTexture * texture_;
 	ofImage * thumbArr_;
-
+	module_filter * modFilter_;
 	
 	virtual void saveTextureToFile(std::string);
 	virtual void saveToThumbnail(std::string);
@@ -72,6 +74,8 @@ public:
     virtual ofTexture getThumbnail(int);
     virtual ofImage * getThumbnails();
     virtual bool selectImage(int, int);
+    virtual module_filter * getModFilter();
+    virtual int getFilterSelector();
 };
 
 #endif

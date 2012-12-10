@@ -26,6 +26,12 @@ void FilterController::update()
 	model_->update();
 }
 
+void FilterController::mousePressed(int x, int y, int button)
+{
+	static_cast<FilterModel*>(model_)->selectFilter(x, y);
+	// Controller::mousePressed(x, y, button);
+}
+
 void FilterController::draw()
 {
 	view_->drawVideoGrabber(model_->getVideoGrabber(),

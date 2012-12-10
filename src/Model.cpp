@@ -13,11 +13,13 @@ Model::Model(Model * oldModel, bool delOld)
 	vidGrabber_ = oldModel->getVideoGrabber();
 	texture_ = oldModel->getTexture();
 	thumbArr_ = oldModel->getThumbnails();
+	modFilter_ = oldModel->getModFilter();
 
 	imgCnt_ = oldModel->getImgCount();
 	imgIndex_ = oldModel->getImgIndex();
 	imgSelector_ = oldModel->updateThumbnailSelector(0);
 	thmbCnt_ = oldModel->getThumbnailCount();
+	filterSelector_ = oldModel->getFilterSelector();
 
 	init();
 
@@ -41,10 +43,12 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	imgIndex_ = imgIndex;
 	imgSelector_ = imgSelector;
 	thmbCnt_ = THUMBNAIL_CNT;
+	filterSelector_ = 0;
 
 	vidGrabber_ = new ofVideoGrabber();
 	texture_ = new ofTexture();
 	thumbArr_ = new ofImage[THUMBNAIL_CNT];
+	modFilter_ = new module_filter(640 * 480 * 3);
 
 	vidGrabber_->initGrabber(CAM_WIDTH, CAM_HEIGHT);
 	texture_->allocate(CAM_WIDTH, CAM_HEIGHT, GL_RGB);
@@ -148,6 +152,12 @@ void Model::update()
 	vidGrabber_->update();
 	// unsigned char * myPixelArr = vidGrabber_->getPixels();
 	// texture_->loadData(myPixelArr, 640, 480, GL_RGB);
+	if (vidGrabber_->isFrameNew())
+	{
+	    pixelArr_ = vidGrabber_->getPixels();
+		modFilter_->getFilters(pixelArr_, filterSelector_, 30);
+	 	texture_->loadData(pixelArr_, 640, 480, GL_RGB);
+ 	}
 }
 
 /**
@@ -391,4 +401,14 @@ bool Model::selectImage(int x, int y)
 	}
 
 	return isSelectable;
+}
+
+module_filter * Model::getModFilter()
+{
+	return modFilter_;
+}
+
+int Model::getFilterSelector()
+{
+	return filterSelector_;
 }

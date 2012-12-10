@@ -11,6 +11,7 @@ public:
 	void drawVideoGrabber(ofVideoGrabber *, float, float);
 	void drawFilter(ofTexture *, int);
 	void drawFilter(ofTexture, int);
+	void drawFilterSelector(int);
 	/* data */
 };
 

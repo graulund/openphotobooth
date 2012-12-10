@@ -12,7 +12,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "161"
-         endingLineNumber = "161">
+         endingLineNumber = "161"
+         landmarkName = "Model::update()"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -61,6 +63,17 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "97"
          endingLineNumber = "97">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/Controller.cpp"
+         timestampString = "376839561.325031"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "71"
+         endingLineNumber = "71">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

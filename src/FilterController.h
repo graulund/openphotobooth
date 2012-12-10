@@ -16,6 +16,7 @@ public:
 	void draw();
 	void update();
 
+	void mousePressed(int, int, int);
 	void keyPressed(int);
 
 	/* data */

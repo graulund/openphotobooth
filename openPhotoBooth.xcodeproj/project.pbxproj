@@ -16,6 +16,7 @@
 		1F3D1B931675C2BB00E19AC5 /* PreviewView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8F1675C2BB00E19AC5 /* PreviewView.cpp */; };
 		1F44623F1670BB9D0011DDD7 /* FilterView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F44623E1670BB9D0011DDD7 /* FilterView.cpp */; };
 		1F4462421670C0E00011DDD7 /* FilterModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4462411670C0E00011DDD7 /* FilterModel.cpp */; };
+		1FC40B6116760D9300577450 /* ImageAdjustment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */; };
 		1FF8007C16704F5700CB00F0 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8007A16704F5700CB00F0 /* Controller.cpp */; };
 		1FF8007D16704F5700CB00F0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8007B16704F5700CB00F0 /* main.cpp */; };
 		1FF8007F1670510400CB00F0 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8007E1670510400CB00F0 /* View.cpp */; };
@@ -98,6 +99,8 @@
 		1F44623E1670BB9D0011DDD7 /* FilterView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterView.cpp; sourceTree = "<group>"; };
 		1F4462401670C0E00011DDD7 /* FilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterModel.h; sourceTree = "<group>"; };
 		1F4462411670C0E00011DDD7 /* FilterModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterModel.cpp; sourceTree = "<group>"; };
+		1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageAdjustment.cpp; sourceTree = "<group>"; };
+		1FC40B6016760D9300577450 /* ImageAdjustment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAdjustment.h; sourceTree = "<group>"; };
 		1FF8007816704F5700CB00F0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		1FF8007916704F5700CB00F0 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		1FF8007A16704F5700CB00F0 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 		1F2A393216737F1F001FD801 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */,
+				1FC40B6016760D9300577450 /* ImageAdjustment.h */,
 				1F20666816743CB300FDA409 /* module_wordBubble.cpp */,
 				1F20666916743CB300FDA409 /* module_wordBubble.h */,
 				1F2A391F1672FBB9001FD801 /* Bootstrap.cpp */,
@@ -526,6 +531,7 @@
 				1F3D1B911675C2BB00E19AC5 /* PreviewController.cpp in Sources */,
 				1F3D1B921675C2BB00E19AC5 /* PreviewModel.cpp in Sources */,
 				1F3D1B931675C2BB00E19AC5 /* PreviewView.cpp in Sources */,
+				1FC40B6116760D9300577450 /* ImageAdjustment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

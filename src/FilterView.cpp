@@ -34,11 +34,28 @@ void FilterView::drawFilter(ofTexture * textureArr, int index)
 		{
 			textureArr[i].draw(((i + 1) * 213), y, 213, 160);
 		}
-		if (i > 2)
+		if (i > 5)
+		{
+			y = 320;
+			textureArr[i].draw((i * 213) % 639, y, 213, 160);
+		}
+		else if (i > 2)
 		{
 			y = 160;
 			textureArr[i].draw((i * 213) % 639, y, 213, 160);
 		}
+	}
+}
+
+void FilterView::drawFilterSelector(int fltrNr)
+{
+	if (fltrNr > 0)
+	{
+		ofPushStyle();
+		ofSetHexColor(0x00B2B2);
+		ofNoFill();
+		ofRect((fltrNr * 213), (fltrNr * 160) % 420, 100, 100);
+		ofPopStyle();
 	}
 }
 

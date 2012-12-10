@@ -72,6 +72,7 @@ void Controller::draw()
 {
 	view_->drawVideoGrabber(model_->getVideoGrabber(),
 		model_->getCamWidth(), model_->getCamHeight());
+
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());
 	view_->drawThumbnailSelector(model_->updateThumbnailSelector(0));

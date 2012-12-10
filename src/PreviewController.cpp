@@ -9,10 +9,6 @@ PreviewController::PreviewController(Controller * oldController) :
 
 	initName();
 
-	testImage_ = new ofImage();
-	testImage_->allocate(640, 480, OF_IMAGE_COLOR);
-	testImage_->loadImage("myPhoto 2012-12-08 09.56.33.jpg");
-
 	delete oldController;
 }
 

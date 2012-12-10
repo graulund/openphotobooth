@@ -2,7 +2,6 @@
 #define __myOpenPhotoBooth__FilterModel__ 
 
 #include "Model.h"
-#include "module_filter.h"
 
 #define CAM_WIDTH 213
 #define CAM_HEIGHT 160
@@ -18,7 +17,6 @@ private:
 	unsigned char pixelArrSlot[640*480*3];
 
 	ofTexture * textureArr_;
-	module_filter * modFilter_;
 public:
 	FilterModel(Model *);
 	~FilterModel();
@@ -30,6 +28,7 @@ public:
 	int getFilterCount();
 	std::string getButtonLabel(int);
 	ofTexture * getTextureArray();
+	bool selectFilter(int, int);
 };
 
 #endif
