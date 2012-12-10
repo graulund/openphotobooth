@@ -49,15 +49,18 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 		if (button->getValue() == 1)
 		{
 			controller_ = new FilterController(controller_);
+			lockModel_ = false;
 		}
 		else if (button->getValue() == 0)
 		{
 			controller_ = new Controller(controller_, true);
+			lockModel_ = false;
 		}
 	}
 	if (buttonName == "PREVMIDDLE")
 	{
 		controller_ = new Controller(controller_, true);
+		lockModel_ = false;
 	}
 	else
 	{

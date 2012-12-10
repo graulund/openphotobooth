@@ -15,7 +15,7 @@ PreviewController::PreviewController(Controller * oldController) :
 void PreviewController::draw()
 {
 	static_cast<PreviewView*>(view_)->drawPreview(
-		model_->getThumbnail(model_->updateThumbnailSelector(0) - 1));
+		model_->getThumbnail(model_->updateThumbnailSelector(0)));
 	if (static_cast<PreviewModel*>(model_)->isBubbleVisible())
 	{
 	static_cast<PreviewView*>(view_)->drawWordBubble(

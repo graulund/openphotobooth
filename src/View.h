@@ -16,6 +16,7 @@ public:
 	virtual void drawVideoGrabber(ofVideoGrabber *, float, float);
 	virtual void drawThumbnails(ofImage *, int, int);
 	virtual void drawThumbnailSelector(int);
+	virtual void drawFilter(ofTexture);
 
 	/* setter & getter */
 	virtual void setButtonLabel(int, std::string);

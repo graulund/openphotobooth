@@ -109,3 +109,8 @@ void View::setButtonName(int btnNbr, std::string btnLbl)
 		buttonCenter_->setName(btnLbl);
 	}
 }
+
+void View::drawFilter(ofTexture texture)
+{
+	texture.draw(0, 0, 640, 480);
+}

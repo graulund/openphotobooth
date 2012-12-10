@@ -70,8 +70,15 @@ void Controller::update()
  */
 void Controller::draw()
 {
-	view_->drawVideoGrabber(model_->getVideoGrabber(),
-		model_->getCamWidth(), model_->getCamHeight());
+	if (model_->getFilterSelector() > 0)
+	{
+		view_->drawFilter(*model_->getTexture());
+	}
+	else
+	{
+		view_->drawVideoGrabber(model_->getVideoGrabber(),
+			model_->getCamWidth(), model_->getCamHeight());
+	}
 
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());

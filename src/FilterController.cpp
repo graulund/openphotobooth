@@ -29,6 +29,7 @@ void FilterController::update()
 void FilterController::mousePressed(int x, int y, int button)
 {
 	static_cast<FilterModel*>(model_)->selectFilter(x, y);
+	std::cout << model_->getFilterSelector() << std::endl;
 	// Controller::mousePressed(x, y, button);
 }
 
@@ -42,6 +43,11 @@ void FilterController::draw()
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());
 	view_->drawThumbnailSelector(model_->updateThumbnailSelector(0));
+}
+
+void FilterController::guiEvent(ofxUIEventArgs & newEvent)
+{
+
 }
 
 void FilterController::keyPressed(int key)
