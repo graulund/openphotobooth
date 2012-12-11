@@ -76,6 +76,7 @@ public:
     virtual bool selectImage(int, int);
     virtual module_filter * getModFilter();
     virtual int getFilterSelector();
+    virtual int getImageNumber();
 };
 
 #endif

@@ -8,7 +8,7 @@
 
 #define ICON_URL "./GUI/Images/Icon2.png"
 #define BTN_LABL_L "Twitter"
-#define BTN_LABL_R "Special"
+#define BTN_LABL_R "Apply"
 
 class FilterModel : public Model
 {

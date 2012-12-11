@@ -214,6 +214,18 @@ int Model::updateThumbnailSelector(int nextImage)
 	}
 }
 
+int Model::getImageNumber()
+{
+	if (imgSelector_ == 0)
+	{
+		return 0;
+	}
+	else if (imgSelector_ > 0)
+	{
+		return imgSelector_ - 1;
+	}
+}
+
 /**
  * Returns the Thumbnail Selector
  * @return
