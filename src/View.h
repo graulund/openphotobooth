@@ -21,6 +21,7 @@ public:
 	/* setter & getter */
 	virtual void setButtonLabel(int, std::string);
 	virtual void setButtonName(int, std::string);
+	virtual void clearButtonStatus(int);
 	/* data */
 };
 

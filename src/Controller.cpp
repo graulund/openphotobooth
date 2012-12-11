@@ -24,6 +24,8 @@ Controller::Controller(Controller * oldController, bool delOld)
 	view_ = new View(view_, model_->getIconURL(),
 		model_->getCamWidth(), model_->getCamHeight());
 
+
+
 	initName();
 
 	if (delOld)

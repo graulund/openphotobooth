@@ -94,6 +94,22 @@ void View::setButtonLabel(int btnNbr, std::string btnLbl)
 	}
 }
 
+void View::clearButtonStatus(int btnNbr)
+{
+	if (btnNbr == 1)
+	{
+		buttonLeft_->setValue(0);
+	}
+	else if (btnNbr == 2)
+	{
+		buttonRight_->setValue(0);
+	}
+	else if (btnNbr == 3)
+	{
+		buttonCenter_->setValue(0);
+	}
+}
+
 void View::setButtonName(int btnNbr, std::string btnLbl)
 {
 	if (btnNbr == 1)

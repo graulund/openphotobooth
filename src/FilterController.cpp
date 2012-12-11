@@ -10,6 +10,10 @@ FilterController::FilterController(Controller * oldController) :
 	view_->setButtonLabel(1, model_->getButtonLabel(1));
 	view_->setButtonLabel(2, model_->getButtonLabel(2));
 
+	// view_->clearButtonStatus(1);
+	// view_->clearButtonStatus(2);
+	// view_->clearButtonStatus(3);
+
 	myTexture.allocate(640, 480, GL_RGB);
 
 	delete oldController;

@@ -78,17 +78,17 @@ bool FilterModel::selectFilter(int x, int y)
 		{
 			if (x > 426 && fltrCnt > 2)
 			{
-				filterSelector_ = 3;
+				filterSelector_ = 2;
 				isSelectable = true;
 			}
 			if (x <= 426 && fltrCnt > 1)
 			{
-				filterSelector_ = 2;
+				filterSelector_ = 1;
 				isSelectable = true;
 			}
 			if (x <= 213 && fltrCnt > 0)
 			{
-				filterSelector_ = 1;
+				filterSelector_ = 0;
 				isSelectable = true;
 			}
 		}
@@ -96,17 +96,17 @@ bool FilterModel::selectFilter(int x, int y)
 		{
 			if (x > 426 && fltrCnt > 5)
 			{
-				filterSelector_ = 6;
+				filterSelector_ = 5;
 				isSelectable = true;
 			}
 			if (x <= 426 && fltrCnt > 4)
 			{
-				filterSelector_ = 5;
+				filterSelector_ = 4;
 				isSelectable = true;
 			}
 			if (x <= 213 && fltrCnt > 3)
 			{
-				filterSelector_ = 4;
+				filterSelector_ = 3;
 				isSelectable = true;
 			}
 		}
@@ -114,17 +114,17 @@ bool FilterModel::selectFilter(int x, int y)
 		{
 			if (x > 426 && fltrCnt > 8)
 			{
-				filterSelector_ = 9;
+				filterSelector_ = 8;
 				isSelectable = true;
 			}
 			if (x <= 426 && fltrCnt > 7)
 			{
-				filterSelector_ = 8;
+				filterSelector_ = 7;
 				isSelectable = true;
 			}
 			if (x <= 213 && fltrCnt > 6)
 			{
-				filterSelector_ = 7;
+				filterSelector_ = 6;
 				isSelectable = true;
 			}			
 		}
