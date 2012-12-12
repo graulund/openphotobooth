@@ -3,14 +3,16 @@
 
 #include "View.h"
 
- class PreviewView : public View
- {
- public:
- 	PreviewView(View *, std::string, int, int);
- 	// ~PreviewView();
+class PreviewView : public View
+{
+private:
+
+public:
+	PreviewView(View *, std::string, int, int, ofxUICanvas *);
+	~PreviewView();
  	
- 	void drawPreview(ofTexture);
+	void drawPreview(ofTexture);
 	void drawWordBubble(std::string *, ofTrueTypeFont *, int, int);
- };
+};
 
 #endif

@@ -53,12 +53,12 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 			controller_ = new FilterController(controller_);
 			lockModel_ = false;
 		}
-		else if (button->getValue() == 0)
-		{
-			controller_ = new Controller(controller_, true);
-			button->setValue(1);
-			lockModel_ = false;
-		}
+		// else if (button->getValue() == 0)
+		// {
+			// controller_ = new Controller(controller_, true);
+			// button->setValue(1);
+			// lockModel_ = false;
+		// }
 	}
 	if (buttonName == "PREVMIDDLE")
 	{
@@ -71,6 +71,12 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 		{
 			controller_->guiEvent(newEvent);	
 		}
+	}
+	else if (buttonName == "FILTERRIGHT")
+	{
+		controller_ = new Controller(controller_, true);
+		// button->setValue(1);
+		lockModel_ = false;	
 	}
 	else
 	{

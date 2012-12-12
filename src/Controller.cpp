@@ -24,8 +24,6 @@ Controller::Controller(Controller * oldController, bool delOld)
 	view_ = new View(view_, model_->getIconURL(),
 		model_->getCamWidth(), model_->getCamHeight());
 
-
-
 	initName();
 
 	if (delOld)
@@ -127,7 +125,7 @@ void Controller::guiEvent(ofxUIEventArgs & newEvent)
 		ofxUIButton * button = (ofxUIButton *) newEvent.widget;
 		if (button->getValue() == 1)
 		{
-			std::cout << "SAVE IMAGE" << std::endl;
+			// std::cout << "SAVE IMAGE" << std::endl;
 			model_->saveImage();
 		}
 	}

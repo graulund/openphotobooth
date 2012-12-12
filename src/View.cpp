@@ -11,6 +11,12 @@ View::View(View * oldView, std::string iconURL, int width, int height)
 	buttonLeft_ = oldView->buttonLeft_;
 	buttonRight_ = oldView->buttonRight_;
 	buttonCenter_ = oldView->buttonCenter_;
+	buttonDrop_ = oldView->buttonDrop_;
+
+	buttonLeft_->setVisible(true);
+	buttonLeft_->setValue(0);
+	buttonDrop_->setVisible(false);
+	buttonRight_->setValue(0);
 
 	// init(iconURL, width, height, false);
 }
@@ -23,10 +29,18 @@ void View::init(std::string iconURL, int width, int height, ofxUICanvas * canvas
 		304, 8, 32, 32, false, iconURL, "BUTTON_CENT");
 	buttonRight_ = new ofxUILabelToggle(
 		"BUTTON_RIGHT", false, 100, 32, 532, 8, OFX_UI_FONT_MEDIUM);
+    
+    buttonItems_.push_back("Facebook");
+    buttonItems_.push_back("Save");
+    buttonDrop_ = new ofxUIDropDownList("Publish", buttonItems_, 100, 8, 8);
 
 	canvas->addWidget(buttonLeft_);
 	canvas->addWidget(buttonCenter_);
 	canvas->addWidget(buttonRight_);
+	canvas->addWidget(buttonDrop_);
+
+	buttonDrop_->setVisible(false);
+	buttonDrop_->setName("PREVBTN_L_D");
 }
 
 /**

@@ -8,7 +8,12 @@
 
 #define ICON_URL "./GUI/Images/Icon2.png"
 #define BTN_LABL_L "Twitter"
+#define BTN_LABL_M "CNTRL"
 #define BTN_LABL_R "Apply"
+#define BTN_NAME_L "FILTERLEFT"
+#define BTN_NAME_M "FILTERMIDDLE"
+#define BTN_NAME_R "FILTERRIGHT"
+
 
 class FilterModel : public Model
 {
@@ -21,6 +26,7 @@ public:
 	FilterModel(Model *);
 	~FilterModel();
 
+	void init();
 	void update();
 
 	float getCamWidth();

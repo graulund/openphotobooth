@@ -5,7 +5,7 @@ PreviewController::PreviewController(Controller * oldController) :
 {
 	model_ = new PreviewModel(oldController->getModel());
 	view_ = new PreviewView(oldController->getView(), model_->getIconURL(), 
-		model_->getCamWidth(), model_->getCamHeight());
+		model_->getCamWidth(), model_->getCamHeight(), canvas_);
 
 	initName();
 
@@ -57,7 +57,7 @@ void PreviewController::guiEvent(ofxUIEventArgs & newEvent)
 	string buttonName = newEvent.widget->getName();
 	ofxUIButton * button = (ofxUIButton *) newEvent.widget;
 
-	if (buttonName == model_->getButtonName(1))
+	if (buttonName == "Save")
 	{
 		saveWordBubble();
 		button->setValue(0);
@@ -85,7 +85,10 @@ void PreviewController::saveWordBubble()
 	ofFbo fbo;
 	ofPixels myPixels;
 
-	fbo.allocate(640, 480, GL_RGB);
+	int x = model_->getThumbnail(model_->getImageNumber()).getWidth();
+	int y = model_->getThumbnail(model_->getImageNumber()).getHeight();
+
+	fbo.allocate(x, y, GL_RGB);
 
 	fbo.begin();
 	static_cast<PreviewView*>(view_)->drawPreview(

@@ -8,9 +8,12 @@ class View
 protected:
 	ofxUILabelToggle * buttonLeft_, * buttonRight_;
 	ofxUIImageButton * buttonCenter_;
+	ofxUIDropDownList * buttonDrop_;
+	std::vector<string> buttonItems_;
 public:
 	View(std::string, int, int, ofxUICanvas *);
 	View(View *, std::string, int, int);
+	// virtual ~View();
 	void init(std::string, int, int, ofxUICanvas *);
 
 	virtual void drawVideoGrabber(ofVideoGrabber *, float, float);

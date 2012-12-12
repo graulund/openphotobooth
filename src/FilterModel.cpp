@@ -10,6 +10,8 @@ FilterModel::FilterModel(Model * oldModel) : Model(oldModel, true)
 	{
 		textureArr_[i].allocate(640, 480, GL_RGB);
 	}
+
+	init();
 }
 
 FilterModel::~FilterModel()
@@ -17,6 +19,17 @@ FilterModel::~FilterModel()
 	delete modFilter_;
 	delete textureArr_;
 //	delete pixelArr_;
+}
+
+void FilterModel::init()
+{
+	btnLabelL_ = BTN_LABL_L;
+	btnLabelM_ = BTN_LABL_M;
+	btnLabelR_ = BTN_LABL_R;	
+
+	btnNameL_ = BTN_NAME_L;
+	btnNameM_ = BTN_NAME_M;
+	btnNameR_ = BTN_NAME_R;
 }
 
 void FilterModel::update()

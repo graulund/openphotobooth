@@ -143,9 +143,11 @@ void Model::resizeToThumbnail(ofImage img, float ratio)
 	if (imgWidth > ratio)
 	{
 		img.resize(ratio, imgWidth / imgHeight);
+		cout << "RESIZE WITH" << endl;
 	}
 	else if (imgHeight > ratio)
 	{
+		cout << "RESIZE HEIGHT" << endl;
 		img.resize(imgHeight / imgWidth, ratio);
 	}
 }
@@ -460,10 +462,20 @@ void Model::processOpenFileSelection(ofFileDialogResult openFileResult){
 			//Load the selected image
 			ofImage image;
 			image.loadImage(openFileResult.getPath());
-			if (image.getWidth() > 640 || image.getHeight() > 480)
-			{
-				resizeToThumbnail(image, 640);
-			}
+			// if (image.getWidth() > 640 || image.getHeight() > 480)
+			// {
+				cout << "RESIZING" << endl;
+					if (image.getWidth() > 640)
+					{
+						image.resize(640, (640 / image.getWidth()) * image.getHeight());
+						cout << "RESIZE WITH" << endl;
+					}
+					else if (image.getHeight() > 480)
+					{
+						cout << "RESIZE HEIGHT" << endl;
+						image.resize((480 / image.getHeight()) * image.getWidth(), 480);
+					}
+			// }
 			saveToThumbnail(image);
 			
 			//Make some short variables 

@@ -1,9 +1,20 @@
 #include "PreviewView.h"
 
 PreviewView::PreviewView(View * oldView, std::string iconURL,
-	int width, int height) : View(oldView, iconURL, width, height)
-{
+	int width, int height, ofxUICanvas * canvas)
+	: View(oldView, iconURL, width, height)
+{   
+    buttonLeft_->setVisible(false);
+    buttonDrop_->setVisible(true);
+    buttonDrop_->setValue(0);
+    
 	delete oldView;
+}
+
+PreviewView::~PreviewView()
+{
+	buttonLeft_->setVisible(true);
+	delete buttonDrop_;
 }
 
 void PreviewView::drawPreview(ofTexture newPreview)

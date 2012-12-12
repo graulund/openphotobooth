@@ -14,6 +14,8 @@ FilterController::FilterController(Controller * oldController) :
 	// view_->clearButtonStatus(2);
 	// view_->clearButtonStatus(3);
 
+	initName();
+
 	myTexture.allocate(640, 480, GL_RGB);
 
 	delete oldController;

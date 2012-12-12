@@ -41,7 +41,6 @@ protected:
 	module_filter * modFilter_;
 
 	vector<ofImage>loadedImages, processedImages;
-	// vector<ofImage>processedImages;
 
 	virtual void saveTextureToFile(std::string);
 	virtual void saveToThumbnail(std::string);
