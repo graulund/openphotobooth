@@ -89,7 +89,7 @@ void PreviewController::saveWordBubble()
 
 	fbo.begin();
 	static_cast<PreviewView*>(view_)->drawPreview(
-		model_->getThumbnail(model_->getImgIndex()));
+		model_->getThumbnail(model_->getImageNumber()));
 	static_cast<PreviewView*>(view_)->drawWordBubble(
 		static_cast<PreviewModel*>(model_)->getWordBubbleStr(),
 		static_cast<PreviewModel*>(model_)->getWordBubble(), 

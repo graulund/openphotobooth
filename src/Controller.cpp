@@ -103,6 +103,10 @@ void Controller::keyPressed(int key)
 		view_->drawThumbnailSelector(
 			model_->updateThumbnailSelector(-1));
 	}
+	else if (key == ' ')
+	{	
+
+	}
 }
 
 void Controller::mousePressed(int x, int y, int button)
@@ -121,14 +125,30 @@ void Controller::guiEvent(ofxUIEventArgs & newEvent)
 	if (buttonName == "MAINMIDDLE")
 	{
 		ofxUIButton * button = (ofxUIButton *) newEvent.widget;
-		if (button->getValue() == 0)
+		if (button->getValue() == 1)
 		{
+			std::cout << "SAVE IMAGE" << std::endl;
 			model_->saveImage();
 		}
 	}
 	else if (buttonName == "MAINLEFT")
 	{
-
+		//Open the Open File Dialog
+		ofFileDialogResult openFileResult = ofSystemLoadDialog("Select a jpg or png"); 
+		
+		//Check if the user opened a file
+		if (openFileResult.bSuccess){
+			
+			ofLogVerbose("User selected a file");
+			
+			//We have a file, check it and process it
+			model_->processOpenFileSelection(openFileResult);
+			
+		}
+		else 
+		{
+			ofLogVerbose("User hit cancel");
+		}
 	}
 }
 

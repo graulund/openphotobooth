@@ -44,6 +44,8 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 	string buttonName = newEvent.widget->getName();
 	ofxUIButton * button = (ofxUIButton *) newEvent.widget;
 
+	std::cout << button->getValue() << " BUTTON NAME " << buttonName << std::endl;
+
 	if (buttonName == "MAINRIGHT")
 	{
 		if (button->getValue() == 1)
@@ -54,6 +56,7 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 		else if (button->getValue() == 0)
 		{
 			controller_ = new Controller(controller_, true);
+			button->setValue(1);
 			lockModel_ = false;
 		}
 	}
@@ -61,6 +64,13 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 	{
 		controller_ = new Controller(controller_, true);
 		lockModel_ = false;
+	}
+	else if (buttonName == "MAINMIDDLE")
+	{
+		if (button->getValue() == 1)
+		{
+			controller_->guiEvent(newEvent);	
+		}
 	}
 	else
 	{

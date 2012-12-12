@@ -18,10 +18,10 @@
 #define IMG_EXT ".jpg"
 //----------------------------------
 #define ICON_URL "./GUI/Images/Icon.png"
-#define BTN_LABL_L "Facebook"
+#define BTN_LABL_L "Open"
 #define BTN_LABL_M "CNTRL"
 #define BTN_LABL_R "Effects"
-#define BTN_NAME_L "MAINRIGHT"
+#define BTN_NAME_L "MAINLEFT"
 #define BTN_NAME_M "MAINMIDDLE"
 #define BTN_NAME_R "MAINRIGHT"
 //----------------------------------
@@ -33,15 +33,19 @@ protected:
 	
 	unsigned char * pixelArr_;
 	std::string btnLabelL_, btnLabelR_, btnLabelM_, 
-		btnNameL_, btnNameM_, btnNameR_;
+		btnNameL_, btnNameM_, btnNameR_, originalFileExtension;
 
 	ofVideoGrabber * vidGrabber_;
 	ofTexture * texture_;
 	ofImage * thumbArr_;
 	module_filter * modFilter_;
-	
+
+	vector<ofImage>loadedImages, processedImages;
+	// vector<ofImage>processedImages;
+
 	virtual void saveTextureToFile(std::string);
 	virtual void saveToThumbnail(std::string);
+	virtual void saveToThumbnail(ofImage);
 	virtual void resizeToThumbnail(ofImage, float);
 public:
 	Model();
@@ -77,6 +81,8 @@ public:
     virtual module_filter * getModFilter();
     virtual int getFilterSelector();
     virtual int getImageNumber();
+    // virtual bool sortColorFunction(ofColor, ofColor);
+    virtual void processOpenFileSelection(ofFileDialogResult);
 };
 
 #endif

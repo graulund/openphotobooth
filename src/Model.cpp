@@ -110,6 +110,12 @@ void Model::saveToThumbnail(std::string name)
 	updateImgCount();
 }
 
+void Model::saveToThumbnail(ofImage newImage)
+{
+	thumbArr_[imgIndex_] = newImage;
+	updateImgCount();
+}
+
 /**
  * Updates the Image Count and Index for the Thumbnail Array
  */
@@ -423,4 +429,75 @@ module_filter * Model::getModFilter()
 int Model::getFilterSelector()
 {
 	return filterSelector_;
+}
+
+bool sortColorFunction (ofColor i,ofColor j) { 
+	return (i.getBrightness()<j.getBrightness()); 
+}
+
+void Model::processOpenFileSelection(ofFileDialogResult openFileResult){
+	
+	ofLogVerbose("getName(): "  + openFileResult.getName());
+	ofLogVerbose("getPath(): "  + openFileResult.getPath());
+	
+	ofFile file (openFileResult.getPath()); 
+	
+	if (file.exists())
+	{
+		//Limiting this example to one image so we delete previous ones
+		processedImages.clear();
+		loadedImages.clear();
+		
+		ofLogVerbose("The file exists - now checking the type via file extension");
+		string fileExtension = ofToUpper(file.getExtension());
+		
+		//We only want images
+		if (fileExtension == "JPG" || fileExtension == "PNG")
+		{	
+			//Save the file extension to use when we save out
+			originalFileExtension = fileExtension;
+			
+			//Load the selected image
+			ofImage image;
+			image.loadImage(openFileResult.getPath());
+			if (image.getWidth() > 640 || image.getHeight() > 480)
+			{
+				resizeToThumbnail(image, 640);
+			}
+			saveToThumbnail(image);
+			
+			//Make some short variables 
+			int w = image.getWidth();
+			int h = image.getHeight();
+			
+			// //Make a new image to save manipulation by copying the source
+			// ofImage processedImage = image;
+			
+			// //Walk through the pixels
+			// for (int y = 0; y < h; y++){
+				
+			// 	//Create a vector to store and sort the colors
+			// 	vector<ofColor> colorsToSort;
+				
+			// 	for (int x = 0; x < w; x++){
+					
+			// 		//Capture the colors for the row
+			// 		ofColor color = image.getColor(x, y); 
+			// 		colorsToSort.push_back(color);					
+			// 	}
+				
+			// 	//Sort the colors for the row
+			// 	// sort (colorsToSort.begin(), colorsToSort.end(), sortColorFunction);
+				
+			// 	for (int x = 0; x < w; x++)
+			// 	{
+			// 		//Put the sorted colors back in the new image
+			// 		processedImage.setColor(x, y, colorsToSort[x]);
+			// 	}
+			// }
+			// //Store the processed image
+			// processedImages.push_back(processedImage);
+		}
+	}
+	
 }
