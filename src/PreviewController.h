@@ -5,6 +5,8 @@
 #include "PreviewModel.h"
 #include "PreviewView.h"
 
+#define USE_FACEBOOK 1
+
 class PreviewController : public Controller
  {
  private:
@@ -19,7 +21,7 @@ class PreviewController : public Controller
  	void mousePressed(int, int, int);
  	void guiEvent(ofxUIEventArgs &);
  	
- 	void saveWordBubble();
+ 	std::string saveWordBubble(int = 0);
  };
 
 #endif

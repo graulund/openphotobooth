@@ -13,7 +13,7 @@ Model::Model(Model * oldModel, bool delOld)
 	vidGrabber_ = oldModel->getVideoGrabber();
 	texture_ = oldModel->getTexture();
 	thumbArr_ = oldModel->getThumbnails();
-	modFilter_ = oldModel->getModFilter();
+	filterVector_ = oldModel->getFilterVector();
 
 	imgCnt_ = oldModel->getImgCount();
 	imgIndex_ = oldModel->getImgIndex();
@@ -27,6 +27,9 @@ Model::Model(Model * oldModel, bool delOld)
 		delete oldModel;
 }
 
+/**
+ * SET THE BUTTON LABEL TO THE #DEFINED ONES
+ */
 void Model::init()
 {
 	btnLabelL_ = BTN_LABL_L;
@@ -48,16 +51,28 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	vidGrabber_ = new ofVideoGrabber();
 	texture_ = new ofTexture();
 	thumbArr_ = new ofImage[THUMBNAIL_CNT];
-	modFilter_ = new module_filter(640 * 480 * 3);
 
 	vidGrabber_->initGrabber(CAM_WIDTH, CAM_HEIGHT);
 	texture_->allocate(CAM_WIDTH, CAM_HEIGHT, GL_RGB);
+
+	/* NEW FILTER VECTOR! CARRYS ALL THE FILTERS AVAILABLE				*/
+	filterVector_ = new std::vector<module_filter>();
+
+	/* ADD FILTERS TO FILTER VECTOR - YOU CAN ADD ADJUSTMENTS TO
+	   FILTERS IN FILTERMODEL.CPP LINE 16								*/
+	filterVector_->push_back(
+		module_filter("FILTER ONE", 640 * 480 * 3));
+	filterVector_->push_back(
+		module_filter("VENICE", 640 * 480 * 3));
+
+	/* ADD ADJUSTMENT TO FILTER ADD NEW FILTER IN MODEL.CPP LINE 60		
+	   YOU THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */
+
+	filterVector_->at(0).addAdjustment("Saturation");
+	filterVector_->at(0).addAdjustment("Brightness");
+	filterVector_->at(1).addAdjustment("Brightness");
+
 }
-
-// void Model::loadImage(int index)
-// {
-
-// }
 
 /**
  * Saves the current frame from the Webcam with given Width and
@@ -158,14 +173,30 @@ void Model::resizeToThumbnail(ofImage img, float ratio)
 void Model::update()
 {
 	vidGrabber_->update();
-	// unsigned char * myPixelArr = vidGrabber_->getPixels();
-	// texture_->loadData(myPixelArr, 640, 480, GL_RGB);
+
 	if (vidGrabber_->isFrameNew())
 	{
 	    pixelArr_ = vidGrabber_->getPixels();
-		modFilter_->getFilters(pixelArr_, filterSelector_, 30);
+
+	    applyFilters();
+
 	 	texture_->loadData(pixelArr_, 640, 480, GL_RGB);
  	}
+}
+
+/**
+ * APPLYES THE SELECTED FILTER TO THE MAIN SCENE
+ * @return true if any filter applied.
+ */
+bool Model::applyFilters()
+{
+	if (filterSelector_ > 0)
+	{
+		filterVector_->at(filterSelector_ - 1).apply(
+			static_cast<unsigned char*>(pixelArr_));
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -333,6 +364,11 @@ std::string Model::getButtonLabel(int btnNr)
 	}
 }
 
+/**
+ * RETURNS THE BUTTON NAME DEFINED BY BUTTON NUMBER
+ * @param  btnNr [description]
+ * @return       [description]
+ */
 std::string Model::getButtonName(int btnNr)
 {
 	if (btnNr == 1)
@@ -371,6 +407,11 @@ ofTexture * Model::getTexture()
 	return texture_;
 }
 
+/**
+ * RETURNS SELECTED THUMBNAIL AS TEXTURE TO DRAW ON THE SCENE
+ * @param  index [description]
+ * @return       [description]
+ */
 ofTexture Model::getThumbnail(int index)
 {
 	return thumbArr_[index].getTextureReference();
@@ -423,11 +464,28 @@ bool Model::selectImage(int x, int y)
 	return isSelectable;
 }
 
+/**
+ * @TODO
+ * RETURNS THE MODIFICATION FILTER - DONT USE ANYMORE!1111ONE
+ * @return THE FILTER
+ */
 module_filter * Model::getModFilter()
 {
 	return modFilter_;
 }
 
+/**
+ * RETURNS THE VECTOR WHERE ALL FILTERS ARE SAVED
+ */
+std::vector<module_filter> * Model::getFilterVector()
+{
+	return filterVector_;
+}
+
+/**
+ * Returns the Number of filter the Used hat selected in the filter view
+ * @return number of the filter
+ */
 int Model::getFilterSelector()
 {
 	return filterSelector_;
@@ -437,6 +495,10 @@ bool sortColorFunction (ofColor i,ofColor j) {
 	return (i.getBrightness()<j.getBrightness()); 
 }
 
+/**
+ * SIMPLE FILE HANDLER
+ * @param openFileResult the selected file
+ */
 void Model::processOpenFileSelection(ofFileDialogResult openFileResult){
 	
 	ofLogVerbose("getName(): "  + openFileResult.getName());
@@ -481,35 +543,148 @@ void Model::processOpenFileSelection(ofFileDialogResult openFileResult){
 			//Make some short variables 
 			int w = image.getWidth();
 			int h = image.getHeight();
-			
-			// //Make a new image to save manipulation by copying the source
-			// ofImage processedImage = image;
-			
-			// //Walk through the pixels
-			// for (int y = 0; y < h; y++){
-				
-			// 	//Create a vector to store and sort the colors
-			// 	vector<ofColor> colorsToSort;
-				
-			// 	for (int x = 0; x < w; x++){
-					
-			// 		//Capture the colors for the row
-			// 		ofColor color = image.getColor(x, y); 
-			// 		colorsToSort.push_back(color);					
-			// 	}
-				
-			// 	//Sort the colors for the row
-			// 	// sort (colorsToSort.begin(), colorsToSort.end(), sortColorFunction);
-				
-			// 	for (int x = 0; x < w; x++)
-			// 	{
-			// 		//Put the sorted colors back in the new image
-			// 		processedImage.setColor(x, y, colorsToSort[x]);
-			// 	}
-			// }
-			// //Store the processed image
-			// processedImages.push_back(processedImage);
 		}
 	}
-	
+}
+
+bool Model::saveToFacebook(std::string imgName, int imgWidth, 
+	int imgHeight)
+{
+    CURL * urlHandler;
+    CURLcode resault;
+    
+    struct curl_httppost * post = NULL;
+    struct curl_httppost * last = NULL;
+
+	/* Create an instance of out BufferStruct to accept LCs output		*/
+    struct BufferStruct output; 
+	output.buffer = NULL;
+	output.size = 0;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    urlHandler = curl_easy_init();
+
+    /* @TODO
+       THIS MUST BE FIXED												
+       APP ACCESS TOKEN, DONT USE SIGNS NOT ALLOWED AS URL, USE %		
+       ENTER AN VALID ACCESS_TOKEN HERE 								*/
+	string access_token = 
+   	"AAAFg85KzpIIBAGMFPF4pHUPjcv1BgVGedNIjoTvqojGG0FARt6YtNnv3drTI1ZCc8BeyzZABNfnr0nlREHzame9dpc0C8wgSK2piqgUj41VW4LKITT";
+
+    /* WHERE YOU WANT TO UPLOAD THE PICTURES							*/
+    std::string url;
+	url.append("https://graph.facebook.com/USER_NAME/photos");
+	// url.append("https://graph.facebook.com/oauth/access_token?");
+	// url.append("https://graph.facebook.com/app?access_token=");
+	// url.append(access_token);
+	// url.append("client_id=");
+	// url.append(app_id);
+	// url.append("&client_secret=");
+	// url.append(app_secret);
+	// url.append("&grant_type=client_credentials");
+
+	/* SINCE CURL JUST ALLOW CHAR * AS ARGUMENTS, WE HAVE TO TRANSFORM
+	   THE URL STRINGS INTO CHAR *										*/
+	char * charURL, * charImgName, * charImgPath, * charImgWidth,
+		* charImgHeight;
+
+	ofDirectory myDir;
+
+	std::string imgPath = myDir.getAbsolutePath();
+	imgPath.append(imgName);
+
+	charURL = stringToChar(url);
+	charImgPath = stringToChar(imgPath);
+	charImgName = stringToChar(imgName);
+
+    /* IF INITIALIZATION WAS SUCCESSFULL WE CAN CONTINUE				*/
+    if (urlHandler)
+    {
+    	
+    	/* THIS IS THE WAY TO SET THE OPTIONS FOR THE HANDLER 			*/
+        curl_easy_setopt(urlHandler, CURLOPT_URL, charURL);
+        // curl_easy_setopt(urlHandler, CURLOPT_POST, 1); 
+        
+        // curl_easy_setopt(urlHandler, CURLOPT_HEADER, 1);
+		
+		/* Passing the function pointer to LC 							*/
+        curl_easy_setopt(urlHandler, CURLOPT_WRITEFUNCTION, 
+        	WriteMemoryCallback);
+		/* Passing our BufferStruct to LC 								*/
+        curl_easy_setopt(urlHandler, CURLOPT_WRITEDATA, 
+        	(void *) & output); 
+
+        /* ADDING FORMS FOR THE HTML POST 								*/
+        curl_formadd(&post, &last, 
+        	CURLFORM_COPYNAME, "access_token", 
+        	CURLFORM_COPYCONTENTS, stringToChar(access_token),
+        	CURLFORM_END);
+        curl_formadd(&post, &last,
+        	CURLFORM_COPYNAME, "name",   
+        	CURLFORM_COPYCONTENTS, charImgName, 
+        	CURLFORM_END);
+        curl_formadd(&post, &last, 
+        	CURLFORM_COPYNAME, "width",   
+        	CURLFORM_COPYCONTENTS, new char(imgWidth), 
+        	CURLFORM_END);
+        curl_formadd(&post, &last, 
+        	CURLFORM_COPYNAME, "height",   
+        	CURLFORM_COPYCONTENTS, new char(imgHeight), 
+        	CURLFORM_END);
+        curl_formadd(&post, &last, CURLFORM_COPYNAME, "source", 
+        	CURLFORM_FILE, charImgPath,
+        	CURLFORM_CONTENTTYPE, "image/jpeg", 
+        	CURLFORM_END);
+
+        /* ADD ALL THE FIELDS TO THE URLHANDLER. ITS IMPORTENT THAT ALL
+           ALL FIELDS ARE ADDED BEFORE THIS IS CALLED - TOOKS ME 30MIN
+           TO FIGURE OUT.												*/
+    	curl_easy_setopt(urlHandler, CURLOPT_HTTPPOST, post);
+
+    	/* FOR SOME ERROR CHECKING 										*/
+        resault = curl_easy_perform(urlHandler);
+
+        if (resault != CURLE_OK)
+        {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", 
+            	curl_easy_strerror(resault));
+            
+            curl_easy_cleanup(urlHandler);
+        }
+        
+        curl_global_cleanup();
+	}
+	// curl_easy_getinfo(urlHandler, CURLINFO_EFFECTIVE_URL, &myPtr);
+
+	/* PRINT OUT WHAT WE RECEIVED FROM FACEBOOK 						*/
+	cout << output.buffer << endl;
+}
+
+char * Model::stringToChar(std::string myString)
+{
+	char * charURL = new char[myString.size() + 1];
+    charURL[myString.size()] = 0;
+    memcpy(charURL, myString.c_str(), myString.size());
+
+    return charURL;
+}
+
+/* This is the function we pass to LC, which writes the output 
+   to a BufferStruct													*/
+size_t Model::WriteMemoryCallback(void *ptr, size_t size,
+	size_t nmemb, void *data)
+{
+	size_t realsize = size * nmemb;
+    
+	struct BufferStruct * mem = (struct BufferStruct *) data;
+    
+	mem->buffer = (char *) realloc(mem->buffer, mem->size + realsize + 1);
+    
+	if ( mem->buffer )
+	{
+		memcpy( &( mem->buffer[ mem->size ] ), ptr, realsize );
+		mem->size += realsize;
+		mem->buffer[ mem->size ] = 0;
+	}
+	return realsize;
 }

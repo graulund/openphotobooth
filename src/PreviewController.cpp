@@ -27,6 +27,7 @@ void PreviewController::draw()
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());
 	view_->drawThumbnailSelector(model_->updateThumbnailSelector(0));
+
 }
 
 void PreviewController::keyPressed(int key)
@@ -62,9 +63,10 @@ void PreviewController::guiEvent(ofxUIEventArgs & newEvent)
 		saveWordBubble();
 		button->setValue(0);
 	}
-	else if (buttonName == model_->getButtonName(3))
+	else if (buttonName == "Facebook")
 	{	
-
+		saveWordBubble(USE_FACEBOOK);
+		button->setValue(0);
 	}
 	else if (buttonName == model_->getButtonName(2))
 	{
@@ -80,7 +82,7 @@ void PreviewController::guiEvent(ofxUIEventArgs & newEvent)
 	}
 }
 
-void PreviewController::saveWordBubble()
+std::string PreviewController::saveWordBubble(int option)
 {
 	ofFbo fbo;
 	ofPixels myPixels;
@@ -101,5 +103,15 @@ void PreviewController::saveWordBubble()
 	fbo.end();
 
 	fbo.readToPixels(myPixels);
-	model_->savePixelsToFile(myPixels, model_->getImageName());
+
+
+	std::string imageName = model_->getImageName();
+	model_->savePixelsToFile(myPixels, imageName);
+
+	if (option == USE_FACEBOOK)
+	{
+		model_->saveToFacebook(imageName, x, y);
+	}
+	
+	return imageName;
 }

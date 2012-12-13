@@ -11,11 +11,15 @@
 		1F2A39231672FBB9001FD801 /* Bootstrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A391F1672FBB9001FD801 /* Bootstrap.cpp */; };
 		1F2A39241672FBB9001FD801 /* FilterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A39211672FBB9001FD801 /* FilterController.cpp */; };
 		1F2A3931167329E5001FD801 /* module_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A392F167329E5001FD801 /* module_filter.cpp */; };
+		1F370C1D1679E1DC000DF0D9 /* adjust_brightness.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F370C1B1679E1DC000DF0D9 /* adjust_brightness.cpp */; };
+		1F370C201679EE82000DF0D9 /* libcurl.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F370C1F1679EE82000DF0D9 /* libcurl.4.dylib */; };
 		1F3D1B911675C2BB00E19AC5 /* PreviewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8B1675C2BB00E19AC5 /* PreviewController.cpp */; };
 		1F3D1B921675C2BB00E19AC5 /* PreviewModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8D1675C2BB00E19AC5 /* PreviewModel.cpp */; };
 		1F3D1B931675C2BB00E19AC5 /* PreviewView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D1B8F1675C2BB00E19AC5 /* PreviewView.cpp */; };
 		1F44623F1670BB9D0011DDD7 /* FilterView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F44623E1670BB9D0011DDD7 /* FilterView.cpp */; };
 		1F4462421670C0E00011DDD7 /* FilterModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4462411670C0E00011DDD7 /* FilterModel.cpp */; };
+		1FC05B1C1679BCD8007A2788 /* adjust_saturation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05B181679BCD8007A2788 /* adjust_saturation.cpp */; };
+		1FC05B1D1679BCD8007A2788 /* adjustment_interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FC05B1A1679BCD8007A2788 /* adjustment_interface.cpp */; };
 		1FC40B6116760D9300577450 /* ImageAdjustment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */; };
 		1FF8007C16704F5700CB00F0 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8007A16704F5700CB00F0 /* Controller.cpp */; };
 		1FF8007D16704F5700CB00F0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8007B16704F5700CB00F0 /* main.cpp */; };
@@ -89,6 +93,9 @@
 		1F2A39221672FBB9001FD801 /* FilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterController.h; sourceTree = "<group>"; };
 		1F2A392F167329E5001FD801 /* module_filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = module_filter.cpp; sourceTree = "<group>"; };
 		1F2A3930167329E5001FD801 /* module_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = module_filter.h; sourceTree = "<group>"; };
+		1F370C1B1679E1DC000DF0D9 /* adjust_brightness.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_brightness.cpp; sourceTree = "<group>"; };
+		1F370C1C1679E1DC000DF0D9 /* adjust_brightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_brightness.h; sourceTree = "<group>"; };
+		1F370C1F1679EE82000DF0D9 /* libcurl.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.4.dylib; path = ../../../../../../../usr/lib/libcurl.4.dylib; sourceTree = "<group>"; };
 		1F3D1B8B1675C2BB00E19AC5 /* PreviewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreviewController.cpp; sourceTree = "<group>"; };
 		1F3D1B8C1675C2BB00E19AC5 /* PreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewController.h; sourceTree = "<group>"; };
 		1F3D1B8D1675C2BB00E19AC5 /* PreviewModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreviewModel.cpp; sourceTree = "<group>"; };
@@ -99,6 +106,10 @@
 		1F44623E1670BB9D0011DDD7 /* FilterView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterView.cpp; sourceTree = "<group>"; };
 		1F4462401670C0E00011DDD7 /* FilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterModel.h; sourceTree = "<group>"; };
 		1F4462411670C0E00011DDD7 /* FilterModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterModel.cpp; sourceTree = "<group>"; };
+		1FC05B181679BCD8007A2788 /* adjust_saturation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_saturation.cpp; sourceTree = "<group>"; };
+		1FC05B191679BCD8007A2788 /* adjust_saturation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_saturation.h; sourceTree = "<group>"; };
+		1FC05B1A1679BCD8007A2788 /* adjustment_interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjustment_interface.cpp; sourceTree = "<group>"; };
+		1FC05B1B1679BCD8007A2788 /* adjustment_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjustment_interface.h; sourceTree = "<group>"; };
 		1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageAdjustment.cpp; sourceTree = "<group>"; };
 		1FC40B6016760D9300577450 /* ImageAdjustment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAdjustment.h; sourceTree = "<group>"; };
 		1FF8007816704F5700CB00F0 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
@@ -195,6 +206,7 @@
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
+				1F370C201679EE82000DF0D9 /* libcurl.4.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +216,12 @@
 		1F2A393216737F1F001FD801 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				1F370C1B1679E1DC000DF0D9 /* adjust_brightness.cpp */,
+				1F370C1C1679E1DC000DF0D9 /* adjust_brightness.h */,
+				1FC05B181679BCD8007A2788 /* adjust_saturation.cpp */,
+				1FC05B191679BCD8007A2788 /* adjust_saturation.h */,
+				1FC05B1A1679BCD8007A2788 /* adjustment_interface.cpp */,
+				1FC05B1B1679BCD8007A2788 /* adjustment_interface.h */,
 				1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */,
 				1FC40B6016760D9300577450 /* ImageAdjustment.h */,
 				1F20666816743CB300FDA409 /* module_wordBubble.cpp */,
@@ -287,6 +305,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				1F370C1F1679EE82000DF0D9 /* libcurl.4.dylib */,
 				1f4fb5c423662b96adfdcc0badec1cb0 /* ofxXmlSettings */,
 				a492ce86424ab8905550bfd831201a16 /* ofxUI */,
 			);
@@ -532,6 +551,9 @@
 				1F3D1B921675C2BB00E19AC5 /* PreviewModel.cpp in Sources */,
 				1F3D1B931675C2BB00E19AC5 /* PreviewView.cpp in Sources */,
 				1FC40B6116760D9300577450 /* ImageAdjustment.cpp in Sources */,
+				1FC05B1C1679BCD8007A2788 /* adjust_saturation.cpp in Sources */,
+				1FC05B1D1679BCD8007A2788 /* adjustment_interface.cpp in Sources */,
+				1F370C1D1679E1DC000DF0D9 /* adjust_brightness.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

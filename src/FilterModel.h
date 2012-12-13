@@ -18,7 +18,7 @@
 class FilterModel : public Model
 {
 private:
-	unsigned char * pixelArr_[FILTER_CNT];
+	// unsigned char * pixelArr_[FILTER_CNT];
 	unsigned char pixelArrSlot[640*480*3];
 
 	ofTexture * textureArr_;

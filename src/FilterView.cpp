@@ -49,14 +49,22 @@ void FilterView::drawFilter(ofTexture * textureArr, int index)
 
 void FilterView::drawFilterSelector(int fltrNr)
 {
-	if (fltrNr > 0)
+	ofPushStyle();
+	ofSetHexColor(0x00B2B2);
+	ofNoFill();
+	if (fltrNr < 3)
 	{
-		ofPushStyle();
-		ofSetHexColor(0x00B2B2);
-		ofNoFill();
-		ofRect((fltrNr * 213), (fltrNr * 160) % 420, 100, 100);
-		ofPopStyle();
+		ofRect((fltrNr * 213), 0, 213, 160);
 	}
+	if (fltrNr > 5)
+	{
+		ofRect((fltrNr * 213) % 639, 320, 213, 160);
+	}
+	else if (fltrNr > 2)
+	{
+		ofRect((fltrNr * 213) % 639, 160, 213, 160);
+	}
+	ofPopStyle();
 }
 
 void FilterView::drawFilter(ofTexture texture, int index)

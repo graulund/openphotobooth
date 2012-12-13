@@ -49,6 +49,8 @@ void FilterController::draw()
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());
 	view_->drawThumbnailSelector(model_->updateThumbnailSelector(0));
+	static_cast<FilterView*>(view_)->drawFilterSelector(
+		model_->getFilterSelector());
 }
 
 void FilterController::guiEvent(ofxUIEventArgs & newEvent)

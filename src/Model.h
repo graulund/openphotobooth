@@ -6,6 +6,8 @@
 #include "ofMain.h"
 
 #include <string>
+#include <libgen.h>
+#include <curl/curl.h>
 
 //----------------------------------
 #define CAM_WIDTH 640
@@ -40,12 +42,20 @@ protected:
 	ofImage * thumbArr_;
 	module_filter * modFilter_;
 
+	std::vector<module_filter> * filterVector_;
+
 	vector<ofImage>loadedImages, processedImages;
 
 	virtual void saveTextureToFile(std::string);
 	virtual void saveToThumbnail(std::string);
 	virtual void saveToThumbnail(ofImage);
 	virtual void resizeToThumbnail(ofImage, float);
+
+    struct BufferStruct
+	{
+    	char * buffer;
+    	size_t size;
+	};
 public:
 	Model();
 	Model(Model *, bool = false);
@@ -78,10 +88,16 @@ public:
     virtual ofImage * getThumbnails();
     virtual bool selectImage(int, int);
     virtual module_filter * getModFilter();
+    virtual std::vector<module_filter> * getFilterVector();
     virtual int getFilterSelector();
     virtual int getImageNumber();
     // virtual bool sortColorFunction(ofColor, ofColor);
     virtual void processOpenFileSelection(ofFileDialogResult);
+    virtual bool applyFilters();
+    virtual bool saveToFacebook(std::string, int, int);
+    virtual char * stringToChar(std::string);
+	
+	static size_t WriteMemoryCallback(void *, size_t, size_t, void *);
 };
 
 #endif
