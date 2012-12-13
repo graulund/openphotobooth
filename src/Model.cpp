@@ -59,14 +59,14 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	filterVector_ = new std::vector<module_filter>();
 
 	/* ADD FILTERS TO FILTER VECTOR - YOU CAN ADD ADJUSTMENTS TO
-	   FILTERS IN FILTERMODEL.CPP LINE 16								*/
+	   FILTERS RIGHT AFTER 												*/
 	filterVector_->push_back(
 		module_filter("FILTER ONE", 640 * 480 * 3));
 	filterVector_->push_back(
 		module_filter("VENICE", 640 * 480 * 3));
 
 	/* ADD ADJUSTMENT TO FILTER ADD NEW FILTER IN MODEL.CPP LINE 60		
-	   YOU THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */
+	   USE THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */
 
 	filterVector_->at(0).addAdjustment("Saturation");
 	filterVector_->at(0).addAdjustment("Brightness");

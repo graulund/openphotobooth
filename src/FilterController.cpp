@@ -35,7 +35,7 @@ void FilterController::update()
 void FilterController::mousePressed(int x, int y, int button)
 {
 	static_cast<FilterModel*>(model_)->selectFilter(x, y);
-	std::cout << model_->getFilterSelector() << std::endl;
+	// std::cout << model_->getFilterSelector() << std::endl;
 	// Controller::mousePressed(x, y, button);
 }
 
