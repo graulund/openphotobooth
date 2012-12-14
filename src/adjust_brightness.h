@@ -3,19 +3,18 @@
 
 #include "adjustment_interface.h"
 
-#define NAME "Brightness"
-#define DEFAULT_ADJUST 20
+#define FILTER_BRI_NAME "Brightness"
+#define FILTER_BRI_DEFAULT_ADJUST 20
 
 class adjustBrightness : public IAdjustment
 {
 private:
 
 public:
-	adjustBrightness(int, int = DEFAULT_ADJUST);
-	// ~adjSaturation();
+	adjustBrightness(int, int = FILTER_BRI_DEFAULT_ADJUST);
+	// ~adjBrightness();
 
 	void apply(unsigned char *);
-	// int unclip(int);
 	/* data */
 };
 

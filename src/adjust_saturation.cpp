@@ -7,13 +7,18 @@
 adjustSaturation::adjustSaturation(int newSize, int newAdjust)
 	: IAdjustment(newSize, newAdjust)
 {
-	name_ = NAME;
+	name_   = ADJ_SAT_NAME;
+	adjust_ = newAdjust;
 }
 
+/**
+ * IMAGE ADJUSTMENT: SATURATION
+ * Range of adjust is from -100 to 100.
+ */
 void adjustSaturation::apply(unsigned char * pxlPtr)
 {
 	#ifdef __openPhotoBooth__DEBUG_FLAG__
-	std::cout << "SATURATION APPLYED" << std::endl;
+	std::cout << "SATURATION APPLIED" << std::endl;
 	#endif
 	
 	float x = -0.01F * adjust_;

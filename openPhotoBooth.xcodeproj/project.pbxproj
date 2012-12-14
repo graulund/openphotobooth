@@ -29,6 +29,18 @@
 		63b57ac5bf4ef088491e0317dbb2ecaa /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50df87d612c5aae17aafa6c02c6bc570 /* ofxXmlSettings.cpp */; };
 		933a2227713c720ceff80fd967d0a8ee /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2b40eda85beb63e46785bc299a638898 /* tinyxml.cpp */; };
 		9d44dc88ef9e7991b4a09951e2e4769f /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 832bdc407620cdba568b713d2252c43c /* tinyxmlerror.cpp */; };
+		A1A3AF77167AF1AE0051F930 /* adjust_contrast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF75167AF1AD0051F930 /* adjust_contrast.cpp */; };
+		A1A3AF7A167AF2A30051F930 /* adjust_vibrance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF78167AF2A30051F930 /* adjust_vibrance.cpp */; };
+		A1A3AF7D167AF3B80051F930 /* adjust_greyscale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF7B167AF3B80051F930 /* adjust_greyscale.cpp */; };
+		A1A3AF80167AF4BA0051F930 /* adjust_hue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF7E167AF4BA0051F930 /* adjust_hue.cpp */; };
+		A1A3AF83167AF5D30051F930 /* adjust_invert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF81167AF5D20051F930 /* adjust_invert.cpp */; };
+		A1A3AF86167AF65A0051F930 /* adjust_sepia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF84167AF6590051F930 /* adjust_sepia.cpp */; };
+		A1A3AF89167AF6D60051F930 /* adjust_gamma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF87167AF6D50051F930 /* adjust_gamma.cpp */; };
+		A1A3AF8C167AF7670051F930 /* adjust_noise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF8A167AF7660051F930 /* adjust_noise.cpp */; };
+		A1A3AF8F167AF7F00051F930 /* adjust_posterize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF8D167AF7EF0051F930 /* adjust_posterize.cpp */; };
+		A1A3AF92167AF8F40051F930 /* adjust_tint_red.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF90167AF8F30051F930 /* adjust_tint_red.cpp */; };
+		A1A3AF95167AFA710051F930 /* adjust_tint_green.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF93167AFA700051F930 /* adjust_tint_green.cpp */; };
+		A1A3AF98167AFACB0051F930 /* adjust_tint_blue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF96167AFAC90051F930 /* adjust_tint_blue.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -142,6 +154,30 @@
 		856bf5ab0322d0689ee63829f6f27a37 /* ofxUIRangeSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIRangeSlider.h; path = ../../../addons/ofxUI/src/ofxUIRangeSlider.h; sourceTree = SOURCE_ROOT; };
 		885850b62fad08eb1d2f0bf4a56e5e01 /* ofxUIRotarySlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIRotarySlider.h; path = ../../../addons/ofxUI/src/ofxUIRotarySlider.h; sourceTree = SOURCE_ROOT; };
 		961de8b564ef22e65c9480ae3fc5936a /* ofxUI2DPad.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUI2DPad.h; path = ../../../addons/ofxUI/src/ofxUI2DPad.h; sourceTree = SOURCE_ROOT; };
+		A1A3AF75167AF1AD0051F930 /* adjust_contrast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_contrast.cpp; sourceTree = "<group>"; };
+		A1A3AF76167AF1AE0051F930 /* adjust_contrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_contrast.h; sourceTree = "<group>"; };
+		A1A3AF78167AF2A30051F930 /* adjust_vibrance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_vibrance.cpp; sourceTree = "<group>"; };
+		A1A3AF79167AF2A30051F930 /* adjust_vibrance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_vibrance.h; sourceTree = "<group>"; };
+		A1A3AF7B167AF3B80051F930 /* adjust_greyscale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_greyscale.cpp; sourceTree = "<group>"; };
+		A1A3AF7C167AF3B80051F930 /* adjust_greyscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_greyscale.h; sourceTree = "<group>"; };
+		A1A3AF7E167AF4BA0051F930 /* adjust_hue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_hue.cpp; sourceTree = "<group>"; };
+		A1A3AF7F167AF4BA0051F930 /* adjust_hue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_hue.h; sourceTree = "<group>"; };
+		A1A3AF81167AF5D20051F930 /* adjust_invert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_invert.cpp; sourceTree = "<group>"; };
+		A1A3AF82167AF5D20051F930 /* adjust_invert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_invert.h; sourceTree = "<group>"; };
+		A1A3AF84167AF6590051F930 /* adjust_sepia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_sepia.cpp; sourceTree = "<group>"; };
+		A1A3AF85167AF65A0051F930 /* adjust_sepia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_sepia.h; sourceTree = "<group>"; };
+		A1A3AF87167AF6D50051F930 /* adjust_gamma.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_gamma.cpp; sourceTree = "<group>"; };
+		A1A3AF88167AF6D60051F930 /* adjust_gamma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_gamma.h; sourceTree = "<group>"; };
+		A1A3AF8A167AF7660051F930 /* adjust_noise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_noise.cpp; sourceTree = "<group>"; };
+		A1A3AF8B167AF7670051F930 /* adjust_noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_noise.h; sourceTree = "<group>"; };
+		A1A3AF8D167AF7EF0051F930 /* adjust_posterize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_posterize.cpp; sourceTree = "<group>"; };
+		A1A3AF8E167AF7EF0051F930 /* adjust_posterize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_posterize.h; sourceTree = "<group>"; };
+		A1A3AF90167AF8F30051F930 /* adjust_tint_red.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_tint_red.cpp; sourceTree = "<group>"; };
+		A1A3AF91167AF8F30051F930 /* adjust_tint_red.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_tint_red.h; sourceTree = "<group>"; };
+		A1A3AF93167AFA700051F930 /* adjust_tint_green.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_tint_green.cpp; sourceTree = "<group>"; };
+		A1A3AF94167AFA700051F930 /* adjust_tint_green.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_tint_green.h; sourceTree = "<group>"; };
+		A1A3AF96167AFAC90051F930 /* adjust_tint_blue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_tint_blue.cpp; sourceTree = "<group>"; };
+		A1A3AF97167AFACA0051F930 /* adjust_tint_blue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_tint_blue.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -220,6 +256,30 @@
 				1F370C1C1679E1DC000DF0D9 /* adjust_brightness.h */,
 				1FC05B181679BCD8007A2788 /* adjust_saturation.cpp */,
 				1FC05B191679BCD8007A2788 /* adjust_saturation.h */,
+				A1A3AF75167AF1AD0051F930 /* adjust_contrast.cpp */,
+				A1A3AF76167AF1AE0051F930 /* adjust_contrast.h */,
+				A1A3AF78167AF2A30051F930 /* adjust_vibrance.cpp */,
+				A1A3AF79167AF2A30051F930 /* adjust_vibrance.h */,
+				A1A3AF7B167AF3B80051F930 /* adjust_greyscale.cpp */,
+				A1A3AF7C167AF3B80051F930 /* adjust_greyscale.h */,
+				A1A3AF7E167AF4BA0051F930 /* adjust_hue.cpp */,
+				A1A3AF7F167AF4BA0051F930 /* adjust_hue.h */,
+				A1A3AF81167AF5D20051F930 /* adjust_invert.cpp */,
+				A1A3AF82167AF5D20051F930 /* adjust_invert.h */,
+				A1A3AF84167AF6590051F930 /* adjust_sepia.cpp */,
+				A1A3AF85167AF65A0051F930 /* adjust_sepia.h */,
+				A1A3AF87167AF6D50051F930 /* adjust_gamma.cpp */,
+				A1A3AF88167AF6D60051F930 /* adjust_gamma.h */,
+				A1A3AF8A167AF7660051F930 /* adjust_noise.cpp */,
+				A1A3AF8B167AF7670051F930 /* adjust_noise.h */,
+				A1A3AF8D167AF7EF0051F930 /* adjust_posterize.cpp */,
+				A1A3AF8E167AF7EF0051F930 /* adjust_posterize.h */,
+				A1A3AF90167AF8F30051F930 /* adjust_tint_red.cpp */,
+				A1A3AF91167AF8F30051F930 /* adjust_tint_red.h */,
+				A1A3AF93167AFA700051F930 /* adjust_tint_green.cpp */,
+				A1A3AF94167AFA700051F930 /* adjust_tint_green.h */,
+				A1A3AF96167AFAC90051F930 /* adjust_tint_blue.cpp */,
+				A1A3AF97167AFACA0051F930 /* adjust_tint_blue.h */,
 				1FC05B1A1679BCD8007A2788 /* adjustment_interface.cpp */,
 				1FC05B1B1679BCD8007A2788 /* adjustment_interface.h */,
 				1FC40B5F16760D9300577450 /* ImageAdjustment.cpp */,
@@ -554,6 +614,18 @@
 				1FC05B1C1679BCD8007A2788 /* adjust_saturation.cpp in Sources */,
 				1FC05B1D1679BCD8007A2788 /* adjustment_interface.cpp in Sources */,
 				1F370C1D1679E1DC000DF0D9 /* adjust_brightness.cpp in Sources */,
+				A1A3AF77167AF1AE0051F930 /* adjust_contrast.cpp in Sources */,
+				A1A3AF7A167AF2A30051F930 /* adjust_vibrance.cpp in Sources */,
+				A1A3AF7D167AF3B80051F930 /* adjust_greyscale.cpp in Sources */,
+				A1A3AF80167AF4BA0051F930 /* adjust_hue.cpp in Sources */,
+				A1A3AF83167AF5D30051F930 /* adjust_invert.cpp in Sources */,
+				A1A3AF86167AF65A0051F930 /* adjust_sepia.cpp in Sources */,
+				A1A3AF89167AF6D60051F930 /* adjust_gamma.cpp in Sources */,
+				A1A3AF8C167AF7670051F930 /* adjust_noise.cpp in Sources */,
+				A1A3AF8F167AF7F00051F930 /* adjust_posterize.cpp in Sources */,
+				A1A3AF92167AF8F40051F930 /* adjust_tint_red.cpp in Sources */,
+				A1A3AF95167AFA710051F930 /* adjust_tint_green.cpp in Sources */,
+				A1A3AF98167AFACB0051F930 /* adjust_tint_blue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

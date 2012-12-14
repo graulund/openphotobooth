@@ -3,7 +3,8 @@
 adjustBrightness::adjustBrightness(int newSize, int newAdjust)
 	: IAdjustment(newSize, newAdjust)
 {
-	name_ = NAME;
+	name_   = FILTER_BRI_NAME;
+	adjust_ = newAdjust;
 }
 
 /**
@@ -13,7 +14,7 @@ adjustBrightness::adjustBrightness(int newSize, int newAdjust)
 void adjustBrightness::apply(unsigned char * pxlPtr)
 {
 	#ifdef __openPhotoBooth__DEBUG_FLAG__
-	std::cout << "BRIGHTNESS APPLYED" << std::endl;
+	std::cout << "BRIGHTNESS APPLIED" << std::endl;
 	#endif
 
 	int x = (int) floor(255.0F * (adjust_ / 100.0F));

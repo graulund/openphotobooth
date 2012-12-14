@@ -21,6 +21,10 @@ public:
 	virtual void apply(unsigned char *) = 0;
 	virtual int unclip(int);
 	virtual unsigned char unclip(unsigned char);
+	
+	void colorize(unsigned char *, int, unsigned char, unsigned char, unsigned char);
+	float * rgbToHSV(unsigned char, unsigned char, unsigned char);
+	unsigned char * hsvToRGB(float, float, float);
 	/* data */
 };
 #endif

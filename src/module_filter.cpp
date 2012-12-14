@@ -16,6 +16,7 @@ module_filter::module_filter(std::string newName, int newImageSize)
 	/* PUSH ALL AVAIABLE FILTERS AT THE BACK 						  */
 	globalList_.push_back(new adjustSaturation(imageSize_));
 	globalList_.push_back(new adjustBrightness(imageSize_));
+	//globalList_.push_back(new adjustBrightness(imageSize_));
 }
 
 module_filter::~module_filter()

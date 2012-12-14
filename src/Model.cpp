@@ -590,7 +590,7 @@ bool Model::saveToFacebook(std::string imgName, int imgWidth,
 
 	ofDirectory myDir;
 
-	std::string imgPath = myDir.getAbsolutePath();
+	std::string imgPath = ofFilePath::getAbsolutePath(myDir.path());
 	imgPath.append(imgName);
 
 	charURL = stringToChar(url);
