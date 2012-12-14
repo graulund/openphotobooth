@@ -2,6 +2,7 @@
 #define __adjustment_Interface__
 
 #include <string>
+#include <map>
 
 class IAdjustment
 {
@@ -25,9 +26,12 @@ public:
 	virtual int unclip(int);
 	virtual unsigned char unclip(unsigned char);
 	
+	void curves(unsigned char *, int, int, int, int, int, int, int, int, int);
 	void colorize(unsigned char *, int, unsigned char, unsigned char, unsigned char);
 	float * rgbToHSV(unsigned char, unsigned char, unsigned char);
 	unsigned char * hsvToRGB(float, float, float);
+	
+	std::map<int,int> bezier(int, int, int, int, int, int, int, int, int, int);
 	/* data */
 };
 #endif

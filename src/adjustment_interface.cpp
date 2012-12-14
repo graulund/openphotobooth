@@ -1,5 +1,6 @@
 #include "adjustment_interface.h"
 #include <cmath>
+#include <map>
 
 // IAdjustment::IAdjustment()
 // {
@@ -46,6 +47,79 @@ int IAdjustment::unclip(int value)
 unsigned char IAdjustment::unclip(unsigned char value)
 {
 	return std::min((unsigned char)255, std::max((unsigned char)0, value));
+}
+
+/**
+ * CURVES
+ * Curves implementation using bezier curves.
+ * Nine values given. x2 and y2 can be omitted using -1 for the coordinates.
+ * Selected channel to modify with the curves is either:
+ *   0 => r,
+ *   1 => g,
+ *   2 => b,
+ *   3 => rgb (all channels)
+ */
+void IAdjustment::curves(unsigned char * pxlPtr, int selectedChannel, int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3){
+	int channel, r, g, b;
+	std::map<int,int> bezier;
+	
+	// Optional ctrl-point x2,y2
+	if (x2 < 0 || y2 < 0) {
+		x2 = x1; y2 = y1;
+	}
+	// Calculate the bezier!
+	bezier = IAdjustment::bezier(x0, y0, x1, y1, x2, y2, x3, y3, 0, 255);
+	// If the curve starts after x = 0, initialize it with a flat line
+	if (x0 > 0) {
+		for (int i = 0; i < x0; i++) {
+			bezier[i] = x0;
+		}
+	}
+	// And the same with the end point.
+	if (x3 < 255) {
+		for (int i = x3 + 1; i <= 255; i++) {
+			bezier[i] = x3;
+		}
+	}
+	
+	// Alright, we've got the curve! Time to manipulate the pixels!
+	for (int i = 0; i < imageSize_; i++)
+	{
+		channel = i % 3;
+		// Separating the subpixels into channels
+		if (channel == 0)
+		{
+			r = pxlPtr[i];
+		}
+		else if (channel == 1)
+		{
+			g = pxlPtr[i];
+		}
+		else
+		{
+			b = pxlPtr[i];
+			
+			// Handling the subpixels
+			// --> RED CHANNEL
+			if (selectedChannel == 0 || selectedChannel == 3) {
+				r = bezier[r];
+			}
+			// --> GREEN CHANNEL
+			if (selectedChannel == 1 || selectedChannel == 3) {
+				g = bezier[g];
+			}
+			// --> RED CHANNEL
+			if (selectedChannel == 2 || selectedChannel == 3) {
+				b = bezier[b];
+			}
+			
+			// Saving the subpixels back
+			pxlPtr[i-2] = IAdjustment::unclip(r);
+			pxlPtr[i-1] = IAdjustment::unclip(g);
+			pxlPtr[i]   = IAdjustment::unclip(b);
+			// DONE!!!
+		}
+	}
 }
 
 /**
@@ -136,11 +210,6 @@ unsigned char * IAdjustment::hsvToRGB(float h, float s, float v){
 	p = v * (1.0F - s);
 	q = v * (1.0F - f * s);
 	t = v * (1.0F - (1.0F - f) * s);
-	/*
-	 p = v * (1 - s)
-	 q = v * (1 - f * s)
-	 t = v * (1 - (1 - f) * s)
-	 */
 	
 	switch (i % 6) {
 		case 0:
@@ -167,4 +236,66 @@ unsigned char * IAdjustment::hsvToRGB(float h, float s, float v){
 	rgb[1] = (unsigned char)(g * 255.0F);
 	rgb[2] = (unsigned char)(b * 255.0F);
 	return rgb;
+}
+
+/**
+ * Calculate a bezier curve.
+ * Start (0) and end (3) point, with two points in between.
+ * Ported from the good folks at CamanJS https://github.com/meltingice/CamanJS/blob/master/src/core/calculate.coffee
+ */
+std::map<int,int> IAdjustment::bezier(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3, int lowBound, int highBound){
+	std::map<int,int> bezier;
+	
+	int Cx, Bx, Ax, Cy, By, Ay, curveX, curveY;
+	float t;
+	
+	Cx = 3 * (x1 - x0);
+    Bx = 3 * (x2 - x1) - Cx;
+    Ax = x3 - x0 - Cx - Bx;
+	
+    Cy = 3 * (y1 - y0);
+    By = 3 * (y2 - y1) - Cy;
+    Ay = y3 - y0 - Cy - By;
+	
+	for (int i; i < 1000; i++) {
+		t = i / 1000.0F;
+		
+		curveX = (int)std::floor((Ax * std::pow(t, 3.0F)) + (Bx * std::pow(t, 2.0F)) + (Cx * t) + x0);
+		curveY = (int)std::floor((Ay * std::pow(t, 3.0F)) + (By * std::pow(t, 2.0F)) + (Cy * t) + y0);
+		
+		if (lowBound && curveY < lowBound) {
+			curveY = lowBound;
+		} else if (highBound && curveY > highBound) {
+			curveY = highBound;
+		}
+		bezier[curveX] = curveY;
+	}
+	
+	// Search for missing values and use linear interpolation to approximate
+	if (bezier.size() < (x3 + 1)) {
+		for (int i = 0; i <= x3; i++) {
+			if (bezier.count(i) <= 0) {
+				int leftX, leftY, rightX, rightY;
+				leftX = i-1;
+				leftY = bezier[i-1];
+				
+				for (int j = i; j <= x3; j++) {
+					if (bezier.count(j) > 0) {
+						rightX = j;
+						rightY = bezier[j];
+						break;
+					}
+				}
+				
+				bezier[i] = leftY + ((rightY - leftY) / (rightX - leftX)) * (i - leftX);
+			}
+		}
+	}
+	
+	// Edge case
+	if (bezier.count(x3) <= 0) {
+		bezier[x3] = bezier[x3-1];
+	}
+	
+	return bezier;
 }

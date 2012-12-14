@@ -41,6 +41,10 @@
 		A1A3AF95167AFA710051F930 /* adjust_tint_green.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF93167AFA700051F930 /* adjust_tint_green.cpp */; };
 		A1A3AF98167AFACB0051F930 /* adjust_tint_blue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF96167AFAC90051F930 /* adjust_tint_blue.cpp */; };
 		A1A3AF9B167B1AA60051F930 /* adjust_colorize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AF99167B1AA50051F930 /* adjust_colorize.cpp */; };
+		A1A3AFA4167B28A30051F930 /* adjust_clip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AFA2167B28A20051F930 /* adjust_clip.cpp */; };
+		A1A3AFA7167B2AE20051F930 /* adjust_channels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AFA5167B2AE00051F930 /* adjust_channels.cpp */; };
+		A1A3AFAA167B2C410051F930 /* adjust_curves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AFA8167B2C3F0051F930 /* adjust_curves.cpp */; };
+		A1A3AFAD167B2F370051F930 /* adjust_exposure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1A3AFAB167B2F340051F930 /* adjust_exposure.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -178,6 +182,14 @@
 		A1A3AF97167AFACA0051F930 /* adjust_tint_blue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_tint_blue.h; sourceTree = "<group>"; };
 		A1A3AF99167B1AA50051F930 /* adjust_colorize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_colorize.cpp; sourceTree = "<group>"; };
 		A1A3AF9A167B1AA50051F930 /* adjust_colorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_colorize.h; sourceTree = "<group>"; };
+		A1A3AFA2167B28A20051F930 /* adjust_clip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_clip.cpp; sourceTree = "<group>"; };
+		A1A3AFA3167B28A30051F930 /* adjust_clip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_clip.h; sourceTree = "<group>"; };
+		A1A3AFA5167B2AE00051F930 /* adjust_channels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_channels.cpp; sourceTree = "<group>"; };
+		A1A3AFA6167B2AE10051F930 /* adjust_channels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_channels.h; sourceTree = "<group>"; };
+		A1A3AFA8167B2C3F0051F930 /* adjust_curves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_curves.cpp; sourceTree = "<group>"; };
+		A1A3AFA9167B2C3F0051F930 /* adjust_curves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_curves.h; sourceTree = "<group>"; };
+		A1A3AFAB167B2F340051F930 /* adjust_exposure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjust_exposure.cpp; sourceTree = "<group>"; };
+		A1A3AFAC167B2F360051F930 /* adjust_exposure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adjust_exposure.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -272,8 +284,16 @@
 				A1A3AF88167AF6D60051F930 /* adjust_gamma.h */,
 				A1A3AF8A167AF7660051F930 /* adjust_noise.cpp */,
 				A1A3AF8B167AF7670051F930 /* adjust_noise.h */,
+				A1A3AFA2167B28A20051F930 /* adjust_clip.cpp */,
+				A1A3AFA3167B28A30051F930 /* adjust_clip.h */,
 				A1A3AF8D167AF7EF0051F930 /* adjust_posterize.cpp */,
 				A1A3AF8E167AF7EF0051F930 /* adjust_posterize.h */,
+				A1A3AFA5167B2AE00051F930 /* adjust_channels.cpp */,
+				A1A3AFA6167B2AE10051F930 /* adjust_channels.h */,
+				A1A3AFA8167B2C3F0051F930 /* adjust_curves.cpp */,
+				A1A3AFA9167B2C3F0051F930 /* adjust_curves.h */,
+				A1A3AFAB167B2F340051F930 /* adjust_exposure.cpp */,
+				A1A3AFAC167B2F360051F930 /* adjust_exposure.h */,
 				A1A3AF99167B1AA50051F930 /* adjust_colorize.cpp */,
 				A1A3AF9A167B1AA50051F930 /* adjust_colorize.h */,
 				A1A3AF90167AF8F30051F930 /* adjust_tint_red.cpp */,
@@ -626,6 +646,10 @@
 				A1A3AF95167AFA710051F930 /* adjust_tint_green.cpp in Sources */,
 				A1A3AF98167AFACB0051F930 /* adjust_tint_blue.cpp in Sources */,
 				A1A3AF9B167B1AA60051F930 /* adjust_colorize.cpp in Sources */,
+				A1A3AFA4167B28A30051F930 /* adjust_clip.cpp in Sources */,
+				A1A3AFA7167B2AE20051F930 /* adjust_channels.cpp in Sources */,
+				A1A3AFAA167B2C410051F930 /* adjust_curves.cpp in Sources */,
+				A1A3AFAD167B2F370051F930 /* adjust_exposure.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,7 +29,11 @@ module_filter::module_filter(std::string newName, int newImageSize)
 		globalList_.push_back(new adjustSepia(imageSize_));
 		globalList_.push_back(new adjustGamma(imageSize_));
 		globalList_.push_back(new adjustNoise(imageSize_));
+		globalList_.push_back(new adjustClip(imageSize_));
 		globalList_.push_back(new adjustPosterize(imageSize_));
+		globalList_.push_back(new adjustChannels(imageSize_));
+		globalList_.push_back(new adjustCurves(imageSize_));
+		globalList_.push_back(new adjustExposure(imageSize_));
 		globalList_.push_back(new adjustColorize(imageSize_));
 		globalList_.push_back(new adjustTintRed(imageSize_));
 		globalList_.push_back(new adjustTintGreen(imageSize_));

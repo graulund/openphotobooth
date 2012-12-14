@@ -68,8 +68,18 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 		module_filter("Love", CAM_SUBPIXELS));
 	filterVector_->push_back(
 		module_filter("Grunge", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Cross Process", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Sunrise", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Orange Peel", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Blue Skies", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Evil", CAM_SUBPIXELS));
 	//filterVector_->push_back(
-	//						 module_filter("Whatever", CAM_SUBPIXELS));
+	//	module_filter("Whatever", CAM_SUBPIXELS));
 
 	/* ADD ADJUSTMENT TO FILTER ADD NEW FILTER IN MODEL.CPP LINE 60		
 	   USE THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */
@@ -79,7 +89,9 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	filterVector_->at(0).addAdjustment("Contrast", 100);
 	filterVector_->at(0).addAdjustment("Brightness", 15);
 	filterVector_->at(0).addAdjustment("Posterize", 80);
+	//filterVector_->at(0).addAdjustment("Clip", 30); // Doesn't look good
 	filterVector_->at(0).addAdjustment("Greyscale");
+	
 	// Love -----
 	int *lovecolor = new int[3];
 	lovecolor[0] = 196; lovecolor[1] = 32; lovecolor[2] = 7;
@@ -88,14 +100,58 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	filterVector_->at(1).addAdjustment("Colorize", 35, lovecolor);
 	filterVector_->at(1).addAdjustment("Vibrance", 50);
 	filterVector_->at(1).addAdjustment("Gamma", 130);
+	
 	// Grunge -----
 	filterVector_->at(2).addAdjustment("Gamma", 150);
+	filterVector_->at(2).addAdjustment("Clip", 25);
 	filterVector_->at(2).addAdjustment("Saturation", -60);
 	filterVector_->at(2).addAdjustment("Contrast", 5);
-	filterVector_->at(2).addAdjustment("Noise", 5);
+	filterVector_->at(2).addAdjustment("Noise", 15);
 	
-	//filterVector_->at(3).addAdjustment("Brightness", 15);
+	// Cross Process -----
+	int *crproc = new int[3]; int *crcolor = new int[3];
+	crproc[0] = 3; crproc[1] = 0; crproc[2] = 8;
+	crcolor[0] = 232; crcolor[1] = 123; crcolor[2] = 34;
+	filterVector_->at(3).addAdjustment("Brightness", 20);
+	filterVector_->at(3).addAdjustment("Colorize", 4, crcolor);
+	filterVector_->at(3).addAdjustment("Sepia", 20);
+	filterVector_->at(3).addAdjustment("Channels", 0, crproc);
+	filterVector_->at(3).addAdjustment("Contrast", 15);
+	filterVector_->at(3).addAdjustment("Vibrance", 75);
+	filterVector_->at(3).addAdjustment("Gamma", 160);
 	
+	// Vintage -----
+	int *vintage = new int[3];
+	vintage[0] = 8; vintage[1] = 4; vintage[2] = 2;
+	filterVector_->at(4).addAdjustment("Greyscale");
+	filterVector_->at(4).addAdjustment("Contrast", 5);
+	filterVector_->at(4).addAdjustment("Noise", 10);
+	filterVector_->at(4).addAdjustment("Sepia", 100);
+	filterVector_->at(4).addAdjustment("Channels", 0, vintage);
+	filterVector_->at(4).addAdjustment("Gamma", 87);
+	
+	// Orange Peel -----
+	int *opeel = new int[3];
+	opeel[0] = 255; opeel[1] = 144; opeel[2] = 0;
+	filterVector_->at(5).addAdjustment("Vibrance", -30);
+	filterVector_->at(5).addAdjustment("Saturation", -30);
+	filterVector_->at(5).addAdjustment("Colorize", 30, opeel);
+	filterVector_->at(5).addAdjustment("Contrast", -5);
+	filterVector_->at(5).addAdjustment("Gamma", 140);
+	
+	// Trippy ------
+	filterVector_->at(6).addAdjustment("Hue", 40);
+	filterVector_->at(6).addAdjustment("Brightness", 25);
+	filterVector_->at(6).addAdjustment("Vibrance", 70);
+	filterVector_->at(6).addAdjustment("Contrast", 20);
+	
+	// Evil ------
+	int *cold = new int[3];
+	cold[0] = 0; cold[1] = 144; cold[2] = 255;
+	filterVector_->at(7).addAdjustment("Invert");
+	filterVector_->at(7).addAdjustment("Greyscale");
+	filterVector_->at(7).addAdjustment("Contrast", 40);
+	filterVector_->at(7).addAdjustment("Colorize", 40, cold);
 	
 	/*
 	 std::vector<ImageAdjustment> sinCity;

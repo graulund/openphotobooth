@@ -34,12 +34,12 @@ void FilterView::drawFilter(ofTexture * textureArr, int index)
 		{
 			textureArr[i].draw(((i + 1) * 213), y, 213, 160);
 		}
-		if (i > 5)
+		if (i >= 5)
 		{
 			y = 320;
 			textureArr[i].draw((i * 213) % 639, y, 213, 160);
 		}
-		else if (i >= 3)
+		else if (i >= 2)
 		{
 			y = 160;
 			textureArr[i].draw((i * 213) % 639, y, 213, 160);
@@ -56,11 +56,11 @@ void FilterView::drawFilterSelector(int fltrNr)
 	{
 		ofRect((fltrNr * 213), 0, 213, 160);
 	}
-	if (fltrNr > 5)
+	if (fltrNr >= 5)
 	{
 		ofRect((fltrNr * 213) % 639, 320, 213, 160);
 	}
-	else if (fltrNr > 2)
+	else if (fltrNr >= 2)
 	{
 		ofRect((fltrNr * 213) % 639, 160, 213, 160);
 	}
