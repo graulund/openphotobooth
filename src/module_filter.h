@@ -12,8 +12,20 @@
 
 /* INCLUDE ALL ADJUST_ HEADERS AVAILABLE THEN LOOK MODULE_FILTER.CPP
    LINE 13																*/
-#include "adjust_saturation.h"
 #include "adjust_brightness.h"
+#include "adjust_saturation.h"
+#include "adjust_contrast.h"
+#include "adjust_vibrance.h"
+#include "adjust_greyscale.h"
+#include "adjust_hue.h"
+#include "adjust_invert.h"
+#include "adjust_sepia.h"
+#include "adjust_gamma.h"
+#include "adjust_noise.h"
+#include "adjust_posterize.h"
+#include "adjust_tint_red.h"
+#include "adjust_tint_green.h"
+#include "adjust_tint_blue.h"
 
 class module_filter
 {
@@ -24,6 +36,7 @@ private:
 
 	std::string name_;
 	std::vector<IAdjustment *> list_;
+	std::vector<int> adjusts_;
 
 	/* GLOBAL LIST WITH ALL AVAIABLE ADJUSTMENTS						*/
 	static std::vector<IAdjustment *> globalList_;
@@ -32,6 +45,7 @@ public:
 	module_filter(std::string, int);
 	~module_filter();
 
+	bool addAdjustment(std::string, int);
 	bool addAdjustment(std::string);
 	bool removeAdjustment(std::string);
 

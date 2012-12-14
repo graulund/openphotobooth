@@ -7,16 +7,34 @@
 		std::vector<IAdjustment *>();
 #endif
 
+bool adjustmentsAdded = false;
+
 module_filter::module_filter(std::string newName, int newImageSize) 
 	: name_(newName), imageSize_(newImageSize)
 {
 	/* INCREASE FILTER COUNT WITH EVERY NEW MODULE_FILTER OBJECT	  */
 	filterCount_++;
+	
+	//adjusts_ = *new std::vector<int>();
 
-	/* PUSH ALL AVAIABLE FILTERS AT THE BACK 						  */
-	globalList_.push_back(new adjustSaturation(imageSize_));
-	globalList_.push_back(new adjustBrightness(imageSize_));
-	//globalList_.push_back(new adjustBrightness(imageSize_));
+	/* PUSH ALL AVAILABLE ADJUSTMENTS TO THE "GLOBAL LIST"			  */
+	if(!adjustmentsAdded){
+		globalList_.push_back(new adjustBrightness(imageSize_));
+		globalList_.push_back(new adjustSaturation(imageSize_));
+		globalList_.push_back(new adjustContrast(imageSize_));
+		globalList_.push_back(new adjustVibrance(imageSize_));
+		globalList_.push_back(new adjustGreyscale(imageSize_));
+		globalList_.push_back(new adjustHue(imageSize_));
+		globalList_.push_back(new adjustInvert(imageSize_));
+		globalList_.push_back(new adjustSepia(imageSize_));
+		globalList_.push_back(new adjustGamma(imageSize_));
+		globalList_.push_back(new adjustNoise(imageSize_));
+		globalList_.push_back(new adjustPosterize(imageSize_));
+		globalList_.push_back(new adjustTintRed(imageSize_));
+		globalList_.push_back(new adjustTintGreen(imageSize_));
+		globalList_.push_back(new adjustTintBlue(imageSize_));
+		adjustmentsAdded = true;
+	}
 }
 
 module_filter::~module_filter()
@@ -32,13 +50,14 @@ module_filter::~module_filter()
 	}
 }
 
-bool module_filter::addAdjustment(std::string adjustmentName)
+bool module_filter::addAdjustment(std::string adjustmentName, int adjust)
 {
 	for (std::vector<IAdjustment *>::iterator it = globalList_.begin();
 		it != globalList_.end(); it++)
 	{
 		if ((*it)->getName() == adjustmentName)
 		{
+			adjusts_.push_back(adjust);
 			list_.push_back(*it);
 			return true;
 		}
@@ -46,14 +65,21 @@ bool module_filter::addAdjustment(std::string adjustmentName)
 	return false;
 }
 
+bool module_filter::addAdjustment(std::string adjustmentName)
+{
+	return module_filter::addAdjustment(adjustmentName, 0);
+}
+
 bool module_filter::removeAdjustment(std::string adjustmentName)
 {
+	std::vector<int>::iterator at = adjusts_.begin();
 	for (std::vector<IAdjustment *>::iterator it = list_.begin();
-		it != list_.end(); it++)
+		it != list_.end(); it++, at++)
 	{
 		if ((*it)->getName() == adjustmentName)
 		{
 			list_.erase(it);
+			adjusts_.erase(at);
 			return true;
 		}
 	}
@@ -67,9 +93,12 @@ int module_filter::getFilterCount()
 
 void module_filter::apply(unsigned char * pxlArr)
 {
+	std::vector<int>::iterator at = adjusts_.begin();
 	for (std::vector<IAdjustment *>::iterator it = list_.begin();
-		it != list_.end(); it++)
+		it != list_.end(); it++, at++)
 	{
+		
+		(*it)->setAdjust(*at);
 		(*it)->apply(pxlArr);
 	}
 }

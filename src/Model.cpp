@@ -55,22 +55,25 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	vidGrabber_->initGrabber(CAM_WIDTH, CAM_HEIGHT);
 	texture_->allocate(CAM_WIDTH, CAM_HEIGHT, GL_RGB);
 
-	/* NEW FILTER VECTOR! CARRYS ALL THE FILTERS AVAILABLE				*/
+	/* NEW FILTER VECTOR! CARRIES ALL THE FILTERS AVAILABLE				*/
 	filterVector_ = new std::vector<module_filter>();
 
 	/* ADD FILTERS TO FILTER VECTOR - YOU CAN ADD ADJUSTMENTS TO
 	   FILTERS RIGHT AFTER 												*/
 	filterVector_->push_back(
-		module_filter("FILTER ONE", 640 * 480 * 3));
+		module_filter("Happy", 640 * 480 * 3));
 	filterVector_->push_back(
-		module_filter("VENICE", 640 * 480 * 3));
+		module_filter("Dark", 640 * 480 * 3));
 
 	/* ADD ADJUSTMENT TO FILTER ADD NEW FILTER IN MODEL.CPP LINE 60		
 	   USE THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */
 
-	filterVector_->at(0).addAdjustment("Saturation");
-	filterVector_->at(0).addAdjustment("Brightness");
-	filterVector_->at(1).addAdjustment("Brightness");
+	filterVector_->at(0).addAdjustment("Vibrance", 100);
+	//filterVector_->at(0).addAdjustment("Brightness", 20);
+	filterVector_->at(1).addAdjustment("Blue tint", 20);
+	filterVector_->at(1).addAdjustment("Contrast", 50);
+	filterVector_->at(1).addAdjustment("Noise", 50);
+	
 
 }
 

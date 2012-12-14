@@ -13,9 +13,9 @@ adjustBrightness::adjustBrightness(int newSize, int newAdjust)
  */
 void adjustBrightness::apply(unsigned char * pxlPtr)
 {
-	#ifdef __openPhotoBooth__DEBUG_FLAG__
+#ifdef __openPhotoBooth__DEBUG_FLAG__
 	std::cout << "BRIGHTNESS APPLIED" << std::endl;
-	#endif
+#endif
 
 	int x = (int) floor(255.0F * (adjust_ / 100.0F));
 	

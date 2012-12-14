@@ -17,9 +17,9 @@ adjustSaturation::adjustSaturation(int newSize, int newAdjust)
  */
 void adjustSaturation::apply(unsigned char * pxlPtr)
 {
-	#ifdef __openPhotoBooth__DEBUG_FLAG__
+#ifdef __openPhotoBooth__DEBUG_FLAG__
 	std::cout << "SATURATION APPLIED" << std::endl;
-	#endif
+#endif
 	
 	float x = -0.01F * adjust_;
 	int channel;
