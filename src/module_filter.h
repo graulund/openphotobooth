@@ -23,6 +23,7 @@
 #include "adjust_gamma.h"
 #include "adjust_noise.h"
 #include "adjust_posterize.h"
+#include "adjust_colorize.h"
 #include "adjust_tint_red.h"
 #include "adjust_tint_green.h"
 #include "adjust_tint_blue.h"
@@ -37,14 +38,16 @@ private:
 	std::string name_;
 	std::vector<IAdjustment *> list_;
 	std::vector<int> adjusts_;
+	std::vector<int *> options_;
 
-	/* GLOBAL LIST WITH ALL AVAIABLE ADJUSTMENTS						*/
+	/* GLOBAL LIST WITH ALL AVAILABLE ADJUSTMENTS						*/
 	static std::vector<IAdjustment *> globalList_;
 
 public:
 	module_filter(std::string, int);
 	~module_filter();
 
+	bool addAdjustment(std::string, int, int*);
 	bool addAdjustment(std::string, int);
 	bool addAdjustment(std::string);
 	bool removeAdjustment(std::string);

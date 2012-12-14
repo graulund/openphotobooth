@@ -9,7 +9,8 @@
 IAdjustment::IAdjustment(int newSize, int newAdjust)
 {
     imageSize_ = newSize;
-	adjust_ = newAdjust;
+	adjust_    = newAdjust;
+	options_   = NULL;
 }
 
 void IAdjustment::setAdjust(int newAdjust)
@@ -20,6 +21,16 @@ void IAdjustment::setAdjust(int newAdjust)
 int IAdjustment::getAdjust()
 {
 	return adjust_;
+}
+
+void IAdjustment::setOptions(int * newOptions)
+{
+	options_ = newOptions;
+}
+
+int * IAdjustment::getOptions()
+{
+	return options_;
 }
 
 std::string IAdjustment::getName()

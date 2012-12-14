@@ -2,6 +2,8 @@
 
 #include <ctime>
 
+#define CAM_SUBPIXELS 640 * 480 * 3
+
 Model::Model()
 {
 	init();
@@ -61,18 +63,56 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	/* ADD FILTERS TO FILTER VECTOR - YOU CAN ADD ADJUSTMENTS TO
 	   FILTERS RIGHT AFTER 												*/
 	filterVector_->push_back(
-		module_filter("Happy", 640 * 480 * 3));
+		module_filter("Sin City", CAM_SUBPIXELS));
 	filterVector_->push_back(
-		module_filter("Dark", 640 * 480 * 3));
+		module_filter("Love", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Grunge", CAM_SUBPIXELS));
+	//filterVector_->push_back(
+	//						 module_filter("Whatever", CAM_SUBPIXELS));
 
 	/* ADD ADJUSTMENT TO FILTER ADD NEW FILTER IN MODEL.CPP LINE 60		
 	   USE THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */
 
-	filterVector_->at(0).addAdjustment("Vibrance", 100);
-	//filterVector_->at(0).addAdjustment("Brightness", 20);
-	filterVector_->at(1).addAdjustment("Blue tint", 20);
-	filterVector_->at(1).addAdjustment("Contrast", 50);
-	filterVector_->at(1).addAdjustment("Noise", 50);
+	// DEFAULT FILTERS:
+	// Sin City -----
+	filterVector_->at(0).addAdjustment("Contrast", 100);
+	filterVector_->at(0).addAdjustment("Brightness", 15);
+	filterVector_->at(0).addAdjustment("Posterize", 80);
+	filterVector_->at(0).addAdjustment("Greyscale");
+	// Love -----
+	int *lovecolor = new int[3];
+	lovecolor[0] = 196; lovecolor[1] = 32; lovecolor[2] = 7;
+	filterVector_->at(1).addAdjustment("Brightness", 10);
+	filterVector_->at(1).addAdjustment("Contrast", 4);
+	filterVector_->at(1).addAdjustment("Colorize", 35, lovecolor);
+	filterVector_->at(1).addAdjustment("Vibrance", 50);
+	filterVector_->at(1).addAdjustment("Gamma", 130);
+	// Grunge -----
+	filterVector_->at(2).addAdjustment("Gamma", 150);
+	filterVector_->at(2).addAdjustment("Saturation", -60);
+	filterVector_->at(2).addAdjustment("Contrast", 5);
+	filterVector_->at(2).addAdjustment("Noise", 5);
+	
+	//filterVector_->at(3).addAdjustment("Brightness", 15);
+	
+	
+	/*
+	 std::vector<ImageAdjustment> sinCity;
+	 sinCity.push_back(ImageAdjustment("contrast", 100));
+	 sinCity.push_back(ImageAdjustment("brightness", 15));
+	 //sinCity.push_back(ImageAdjustment("exposure", 10));
+	 sinCity.push_back(ImageAdjustment("posterize", 80));
+	 sinCity.push_back(ImageAdjustment("greyscale"));
+	 
+	 std::vector<ImageAdjustment> love;
+	 love.push_back(ImageAdjustment("brightness", 5));
+	 //love.push_back(ImageAdjustment("exposure", 8));
+	 love.push_back(ImageAdjustment("contrast", 4));
+	 love.push_back(ImageAdjustment("colorize", 30, 196, 32, 7));
+	 love.push_back(ImageAdjustment("vibrance", 50));
+	 love.push_back(ImageAdjustment("gamma", 130));
+	 */
 	
 
 }

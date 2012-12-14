@@ -39,7 +39,7 @@ void FilterView::drawFilter(ofTexture * textureArr, int index)
 			y = 320;
 			textureArr[i].draw((i * 213) % 639, y, 213, 160);
 		}
-		else if (i > 2)
+		else if (i >= 3)
 		{
 			y = 160;
 			textureArr[i].draw((i * 213) % 639, y, 213, 160);

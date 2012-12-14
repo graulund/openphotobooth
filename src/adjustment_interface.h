@@ -8,14 +8,17 @@ class IAdjustment
 protected:
 	std::string name_;
 	int imageSize_, adjust_;
+	int * options_;
 
 public:
 	IAdjustment(int, int);
 	// ~IAdjustment();
 
 	virtual void setAdjust(int);
+	virtual void setOptions(int *);
 
 	virtual int getAdjust();
+	virtual int * getOptions();
 	virtual std::string getName();
 	
 	virtual void apply(unsigned char *) = 0;
