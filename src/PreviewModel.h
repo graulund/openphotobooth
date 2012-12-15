@@ -4,9 +4,9 @@
 #include "Model.h"
 #include "module_wordBubble.h"
 
-#define BTN_LABL_L "Save"
+#define BTN_LABL_L "Publish"
 #define BTN_LABL_M "PRV"
-#define BTN_LABL_R "Edit"
+#define BTN_LABL_R "Annotate"
 #define BTN_NAME_L "PREVLEFT"
 #define BTN_NAME_M "PREVMIDDLE"
 #define BTN_NAME_R "PREVRIGHT"

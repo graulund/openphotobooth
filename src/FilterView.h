@@ -7,6 +7,7 @@ class FilterView : public View
 {
 public:
 	FilterView(View *, std::string, int, int);
+	~FilterView();
 
 	void drawVideoGrabber(ofVideoGrabber *, float, float);
 	void drawFilter(ofTexture *, int);

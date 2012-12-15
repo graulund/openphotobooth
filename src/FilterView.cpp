@@ -7,7 +7,18 @@
 FilterView::FilterView(View * oldView, std::string iconURL, 
 	int width, int height) : View(oldView, iconURL, width, height)
 {
+	// In the filter grid state, we have some different controls.
+	buttonLeft_->setVisible(false);
+    editorDrop_->setVisible(true);
+    editorDrop_->setValue(0);
+	
 	delete oldView;
+}
+
+FilterView::~FilterView()
+{
+	buttonLeft_->setVisible(true);
+	delete editorDrop_;
 }
 
 /**

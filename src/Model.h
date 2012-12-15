@@ -20,9 +20,9 @@
 #define IMG_EXT ".jpg"
 //----------------------------------
 #define ICON_URL "./GUI/Images/Icon.png"
-#define BTN_LABL_L "Open"
+#define BTN_LABL_L "Import"
 #define BTN_LABL_M "CNTRL"
-#define BTN_LABL_R "Effects"
+#define BTN_LABL_R "Filters"
 #define BTN_NAME_L "MAINLEFT"
 #define BTN_NAME_M "MAINMIDDLE"
 #define BTN_NAME_R "MAINRIGHT"

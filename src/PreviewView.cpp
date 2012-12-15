@@ -3,7 +3,8 @@
 PreviewView::PreviewView(View * oldView, std::string iconURL,
 	int width, int height, ofxUICanvas * canvas)
 	: View(oldView, iconURL, width, height)
-{   
+{
+	// In the taken image state, we have some different controls.
     buttonLeft_->setVisible(false);
     buttonDrop_->setVisible(true);
     buttonDrop_->setValue(0);

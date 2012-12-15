@@ -27,20 +27,32 @@ void View::init(std::string iconURL, int width, int height, ofxUICanvas * canvas
 		"BUTTON_LEFT", false, 100, 32, 8, 8, OFX_UI_FONT_MEDIUM);
 	buttonCenter_ = new ofxUIImageButton(
 		304, 8, 32, 32, false, iconURL, "BUTTON_CENT");
+	actButtonCenter_ = new ofxUILabelButton("BUTTON_ACTCENT", false);
 	buttonRight_ = new ofxUILabelToggle(
 		"BUTTON_RIGHT", false, 100, 32, 532, 8, OFX_UI_FONT_MEDIUM);
     
     buttonItems_.push_back("Facebook");
     buttonItems_.push_back("Save");
     buttonDrop_ = new ofxUIDropDownList("Publish", buttonItems_, 100, 8, 8);
-
+	
+	// Filter editor drop down
+	editorItems_.push_back("Create Filter");
+	editorItems_.push_back("Load Filter");
+	editorDrop_ = new ofxUIDropDownList("Editor", editorItems_, 100, 8, 8);
+	
 	canvas->addWidget(buttonLeft_);
 	canvas->addWidget(buttonCenter_);
+	canvas->addWidget(actButtonCenter_);
 	canvas->addWidget(buttonRight_);
 	canvas->addWidget(buttonDrop_);
 
 	buttonDrop_->setVisible(false);
 	buttonDrop_->setName("PREVBTN_L_D");
+	
+	editorDrop_->setVisible(false);
+	editorDrop_->setName("EDITORDROP");
+	
+	actButtonCenter_->setVisible(false);
 }
 
 /**
