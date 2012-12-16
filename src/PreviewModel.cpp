@@ -3,7 +3,7 @@
 PreviewModel::PreviewModel(Model * oldModel) : Model(oldModel, true)
 {
 	wordBubble_ = new module_wordBubble();
-	wordBubbleStr_ = new string("Enter Text");
+	wordBubbleStr_ = new string("Enter Text Here");
 
 	// imgSelector_;
 	

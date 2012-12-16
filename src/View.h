@@ -21,6 +21,7 @@ public:
 	void init(std::string, int, int, ofxUICanvas *);
 
 	virtual void drawVideoGrabber(ofVideoGrabber *, float, float);
+	virtual void drawVideoGrabber(ofVideoGrabber *, float, float, float, float);
 	virtual void drawThumbnails(ofImage *, int, int);
 	virtual void drawThumbnailSelector(int);
 	virtual void drawFilter(ofTexture);

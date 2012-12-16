@@ -55,6 +55,7 @@ void Controller::initName()
 	view_->setButtonName(1, model_->getButtonName(1));
 	view_->setButtonName(2, model_->getButtonName(2));
 	view_->setButtonName(3, model_->getButtonName(3));
+	view_->setButtonName(4, model_->getButtonName(4));
 }
 
 /**

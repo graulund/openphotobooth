@@ -7,11 +7,12 @@
 #define CAM_HEIGHT 160
 
 #define ICON_URL "./GUI/Images/Icon2.png"
-#define BTN_LABL_L "Twitter"
+#define BTN_LABL_L ""
 #define BTN_LABL_M "CNTRL"
-#define BTN_LABL_R "Apply"
+#define BTN_LABL_R "Next Page"
 #define BTN_NAME_L "FILTERLEFT"
 #define BTN_NAME_M "FILTERMIDDLE"
+#define BTN_NAME_AM "FILTERACTMIDDLE"
 #define BTN_NAME_R "FILTERRIGHT"
 
 
@@ -22,6 +23,7 @@ private:
 	unsigned char pixelArrSlot[640*480*3];
 
 	ofTexture * textureArr_;
+	std::string * filterNames_;
 public:
 	FilterModel(Model *);
 	~FilterModel();
@@ -34,6 +36,7 @@ public:
 	int getFilterCount();
 	std::string getButtonLabel(int);
 	ofTexture * getTextureArray();
+	std::string * getFilterNames();
 	bool selectFilter(int, int);
 };
 

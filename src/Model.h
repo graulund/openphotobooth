@@ -25,6 +25,7 @@
 #define BTN_LABL_R "Filters"
 #define BTN_NAME_L "MAINLEFT"
 #define BTN_NAME_M "MAINMIDDLE"
+#define BTN_NAME_AM "MAINACTMIDDLE"
 #define BTN_NAME_R "MAINRIGHT"
 //----------------------------------
 
@@ -35,7 +36,7 @@ protected:
 	
 	unsigned char * pixelArr_;
 	std::string btnLabelL_, btnLabelR_, btnLabelM_, 
-		btnNameL_, btnNameM_, btnNameR_, originalFileExtension;
+		btnNameL_, btnNameM_, btnNameAM_, btnNameR_, originalFileExtension;
 
 	ofVideoGrabber * vidGrabber_;
 	ofTexture * texture_;

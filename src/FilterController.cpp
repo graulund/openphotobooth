@@ -42,9 +42,10 @@ void FilterController::mousePressed(int x, int y, int button)
 void FilterController::draw()
 {
 	view_->drawVideoGrabber(model_->getVideoGrabber(),
-		model_->getCamWidth(), model_->getCamHeight());
+		model_->getCamWidth(), model_->getCamHeight(), model_->getCamWidth(), model_->getCamHeight());
 	static_cast<FilterView*>(view_)->drawFilter(
-		static_cast<FilterModel*>(model_)->getTextureArray(), 
+		static_cast<FilterModel*>(model_)->getTextureArray(),
+		static_cast<FilterModel*>(model_)->getFilterNames(),
 		static_cast<FilterModel*>(model_)->getFilterCount());
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());

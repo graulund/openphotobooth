@@ -57,6 +57,7 @@ public:
 	bool removeAdjustment(std::string);
 
 	int getFilterCount();
+	std::string getName();
 
 	void apply(unsigned char *);
 }; 

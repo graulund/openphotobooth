@@ -72,11 +72,15 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 			controller_->guiEvent(newEvent);	
 		}
 	}
-	else if (buttonName == "FILTERRIGHT")
+	else if (buttonName == "FILTERACTMIDDLE")
 	{
 		controller_ = new Controller(controller_, true);
-		// button->setValue(1);
-		lockModel_ = false;	
+		lockModel_ = false;
+		button->setValue(0);
+	}
+	else if (buttonName == "FILTERRIGHT")
+	{
+		// NEXT PAGE!!!!!
 	}
 	else
 	{

@@ -50,6 +50,9 @@ void adjustHue::apply(unsigned char * pxlPtr)
 			pxlPtr[i-2] = IAdjustment::unclip(rgb[0]);
 			pxlPtr[i-1] = IAdjustment::unclip(rgb[1]);
 			pxlPtr[i]   = IAdjustment::unclip(rgb[2]);
+			
+			delete[] hsv;
+			delete[] rgb;
 		}
 	}
 }

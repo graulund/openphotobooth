@@ -11,11 +11,17 @@ View::View(View * oldView, std::string iconURL, int width, int height)
 	buttonLeft_ = oldView->buttonLeft_;
 	buttonRight_ = oldView->buttonRight_;
 	buttonCenter_ = oldView->buttonCenter_;
+	actButtonCenter_ = oldView->actButtonCenter_;
 	buttonDrop_ = oldView->buttonDrop_;
+	editorDrop_ = oldView->editorDrop_;
 
 	buttonLeft_->setVisible(true);
 	buttonLeft_->setValue(0);
+	buttonCenter_->setVisible(true);
 	buttonDrop_->setVisible(false);
+	editorDrop_->setVisible(false);
+	actButtonCenter_->setVisible(false);
+	actButtonCenter_->setValue(0);
 	buttonRight_->setValue(0);
 
 	// init(iconURL, width, height, false);
@@ -23,28 +29,29 @@ View::View(View * oldView, std::string iconURL, int width, int height)
 
 void View::init(std::string iconURL, int width, int height, ofxUICanvas * canvas)
 {
-	buttonLeft_ = new ofxUILabelToggle(
-		"BUTTON_LEFT", false, 100, 32, 8, 8, OFX_UI_FONT_MEDIUM);
-	buttonCenter_ = new ofxUIImageButton(
-		304, 8, 32, 32, false, iconURL, "BUTTON_CENT");
-	actButtonCenter_ = new ofxUILabelButton("BUTTON_ACTCENT", false);
-	buttonRight_ = new ofxUILabelToggle(
-		"BUTTON_RIGHT", false, 100, 32, 532, 8, OFX_UI_FONT_MEDIUM);
+	buttonLeft_      = new ofxUILabelToggle(
+		                 "BUTTON_LEFT", false, 100, 32, 8, 8, OFX_UI_FONT_MEDIUM);
+	buttonCenter_    = new ofxUIImageButton(
+		                 304, 8, 32, 32, false, iconURL, "BUTTON_CENT");
+	actButtonCenter_ = new ofxUILabelButton("BUTTON_ACTCENT", false, 100, 32, 270, 8, OFX_UI_FONT_MEDIUM);
+	buttonRight_     = new ofxUILabelToggle(
+		                 "BUTTON_RIGHT", false, 100, 32, 532, 8, OFX_UI_FONT_MEDIUM);
     
     buttonItems_.push_back("Facebook");
     buttonItems_.push_back("Save");
-    buttonDrop_ = new ofxUIDropDownList("Publish", buttonItems_, 100, 8, 8);
+    buttonDrop_ = new ofxUIDropDownList("Publish", buttonItems_, 100, 8, 9);
 	
 	// Filter editor drop down
 	editorItems_.push_back("Create Filter");
 	editorItems_.push_back("Load Filter");
-	editorDrop_ = new ofxUIDropDownList("Editor", editorItems_, 100, 8, 8);
+	editorDrop_ = new ofxUIDropDownList("Editor", editorItems_, 120, 8, 9);
 	
 	canvas->addWidget(buttonLeft_);
 	canvas->addWidget(buttonCenter_);
 	canvas->addWidget(actButtonCenter_);
 	canvas->addWidget(buttonRight_);
 	canvas->addWidget(buttonDrop_);
+	canvas->addWidget(editorDrop_);
 
 	buttonDrop_->setVisible(false);
 	buttonDrop_->setName("PREVBTN_L_D");
@@ -62,7 +69,13 @@ void View::init(std::string iconURL, int width, int height, ofxUICanvas * canvas
 void View::drawVideoGrabber(ofVideoGrabber * vidGrabber, 
 	float w, float h)
 {
-	vidGrabber->draw(0, 0, w, h);
+	View::drawVideoGrabber(vidGrabber, w, h, 0, 0);
+}
+
+void View::drawVideoGrabber(ofVideoGrabber * vidGrabber,
+							float w, float h, float x, float y)
+{
+	vidGrabber->draw(x, y, w, h);
 }
 
 /**
@@ -118,6 +131,10 @@ void View::setButtonLabel(int btnNbr, std::string btnLbl)
 	{
 		buttonRight_->setLabelText(btnLbl);
 	}
+	else if (btnNbr == 4)
+	{
+		actButtonCenter_->setLabelText(btnLbl);
+	}
 }
 
 void View::clearButtonStatus(int btnNbr)
@@ -134,21 +151,29 @@ void View::clearButtonStatus(int btnNbr)
 	{
 		buttonCenter_->setValue(0);
 	}
+	else if (btnNbr == 4)
+	{
+		actButtonCenter_->setValue(0);
+	}
 }
 
-void View::setButtonName(int btnNbr, std::string btnLbl)
+void View::setButtonName(int btnNbr, std::string btnName)
 {
 	if (btnNbr == 1)
 	{
-		buttonLeft_->setName(btnLbl);
+		buttonLeft_->setName(btnName);
 	}
 	else if (btnNbr == 2)
 	{
-		buttonRight_->setName(btnLbl);
+		buttonRight_->setName(btnName);
 	}
 	else if (btnNbr == 3)
 	{
-		buttonCenter_->setName(btnLbl);
+		buttonCenter_->setName(btnName);
+	}
+	else if (btnNbr == 4)
+	{
+		actButtonCenter_->setName(btnName);
 	}
 }
 

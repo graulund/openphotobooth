@@ -120,6 +120,8 @@ void IAdjustment::curves(unsigned char * pxlPtr, int selectedChannel, int x0, in
 			// DONE!!!
 		}
 	}
+	
+	bezier.clear();
 }
 
 /**

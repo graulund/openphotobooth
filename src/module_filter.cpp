@@ -102,6 +102,11 @@ int module_filter::getFilterCount()
 	return filterCount_;
 }
 
+std::string module_filter::getName()
+{
+	return name_;
+}
+
 void module_filter::apply(unsigned char * pxlArr)
 {
 	std::vector<int>::iterator at   = adjusts_.begin();

@@ -39,6 +39,7 @@ void Model::init()
 
 	btnNameL_ = BTN_NAME_L;
 	btnNameM_ = BTN_NAME_M;
+	btnNameAM_ = BTN_NAME_AM;
 	btnNameR_ = BTN_NAME_R;
 }
 
@@ -71,11 +72,11 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	filterVector_->push_back(
 		module_filter("Cross Process", CAM_SUBPIXELS));
 	filterVector_->push_back(
-		module_filter("Sunrise", CAM_SUBPIXELS));
+		module_filter("Vintage", CAM_SUBPIXELS));
 	filterVector_->push_back(
 		module_filter("Orange Peel", CAM_SUBPIXELS));
 	filterVector_->push_back(
-		module_filter("Blue Skies", CAM_SUBPIXELS));
+		module_filter("Trippy", CAM_SUBPIXELS));
 	filterVector_->push_back(
 		module_filter("Evil", CAM_SUBPIXELS));
 	//filterVector_->push_back(
@@ -481,6 +482,10 @@ std::string Model::getButtonName(int btnNr)
 	else if (btnNr == 3)
 	{
 		return btnNameM_;
+	}
+	else if (btnNr == 4)
+	{
+		return btnNameAM_;
 	}
 	else
 	{

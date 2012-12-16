@@ -9,16 +9,38 @@ FilterView::FilterView(View * oldView, std::string iconURL,
 {
 	// In the filter grid state, we have some different controls.
 	buttonLeft_->setVisible(false);
+	buttonCenter_->setVisible(false);
     editorDrop_->setVisible(true);
     editorDrop_->setValue(0);
 	
+	actButtonCenter_->setLabelText("Apply");
+	actButtonCenter_->setValue(0);
+	actButtonCenter_->setVisible(true);
+	
 	delete oldView;
+	
+	// Font for filter name display
+	ofTrueTypeFont::setGlobalDpi(72);
+	typeFont_ = new ofTrueTypeFont();
+	
+	if (!typeFont_->isLoaded())
+	{
+		typeFont_->loadFont("verdana.ttf", 14, true, true, true);
+	}
+	
+	typeFont_->setLineHeight(16.0f);
+	typeFont_->setLetterSpacing(1.035);
 }
 
 FilterView::~FilterView()
 {
 	buttonLeft_->setVisible(true);
+	buttonCenter_->setVisible(true);
+	editorDrop_->setVisible(false);
+	actButtonCenter_->setVisible(false);
+	actButtonCenter_->setValue(0);
 	delete editorDrop_;
+	delete actButtonCenter_;
 }
 
 /**
@@ -32,53 +54,52 @@ void FilterView::drawVideoGrabber(ofVideoGrabber * vidGrabber,
 }
 
 /**
- * Draws the Filter into the Scene. Poisition is given by the index
+ * Draws the Filter into the Scene. Position is given by the index
  * @param textureArr texture with applied filter
  * @param index      [description]
  */
-void FilterView::drawFilter(ofTexture * textureArr, int index)
+void FilterView::drawFilter(ofTexture * textureArr, std::string * names, int index)
 {
-	int y = 0;
+	int x = 0, y = 0, w = FILTER_VIEW_CAM_WIDTH, h = FILTER_VIEW_CAM_HEIGHT;
+	int cols = 3, filters = 8, di = 0;
 	for (int i = 0; i < index; i++)
 	{
-		if (i < 3)
-		{
-			textureArr[i].draw(((i + 1) * 213), y, 213, 160);
-		}
-		if (i >= 5)
-		{
-			y = 320;
-			textureArr[i].draw((i * 213) % 639, y, 213, 160);
-		}
-		else if (i >= 2)
-		{
-			y = 160;
-			textureArr[i].draw((i * 213) % 639, y, 213, 160);
-		}
+		// Position according to number in vector, skipping front/center.
+		di = (i >= filters/2) ? i+1 : i;
+		x  = (di % cols) * w;
+		y  = (int)std::floor(((float)di)/((float)cols)) * h;
+		// Draw!
+		textureArr[i].draw(x, y, w, h);
+		typeFont_->drawString(names[i], x + 15, y + h - 15);
 	}
 }
 
 void FilterView::drawFilterSelector(int fltrNr)
 {
 	ofPushStyle();
-	ofSetHexColor(0x00B2B2);
+	ofSetHexColor(0xCCCCCC);
 	ofNoFill();
-	if (fltrNr < 3)
-	{
-		ofRect((fltrNr * 213), 0, 213, 160);
+	int di = 0, filters = 8, cols = 3,
+		x = 0, y = 0, w = FILTER_VIEW_CAM_WIDTH, h = FILTER_VIEW_CAM_HEIGHT;
+	if(fltrNr == 0){
+		// Non-filter view
+		x = w; y = h;
+	} else {
+		// Calculate coordinates of filter on screen
+		di = (fltrNr > filters/2) ? fltrNr : fltrNr-1;
+		x  = (di % cols) * w;
+		y  = (int)std::floor(((float)di)/((float)cols)) * h;
 	}
-	if (fltrNr >= 5)
-	{
-		ofRect((fltrNr * 213) % 639, 320, 213, 160);
-	}
-	else if (fltrNr >= 2)
-	{
-		ofRect((fltrNr * 213) % 639, 160, 213, 160);
-	}
+	// Draw several to simulate a thicker border
+	ofRect(x, y, w, h); // 1px border
+	ofRect(x+1, y+1, w-2, h-2); // 2px border
+	ofRect(x+2, y+2, w-4, h-4); // 3px border
+	ofRect(x+3, y+3, w-6, h-6); // 4px border!!!
+	
 	ofPopStyle();
 }
 
-void FilterView::drawFilter(ofTexture texture, int index)
+/*void FilterView::drawFilter(ofTexture texture, int index)
 {
 	texture.draw(0, 0, 213, 160);
-}
+}*/

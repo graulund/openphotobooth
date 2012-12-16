@@ -4,11 +4,13 @@ FilterModel::FilterModel(Model * oldModel) : Model(oldModel, true)
 {
 	int fltrCnt = filterVector_->size();
 
-	textureArr_ = new ofTexture[fltrCnt];
+	textureArr_  = new ofTexture[fltrCnt];
+	filterNames_ = new std::string[fltrCnt];
 	
 	for (int i = 0; i < fltrCnt; i++)
 	{
 		textureArr_[i].allocate(640, 480, GL_RGB);
+		filterNames_[i] = filterVector_->at(i).getName();
 	}
 
 	init();		
@@ -37,6 +39,7 @@ void FilterModel::init()
 
 	btnNameL_ = BTN_NAME_L;
 	btnNameM_ = BTN_NAME_M;
+	btnNameAM_ = BTN_NAME_AM;
 	btnNameR_ = BTN_NAME_R;
 }
 
@@ -115,6 +118,15 @@ ofTexture * FilterModel::getTextureArray()
 }
 
 /**
+ * [FilterModel::getFilterNames description]
+ * @return [description]
+ */
+std::string * FilterModel::getFilterNames()
+{
+	return filterNames_;
+}
+
+/**
  * [FilterModel::selectFilter description]
  * @param  x [description]
  * @param  y [description]
@@ -124,6 +136,9 @@ bool FilterModel::selectFilter(int x, int y)
 {
 	bool isSelectable = false;
 	int fltrCnt = filterVector_->size();
+	
+	// ZERO IS RESERVED FOR THE NO-FILTER, WHICH IS ALWAYS IN THE MIDDLE (x=1,y=1).
+	// THIS IS WHY SOME NUMBERS ARE SHIFTED IN THE RESULTS.
 
 	if (x <= 640 && y <= 480)
 	{
@@ -131,17 +146,17 @@ bool FilterModel::selectFilter(int x, int y)
 		{
 			if (x > 426 && fltrCnt >= 2)
 			{
-				filterSelector_ = 2;
+				filterSelector_ = 3;
 				isSelectable = true;
 			}
 			if (x <= 426 && fltrCnt >= 1)
 			{
-				filterSelector_ = 1;
+				filterSelector_ = 2;
 				isSelectable = true;
 			}
 			if (x <= 213 && fltrCnt >= 0)
 			{
-				filterSelector_ = 0;
+				filterSelector_ = 1;
 				isSelectable = true;
 			}
 		}
@@ -154,12 +169,12 @@ bool FilterModel::selectFilter(int x, int y)
 			}
 			if (x <= 426 && fltrCnt >= 4)
 			{
-				filterSelector_ = 4;
+				filterSelector_ = 0; // THE MIDDLE <-----
 				isSelectable = true;
 			}
 			if (x <= 213 && fltrCnt >= 3)
 			{
-				filterSelector_ = 3;
+				filterSelector_ = 4;
 				isSelectable = true;
 			}
 		}
