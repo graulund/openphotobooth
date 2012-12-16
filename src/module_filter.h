@@ -36,19 +36,21 @@ class module_filter
 {
 private:
 	int imageSize_;
-	/* COUNTER OF FILTER OBJECTS - STATIC TO SHARE THE SAME VAR			*/ 
-	static int filterCount_;
 
 	std::string name_;
 	std::vector<IAdjustment *> list_;
 	std::vector<int> adjusts_;
 	std::vector<int *> options_;
+	
+	bool isBlueScreen_;
 
 	/* GLOBAL LIST WITH ALL AVAILABLE ADJUSTMENTS						*/
 	static std::vector<IAdjustment *> globalList_;
+	/* COUNTER OF FILTER OBJECTS - STATIC TO SHARE THE SAME VAR			*/
+	static int filterCount_;
 
 public:
-	module_filter(std::string, int);
+	module_filter(std::string, int, bool = false);
 	~module_filter();
 
 	bool addAdjustment(std::string, int, int*);
@@ -58,6 +60,7 @@ public:
 
 	int getFilterCount();
 	std::string getName();
+	bool getIsBlueScreen();
 
 	void apply(unsigned char *);
 }; 

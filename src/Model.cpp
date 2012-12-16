@@ -79,8 +79,8 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 		module_filter("Trippy", CAM_SUBPIXELS));
 	filterVector_->push_back(
 		module_filter("Evil", CAM_SUBPIXELS));
-	//filterVector_->push_back(
-	//	module_filter("Whatever", CAM_SUBPIXELS));
+	filterVector_->push_back(
+		module_filter("Blue Screen", CAM_SUBPIXELS, true));
 
 	/* ADD ADJUSTMENT TO FILTER ADD NEW FILTER IN MODEL.CPP LINE 60		
 	   USE THIS METHODS IF YOU WANT TO ADD A USER INTERFACE WHATEVER    */

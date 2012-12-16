@@ -33,6 +33,7 @@ public:
 	virtual Model * getModel();
 	virtual View * getView();
 	bool isSelectable(int, int);
+	virtual int getFilterOffset();
 	/* data */	
 };
 

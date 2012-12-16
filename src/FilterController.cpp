@@ -1,11 +1,13 @@
 #include "FilterController.h"
 
-FilterController::FilterController(Controller * oldController) : 
-	Controller(oldController)
+FilterController::FilterController(Controller * oldController, int offset) :
+	Controller(oldController), filterOffset_(offset)
 {
-	model_ = new FilterModel(oldController->getModel());
+	std::cout << "FILTER CONTROLLER CREATED WITH OFFSET " << filterOffset_ << std::endl;
+	
+	model_ = new FilterModel(oldController->getModel(), filterOffset_);
 	view_ = new FilterView(oldController->getView(), model_->getIconURL(), 
-		model_->getCamWidth(), model_->getCamHeight());
+		model_->getCamWidth(), model_->getCamHeight(), filterOffset_);
 
 	view_->setButtonLabel(1, model_->getButtonLabel(1));
 	view_->setButtonLabel(2, model_->getButtonLabel(2));
@@ -41,12 +43,14 @@ void FilterController::mousePressed(int x, int y, int button)
 
 void FilterController::draw()
 {
+	int filtersLeft = std::min(FILTER_PAGE_LENGTH, static_cast<FilterModel*>(model_)->getFilterCount() - filterOffset_);
+	
 	view_->drawVideoGrabber(model_->getVideoGrabber(),
 		model_->getCamWidth(), model_->getCamHeight(), model_->getCamWidth(), model_->getCamHeight());
 	static_cast<FilterView*>(view_)->drawFilter(
 		static_cast<FilterModel*>(model_)->getTextureArray(),
 		static_cast<FilterModel*>(model_)->getFilterNames(),
-		static_cast<FilterModel*>(model_)->getFilterCount());
+		filtersLeft);
 	view_->drawThumbnails(model_->getThumbnails(),
 		model_->getImgIndex(), model_->getImgCount());
 	view_->drawThumbnailSelector(model_->updateThumbnailSelector(0));
@@ -67,4 +71,12 @@ void FilterController::keyPressed(int key)
 	}
 
 	Controller::keyPressed(key);
+}
+
+int FilterController::getFilterOffset(){
+	return filterOffset_;
+}
+
+void FilterController::setFilterOffset(int offset){
+	filterOffset_ = offset;
 }

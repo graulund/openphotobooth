@@ -184,3 +184,7 @@ bool Controller::isSelectable(int x, int y)
 {
 	return model_->selectImage(x, y);
 }
+
+int Controller::getFilterOffset(){
+	return -1;
+}

@@ -9,8 +9,9 @@ class FilterController : public Controller
 {
 private:
 	ofTexture myTexture;
+	int filterOffset_;
 public:
-	FilterController(Controller *);
+	FilterController(Controller *, int = 0);
 	~FilterController();
 	
 	void draw();
@@ -19,6 +20,9 @@ public:
 	void guiEvent(ofxUIEventArgs &);
 	void mousePressed(int, int, int);
 	void keyPressed(int);
+	
+	int getFilterOffset();
+	void setFilterOffset(int);
 
 	/* data */
 };

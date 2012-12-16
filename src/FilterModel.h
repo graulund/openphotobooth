@@ -6,6 +6,8 @@
 #define CAM_WIDTH 213
 #define CAM_HEIGHT 160
 
+#define FILTER_PAGE_LENGTH 8
+
 #define ICON_URL "./GUI/Images/Icon2.png"
 #define BTN_LABL_L ""
 #define BTN_LABL_M "CNTRL"
@@ -24,8 +26,11 @@ private:
 
 	ofTexture * textureArr_;
 	std::string * filterNames_;
+	int filterOffset_;
+	int filtersLeft_;
+	unsigned char * BS_;
 public:
-	FilterModel(Model *);
+	FilterModel(Model *, int = 0);
 	~FilterModel();
 
 	void init();

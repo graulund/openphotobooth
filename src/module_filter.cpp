@@ -9,13 +9,12 @@
 
 bool adjustmentsAdded = false;
 
-module_filter::module_filter(std::string newName, int newImageSize) 
-	: name_(newName), imageSize_(newImageSize)
+module_filter::module_filter(std::string newName, int newImageSize, bool isBlueScreen)
+	: name_(newName), imageSize_(newImageSize), isBlueScreen_(isBlueScreen)
 {
+	// STATIC CHANGES: -------------------------------------------------
 	/* INCREASE FILTER COUNT WITH EVERY NEW MODULE_FILTER OBJECT	  */
 	filterCount_++;
-	
-	//adjusts_ = *new std::vector<int>();
 
 	/* PUSH ALL AVAILABLE ADJUSTMENTS TO THE "GLOBAL LIST"			  */
 	if(!adjustmentsAdded){
@@ -105,6 +104,10 @@ int module_filter::getFilterCount()
 std::string module_filter::getName()
 {
 	return name_;
+}
+
+bool module_filter::getIsBlueScreen(){
+	return isBlueScreen_;
 }
 
 void module_filter::apply(unsigned char * pxlArr)

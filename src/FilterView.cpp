@@ -5,7 +5,7 @@
  * a new Filter Class with those settings.
  */
 FilterView::FilterView(View * oldView, std::string iconURL, 
-	int width, int height) : View(oldView, iconURL, width, height)
+	int width, int height, int offset) : View(oldView, iconURL, width, height), filterOffset_(offset)
 {
 	// In the filter grid state, we have some different controls.
 	buttonLeft_->setVisible(false);
@@ -54,14 +54,17 @@ void FilterView::drawVideoGrabber(ofVideoGrabber * vidGrabber,
 }
 
 /**
- * Draws the Filter into the Scene. Position is given by the index
+ * Draws the Filter thumbnails on the Scene
  * @param textureArr texture with applied filter
- * @param index      [description]
+ * @param index      the amount of filters being drawn
  */
 void FilterView::drawFilter(ofTexture * textureArr, std::string * names, int index)
 {
 	int x = 0, y = 0, w = FILTER_VIEW_CAM_WIDTH, h = FILTER_VIEW_CAM_HEIGHT;
 	int cols = 3, filters = 8, di = 0;
+	
+	std::cout << "DRAWING FROM 0 TO " << index << std::endl;
+	
 	for (int i = 0; i < index; i++)
 	{
 		// Position according to number in vector, skipping front/center.
@@ -77,7 +80,7 @@ void FilterView::drawFilter(ofTexture * textureArr, std::string * names, int ind
 void FilterView::drawFilterSelector(int fltrNr)
 {
 	ofPushStyle();
-	ofSetHexColor(0xCCCCCC);
+	ofSetHexColor(0xFFFFFF);
 	ofNoFill();
 	int di = 0, filters = 8, cols = 3,
 		x = 0, y = 0, w = FILTER_VIEW_CAM_WIDTH, h = FILTER_VIEW_CAM_HEIGHT;
@@ -85,8 +88,16 @@ void FilterView::drawFilterSelector(int fltrNr)
 		// Non-filter view
 		x = w; y = h;
 	} else {
-		// Calculate coordinates of filter on screen
+		// Calculate table coordinates of filter on screen
+		fltrNr = fltrNr - filterOffset_;
 		di = (fltrNr > filters/2) ? fltrNr : fltrNr-1;
+		
+		// Do not draw if we're off screen
+		if (di > FILTER_PAGE_LENGTH) {
+			return;
+		}
+		
+		// Calculate pixel coordinates
 		x  = (di % cols) * w;
 		y  = (int)std::floor(((float)di)/((float)cols)) * h;
 	}

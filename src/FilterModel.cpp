@@ -1,16 +1,31 @@
 #include "FilterModel.h"
 
-FilterModel::FilterModel(Model * oldModel) : Model(oldModel, true)
+FilterModel::FilterModel(Model * oldModel, int offset) : Model(oldModel, true), filterOffset_(offset)
 {
-	int fltrCnt = filterVector_->size();
-
-	textureArr_  = new ofTexture[fltrCnt];
-	filterNames_ = new std::string[fltrCnt];
+	// Determining the amount of filters we're displaying on this page (given by offset)
 	
-	for (int i = 0; i < fltrCnt; i++)
+	int fltrCnt  = filterVector_->size();
+	filtersLeft_ = std::min(FILTER_PAGE_LENGTH, fltrCnt - filterOffset_);
+
+	textureArr_  = new ofTexture[filtersLeft_];
+	filterNames_ = new std::string[filtersLeft_];
+	
+	std::cout << "FILTER FROM " << filterOffset_ << " TO " << (filterOffset_ + filtersLeft_) << std::endl;
+	
+	// Allocating textures for filter previews
+	
+	for (int i = 0; i < filtersLeft_; i++)
 	{
 		textureArr_[i].allocate(640, 480, GL_RGB);
-		filterNames_[i] = filterVector_->at(i).getName();
+		filterNames_[i] = filterVector_->at(filterOffset_ + i).getName();
+	}
+	
+	// Allocating special blue screen filter pixel array
+	int subpixels = 640*480*3;
+	BS_ = new unsigned char[subpixels];
+	for (int i = 0; i < subpixels; i++) {
+		int channel = i % 3;
+		BS_[i] = channel == 2 ? 255 : 0; // Blue!
 	}
 
 	init();		
@@ -48,19 +63,25 @@ void FilterModel::init()
  */
 void FilterModel::update()
 {
+	int fi = 0;
 	vidGrabber_->update();
 
-	for (int i = 0; i < filterVector_->size(); i++)
+	for (int i = 0; i < filtersLeft_; i++)
 	{
 		if (vidGrabber_->isFrameNew())
 		{
+			fi = filterOffset_ + i;
 			/* COPY "FRESH" PICTURE TO pixelArrSlot SO THAT EVERY FILTER
 			   GOT A UNMODIFIED VERSION									*/
 		    memcpy(pixelArrSlot, vidGrabber_->getPixels(), 640*480*3);
 		    /* APPLY EVERY AVAILABLE FILTER TO THIS FRESH COPYS			*/
-			filterVector_->at(i).apply(pixelArrSlot);
+			filterVector_->at(fi).apply(pixelArrSlot);
 			/* TRANSFORM PIXELS TO TEXTURE TO DRAW IT ON THE SCREEN		*/
-		 	textureArr_[i].loadData(pixelArrSlot, 640, 480, GL_RGB);
+		 	if(filterVector_->at(fi).getIsBlueScreen()){
+				textureArr_[i].loadData(BS_, 640, 480, GL_RGB);
+			} else {
+				textureArr_[i].loadData(pixelArrSlot, 640, 480, GL_RGB);
+			}
 	 	}
 	}
 }
@@ -144,55 +165,55 @@ bool FilterModel::selectFilter(int x, int y)
 	{
 		if (y <= 160)
 		{
-			if (x > 426 && fltrCnt >= 2)
+			if (x > 426 && fltrCnt >= 3 + filterOffset_)
 			{
-				filterSelector_ = 3;
+				filterSelector_ = 3 + filterOffset_;
 				isSelectable = true;
 			}
-			if (x <= 426 && fltrCnt >= 1)
+			if (x <= 426 && fltrCnt >= 2 + filterOffset_)
 			{
-				filterSelector_ = 2;
+				filterSelector_ = 2 + filterOffset_;
 				isSelectable = true;
 			}
-			if (x <= 213 && fltrCnt >= 0)
+			if (x <= 213 && fltrCnt >= 1 + filterOffset_)
 			{
-				filterSelector_ = 1;
+				filterSelector_ = 1 + filterOffset_;
 				isSelectable = true;
 			}
 		}
 		else if (y <= 320)
 		{
-			if (x > 426 && fltrCnt >= 5)
+			if (x > 426 && fltrCnt >= 5 + filterOffset_)
 			{
-				filterSelector_ = 5;
+				filterSelector_ = 5 + filterOffset_;
 				isSelectable = true;
 			}
-			if (x <= 426 && fltrCnt >= 4)
+			if (x <= 426)
 			{
 				filterSelector_ = 0; // THE MIDDLE <-----
 				isSelectable = true;
 			}
-			if (x <= 213 && fltrCnt >= 3)
+			if (x <= 213 && fltrCnt >= 4 + filterOffset_)
 			{
-				filterSelector_ = 4;
+				filterSelector_ = 4 + filterOffset_;
 				isSelectable = true;
 			}
 		}
 		else
 		{
-			if (x > 426 && fltrCnt >= 8)
+			if (x > 426 && fltrCnt >= 8 + filterOffset_)
 			{
-				filterSelector_ = 8;
+				filterSelector_ = 8 + filterOffset_;
 				isSelectable = true;
 			}
-			if (x <= 426 && fltrCnt >= 7)
+			if (x <= 426 && fltrCnt >= 7 + filterOffset_)
 			{
-				filterSelector_ = 7;
+				filterSelector_ = 7 + filterOffset_;
 				isSelectable = true;
 			}
-			if (x <= 213 && fltrCnt >= 6)
+			if (x <= 213 && fltrCnt >= 6 + filterOffset_)
 			{
-				filterSelector_ = 6;
+				filterSelector_ = 6 + filterOffset_;
 				isSelectable = true;
 			}			
 		}

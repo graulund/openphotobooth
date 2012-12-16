@@ -50,7 +50,9 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 	{
 		if (button->getValue() == 1)
 		{
-			controller_ = new FilterController(controller_);
+			int fltNo         = controller_->getModel()->getFilterSelector();
+			int currentOffset = fltNo - (fltNo % 8);
+			controller_ = new FilterController(controller_, currentOffset);
 			lockModel_ = false;
 		}
 		// else if (button->getValue() == 0)
@@ -74,13 +76,25 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 	}
 	else if (buttonName == "FILTERACTMIDDLE")
 	{
-		controller_ = new Controller(controller_, true);
-		lockModel_ = false;
-		button->setValue(0);
+		if (button->getValue() == 1) {
+			controller_ = new Controller(controller_, true);
+			lockModel_ = false;
+			button->setValue(0);
+		}
 	}
 	else if (buttonName == "FILTERRIGHT")
 	{
-		// NEXT PAGE!!!!!
+		if (button->getValue() == 1) {
+			int offset = controller_->getFilterOffset(), page = 8;
+			if (offset < 0 || offset + page > static_cast<FilterModel*>(controller_->getModel())->getFilterCount()) {
+				offset = 0; // Loop around
+			} else {
+				offset += page;
+			}
+			
+			controller_ = new FilterController(controller_, offset);
+			lockModel_ = false;
+		}
 	}
 	else
 	{
