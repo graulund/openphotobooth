@@ -71,6 +71,9 @@ void FilterView::drawFilter(ofTexture * textureArr, std::string * names, int ind
 		y  = (int)std::floor(((float)di)/((float)cols)) * h;
 		// Draw!
 		textureArr[i].draw(x, y, w, h);
+		ofSetHexColor(0);
+		typeFont_->drawString(names[i], x + 15, y + h - 14);
+		ofSetHexColor(0xFFFFFF);
 		typeFont_->drawString(names[i], x + 15, y + h - 15);
 	}
 }
