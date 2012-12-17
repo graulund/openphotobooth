@@ -72,6 +72,9 @@ public:
 	bool addAdjustment(std::string, int);
 	bool addAdjustment(std::string);
 	bool removeAdjustment(std::string);
+	std::vector<IAdjustment *> getAdjustments();
+	std::vector<int> getAdjusts();
+	std::vector<int *> getOptions();
 
 	int getFilterCount();
 	std::string getName();

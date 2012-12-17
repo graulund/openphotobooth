@@ -1,4 +1,10 @@
 #include "FilterModel.h"
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+#include <cstdlib>
 
 FilterModel::FilterModel(Model * oldModel, int offset) : Model(oldModel, true), filterOffset_(offset)
 {
@@ -219,4 +225,128 @@ bool FilterModel::selectFilter(int x, int y)
 			}			
 		}
 	}
+}
+
+void FilterModel::saveFilterToFile(module_filter filter){
+	if (&filter == NULL) {
+		return;
+	}
+	// The filename
+	std::string filename = filter.getName() + ".pbf";
+	// The file reference
+	std::ofstream file (filename.c_str());
+	// The filter lists
+	std::vector<IAdjustment *> list = filter.getAdjustments();
+	std::vector<int> adjusts        = filter.getAdjusts();
+	std::vector<int *> options      = filter.getOptions();
+	// Let's go
+	if (file.is_open()) {
+		file << filter.getName() << std::endl;
+		for (int i = 0; i < list.size(); i++) {
+			file << list.at(i)->getName();
+			if (adjusts.at(i) > 0) {
+				file << " " << adjusts.at(i);
+			}
+			if (options.at(i)) {
+				// Assume a list of options has three elements (@todo more flexible)
+				for (int j = 0; j < 3; j++) {
+					file << " " << options.at(i)[j];
+				}
+			}
+			file << std::endl;
+		}
+	}
+	file.close();
+	// Done!
+}
+void FilterModel::saveFilterToFile(int filterSelector){
+	FilterModel::saveFilterToFile(filterVector_->at(filterSelector - 1));
+}
+void FilterModel::loadFilterFromFile(std::string filename){
+	// The file
+	std::ifstream file (filename.c_str());
+	// The loading and splitting mechanisms
+	char line[256];
+	std::vector<std::string> tokens;
+	int i = 0;
+	module_filter* filter;
+	bool filterDefined = false;
+	// The adjustments being loaded
+	std::string filtername;
+	std::string adjname;
+	int adjust;
+	// Let's go!
+	if (file.is_open()) {
+		while (file.good()) {
+			// Read one line
+			file.getline(line, 256);
+			string sline(line);
+			// If it's the first line, it's the filter name
+			if (i == 0) {
+				filtername = sline;
+				// And now we have the filter being loaded
+				filter = new module_filter(filtername, 640*480*3);
+				filterDefined = true;
+			} else {
+				// Split it up by space
+				std::istringstream iss(sline);
+				std::copy(istream_iterator<string>(iss),
+						  istream_iterator<string>(),
+						  back_inserter<vector<string> >(tokens));
+				// Handle each token
+				if (tokens.size() > 0) {
+					// Name
+					adjname = tokens.at(0);
+					// Options
+					std::vector<int> options; // always a new vector, otherwise we get overwritten options!!!
+					for (int i = 1; i < tokens.size(); i++) {
+						if (i == 1) {
+							adjust = atoi(tokens.at(i).c_str());
+						} else {
+							options.push_back(atoi(tokens.at(i).c_str()));
+						}
+					}
+					// Add this image adjustment
+					if (options.size() > 0) {
+						filter->addAdjustment(adjname, adjust, &options[0]);
+					} else {
+						filter->addAdjustment(adjname, adjust);
+					}
+					// Clear
+					adjust = 0;
+				}
+				// Clear
+				tokens.clear();
+			}
+			i++;
+		}
+		if (filterDefined) {
+			// ADD THIS FILTER TO OUR LIST OF FILTERS!
+			filterVector_->push_back(*filter);
+		}
+	}
+}
+void FilterModel::loadFilterFromFileUI(){
+	//Open the Open File Dialog
+	ofFileDialogResult openFileResult = ofSystemLoadDialog("Select a Photo Booth Filter (PBF) file");
+	
+	//Check if the user opened a file
+	if (openFileResult.bSuccess){
+		
+		ofLogVerbose("User selected a file");
+		
+		//We have a file, check it and process it
+		ofLogVerbose("getName(): "  + openFileResult.getName());
+		ofLogVerbose("getPath(): "  + openFileResult.getPath());
+		
+		
+		loadFilterFromFile(openFileResult.getPath());
+	}
+	else
+	{
+		ofLogVerbose("User hit cancel");
+	}
+}
+void FilterModel::loadFiltersInFolder(){
+	// Idea: Load all filters in the data folder
 }

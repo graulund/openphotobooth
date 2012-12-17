@@ -60,7 +60,15 @@ void FilterController::draw()
 
 void FilterController::guiEvent(ofxUIEventArgs & newEvent)
 {
-
+	string buttonName = newEvent.widget->getName();
+	ofxUIButton * button = (ofxUIButton *) newEvent.widget;
+	
+	if (buttonName == "Load Filter")
+	{
+		if (button->getValue() == 1){
+			static_cast<FilterModel*>(model_)->loadFilterFromFileUI();
+		}
+	}
 }
 
 void FilterController::keyPressed(int key)

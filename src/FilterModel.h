@@ -43,6 +43,12 @@ public:
 	ofTexture * getTextureArray();
 	std::string * getFilterNames();
 	bool selectFilter(int, int);
+	
+	void saveFilterToFile(module_filter);
+	void saveFilterToFile(int);
+	void loadFilterFromFile(std::string);
+	void loadFilterFromFileUI();
+	void loadFiltersInFolder();
 };
 
 #endif

@@ -128,6 +128,16 @@ std::string module_filter::getName()
 	return name_;
 }
 
+std::vector<IAdjustment *> module_filter::getAdjustments(){
+	return list_;
+}
+std::vector<int> module_filter::getAdjusts(){
+	return adjusts_;
+}
+std::vector<int *> module_filter::getOptions(){
+	return options_;
+}
+
 bool module_filter::getIsBlueScreen(){
 	return isBlueScreen_;
 }
