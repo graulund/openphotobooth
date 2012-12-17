@@ -6,6 +6,8 @@
  */
 void Bootstrap::setup()
 {
+	ofSetWindowTitle("Open Photo Booth");
+	
 	controller_ = new Controller();
 
 	ofAddListener(controller_->getCanvas()->newGUIEvent, 

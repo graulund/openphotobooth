@@ -154,23 +154,6 @@ void Model::init(int imgCnt, int imgIndex, int imgSelector)
 	filterVector_->at(7).addAdjustment("Contrast", 40);
 	filterVector_->at(7).addAdjustment("Colorize", 40, cold);
 	
-	/*
-	 std::vector<ImageAdjustment> sinCity;
-	 sinCity.push_back(ImageAdjustment("contrast", 100));
-	 sinCity.push_back(ImageAdjustment("brightness", 15));
-	 //sinCity.push_back(ImageAdjustment("exposure", 10));
-	 sinCity.push_back(ImageAdjustment("posterize", 80));
-	 sinCity.push_back(ImageAdjustment("greyscale"));
-	 
-	 std::vector<ImageAdjustment> love;
-	 love.push_back(ImageAdjustment("brightness", 5));
-	 //love.push_back(ImageAdjustment("exposure", 8));
-	 love.push_back(ImageAdjustment("contrast", 4));
-	 love.push_back(ImageAdjustment("colorize", 30, 196, 32, 7));
-	 love.push_back(ImageAdjustment("vibrance", 50));
-	 love.push_back(ImageAdjustment("gamma", 130));
-	 */
-	
 
 }
 
@@ -282,11 +265,8 @@ void Model::update()
 	if (vidGrabber_->isFrameNew())
 	{
 	    pixelArr_ = vidGrabber_->getPixels();
-
-		//std::cout << "(1) FIRST 3 PIXELS@" << &pixelArr_ << ": " << pixelArr_[0] << " " << pixelArr_[1] << " " << pixelArr_[2] << std::endl;
+		
 	    applyFilters();
-		//std::cout << "POINTER TO " << &pixelArr_ << std::endl;
-		//std::cout << "(3) FIRST 3 PIXELS@" << &pixelArr_ << ": " << pixelArr_[0] << " " << pixelArr_[1] << " " << pixelArr_[2] << std::endl;
 		
 		// Are we dealing with the blue screen filter? Special case:
 		module_filter* currentFilter;
@@ -581,16 +561,6 @@ bool Model::selectImage(int x, int y)
 	}
 
 	return isSelectable;
-}
-
-/**
- * @TODO
- * RETURNS THE MODIFICATION FILTER - DONT USE ANYMORE!1111ONE
- * @return THE FILTER
- */
-module_filter * Model::getModFilter()
-{
-	return modFilter_;
 }
 
 
