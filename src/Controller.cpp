@@ -21,6 +21,12 @@ Controller::Controller(Controller * oldController, bool delOld)
 	view_ = oldController->getView();
 
 	model_ = new Model(model_);
+	
+	// If we're loading up the blue screen filter, time to load the BS background image
+	if (model_->getCurrentFilter() != NULL && model_->getCurrentFilter()->getIsBlueScreen()) {
+		model_->getCurrentFilter()->loadBsBackgroundImage();
+	}
+	
 	view_ = new View(view_, model_->getIconURL(),
 		model_->getCamWidth(), model_->getCamHeight());
 
@@ -73,10 +79,12 @@ void Controller::draw()
 {
 	if (model_->getFilterSelector() > 0)
 	{
+		// There is a filter. Let's draw the filter (texture).
 		view_->drawFilter(*model_->getTexture());
 	}
 	else
 	{
+		// No filter. Let's draw the raw input
 		view_->drawVideoGrabber(model_->getVideoGrabber(),
 			model_->getCamWidth(), model_->getCamHeight());
 	}
@@ -92,19 +100,31 @@ void Controller::draw()
  */
 void Controller::keyPressed(int key)
 {
-	if (key == '>')
+	// PHOTO STRIP NAVIGATION
+	if (key == '>' || key == 358) // right arrow
 	{
 		view_->drawThumbnailSelector(
 			model_->updateThumbnailSelector(1));
 	}
-	else if (key == '<')
+	else if (key == '<' || key == 356) // left arrow
 	{
 		view_->drawThumbnailSelector(
 			model_->updateThumbnailSelector(-1));
 	}
-	else if (key == ' ')
-	{	
-
+	// BLUE SCREEN FILTER ACTIONS
+	else if (key == 'b' || key == '+' || key == '-')
+	{
+		module_filter* currentFilter;
+		currentFilter = model_->getCurrentFilter();
+		if (currentFilter->getIsBlueScreen()) {
+			if (key == 'b') {
+				currentFilter->bsSampleBackground();
+			} else if (key == '+') {
+				currentFilter->bsChangeThreshold(+1);
+			} else if (key == '-') {
+				currentFilter->bsChangeThreshold(-1);
+			}
+		}
 	}
 }
 

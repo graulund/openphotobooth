@@ -63,8 +63,6 @@ void FilterView::drawFilter(ofTexture * textureArr, std::string * names, int ind
 	int x = 0, y = 0, w = FILTER_VIEW_CAM_WIDTH, h = FILTER_VIEW_CAM_HEIGHT;
 	int cols = 3, filters = 8, di = 0;
 	
-	std::cout << "DRAWING FROM 0 TO " << index << std::endl;
-	
 	for (int i = 0; i < index; i++)
 	{
 		// Position according to number in vector, skipping front/center.

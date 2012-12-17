@@ -3,6 +3,8 @@
 
 #define __openPhotoBooth__DEBUG_FLAG__
 
+#include "ofxOpenCv.h"
+
 #include "adjustment_interface.h"
 
 #include <string>
@@ -42,12 +44,25 @@ private:
 	std::vector<int> adjusts_;
 	std::vector<int *> options_;
 	
-	bool isBlueScreen_;
+	bool isBlueScreen_ = false;
+	bool isBlueScreenBgSet_ = false;
 
 	/* GLOBAL LIST WITH ALL AVAILABLE ADJUSTMENTS						*/
 	static std::vector<IAdjustment *> globalList_;
 	/* COUNTER OF FILTER OBJECTS - STATIC TO SHARE THE SAME VAR			*/
 	static int filterCount_;
+	
+	// BLUE SCREEN FILTER RESOURCES (only one instance needed of each, so they are static)
+	static bool bsSampleBackground_;
+	static int bsThreshold_; // range is 0..255
+	static ofxCvColorImage      colorImg;
+	static ofxCvGrayscaleImage  grayImage;
+	static ofxCvGrayscaleImage 	grayBg;
+	static ofxCvGrayscaleImage 	grayDiff;
+	static ofxCvContourFinder 	contourFinder;
+	static ofImage              bsBackgroundImage;
+	static std::string          bsBackgroundExtension;
+	static unsigned char *      bsPixels;
 
 public:
 	module_filter(std::string, int, bool = false);
@@ -61,6 +76,11 @@ public:
 	int getFilterCount();
 	std::string getName();
 	bool getIsBlueScreen();
+	
+	void bsSampleBackground();
+	void bsChangeThreshold(int);
+	bool loadBsBackgroundImage();
+	unsigned char * getBsPixels();
 
 	void apply(unsigned char *);
 }; 

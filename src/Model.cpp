@@ -184,7 +184,12 @@ void Model::saveImage()
 {
 	std::string imgName = getImageName();
 
-	pixelArr_ = vidGrabber_->getPixels();
+	if (this->getCurrentFilter() != NULL && this->getCurrentFilter()->getIsBlueScreen()) {
+		pixelArr_ = this->getCurrentFilter()->getBsPixels();
+	} else {
+		pixelArr_ = vidGrabber_->getPixels();
+	}
+	
 	texture_->loadData(pixelArr_, CAM_WIDTH, CAM_HEIGHT, GL_RGB);
 	saveTextureToFile(imgName);
 	saveToThumbnail(imgName);
@@ -214,7 +219,7 @@ void Model::saveTextureToFile(std::string name)
 }
 
 /**
- * Reize and Saves a Picture file into an Array
+ * Resize and Saves a Picture file into an Array
  * @param tex  picture Object as Texture
  * @param name filename of the Picture which should be saved
  */
@@ -278,7 +283,17 @@ void Model::update()
 	{
 	    pixelArr_ = vidGrabber_->getPixels();
 
+		//std::cout << "(1) FIRST 3 PIXELS@" << &pixelArr_ << ": " << pixelArr_[0] << " " << pixelArr_[1] << " " << pixelArr_[2] << std::endl;
 	    applyFilters();
+		//std::cout << "POINTER TO " << &pixelArr_ << std::endl;
+		//std::cout << "(3) FIRST 3 PIXELS@" << &pixelArr_ << ": " << pixelArr_[0] << " " << pixelArr_[1] << " " << pixelArr_[2] << std::endl;
+		
+		// Are we dealing with the blue screen filter? Special case:
+		module_filter* currentFilter;
+		currentFilter = this->getCurrentFilter();
+		if (currentFilter != NULL && currentFilter->getIsBlueScreen()) {
+			pixelArr_ = currentFilter->getBsPixels();
+		}
 
 	 	texture_->loadData(pixelArr_, 640, 480, GL_RGB);
  	}
@@ -578,6 +593,15 @@ module_filter * Model::getModFilter()
 	return modFilter_;
 }
 
+
+module_filter * Model::getCurrentFilter()
+{
+	if (filterSelector_ <= 0 || filterVector_->size() <= 0) {
+		return NULL;
+	}
+	return &filterVector_->at(filterSelector_ - 1);
+}
+
 /**
  * RETURNS THE VECTOR WHERE ALL FILTERS ARE SAVED
  */
@@ -634,7 +658,7 @@ void Model::processOpenFileSelection(ofFileDialogResult openFileResult){
 					if (image.getWidth() > 640)
 					{
 						image.resize(640, (640 / image.getWidth()) * image.getHeight());
-						cout << "RESIZE WITH" << endl;
+						cout << "RESIZE WIDTH" << endl;
 					}
 					else if (image.getHeight() > 480)
 					{

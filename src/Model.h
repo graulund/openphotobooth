@@ -89,6 +89,7 @@ public:
     virtual ofImage * getThumbnails();
     virtual bool selectImage(int, int);
     virtual module_filter * getModFilter();
+	virtual module_filter * getCurrentFilter();
     virtual std::vector<module_filter> * getFilterVector();
     virtual int getFilterSelector();
     virtual int getImageNumber();

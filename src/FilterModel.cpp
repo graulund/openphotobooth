@@ -71,15 +71,16 @@ void FilterModel::update()
 		if (vidGrabber_->isFrameNew())
 		{
 			fi = filterOffset_ + i;
-			/* COPY "FRESH" PICTURE TO pixelArrSlot SO THAT EVERY FILTER
-			   GOT A UNMODIFIED VERSION									*/
-		    memcpy(pixelArrSlot, vidGrabber_->getPixels(), 640*480*3);
-		    /* APPLY EVERY AVAILABLE FILTER TO THIS FRESH COPYS			*/
-			filterVector_->at(fi).apply(pixelArrSlot);
-			/* TRANSFORM PIXELS TO TEXTURE TO DRAW IT ON THE SCREEN		*/
 		 	if(filterVector_->at(fi).getIsBlueScreen()){
+				// Special blue screen blue square preview image
 				textureArr_[i].loadData(BS_, 640, 480, GL_RGB);
 			} else {
+				/* COPY "FRESH" PICTURE TO pixelArrSlot SO THAT EVERY FILTER
+				 GOT A UNMODIFIED VERSION									*/
+				memcpy(pixelArrSlot, vidGrabber_->getPixels(), 640*480*3);
+				/* APPLY EVERY AVAILABLE FILTER TO THIS FRESH COPYS			*/
+				filterVector_->at(fi).apply(pixelArrSlot);
+				/* TRANSFORM PIXELS TO TEXTURE TO DRAW IT ON THE SCREEN		*/
 				textureArr_[i].loadData(pixelArrSlot, 640, 480, GL_RGB);
 			}
 	 	}
