@@ -1,5 +1,16 @@
 #include "module_filter.h"
 
+/*************************************************
+ File: module_filter.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: This filter module class is the class that all filter objects are based on. Therefore, there are a lot of different methods that do a lot of different filter related things. Also, this class has the global list of filters as a static vector, along with a static int that has the count of filters present in the vector.
+ *************************************************/
+
 #ifndef __INIT_STATIC_VARS__
 #define __INIT_STATIC_VARS__
 	int module_filter::filterCount_ = 0;
@@ -7,11 +18,6 @@
 		std::vector<IAdjustment *>();
 	bool module_filter::bsSampleBackground_ = false;
 	int module_filter::bsThreshold_         = 40;
-//	ofxCvColorImage      module_filter::colorImg       = *new ofxCvColorImage();
-//	ofxCvGrayscaleImage  module_filter::grayImage      = *new ofxCvGrayscaleImage();
-//	ofxCvGrayscaleImage  module_filter::grayBg         = *new ofxCvGrayscaleImage();
-//	ofxCvGrayscaleImage  module_filter::grayDiff       = *new ofxCvGrayscaleImage();
-//	ofxCvContourFinder 	 module_filter::contourFinder  = *new ofxCvContourFinder();
 
 	ofxCvColorImage      module_filter::colorImg;
 	ofxCvGrayscaleImage  module_filter::grayImage;
@@ -225,9 +231,7 @@ bool module_filter::loadBsBackgroundImage(){
 
 void module_filter::apply(unsigned char * pxlArr)
 {
-	//std::cout << "APPLYING FILTER ";
 	if (isBlueScreen_) {
-		std::cout << "(BS)" << std::endl;
 		
 		// Special filter actions for the blue screen filter
 		
@@ -248,11 +252,6 @@ void module_filter::apply(unsigned char * pxlArr)
 		
 		// --> Combination: This is the new part.
 		//     Combines pixels from one array (live camera) with another (background image) based on the difference
-		/*unsigned char * diffPixels = new unsigned char[640*480*3];
-		diffPixels = grayDiff.getPixels();
-		std::cout << "FIRST 3 DIFFPIXELS@" << &diffPixels << ": " << diffPixels[0] << " " << diffPixels[1] << " " << diffPixels[2] << std::endl;
-		//delete[] pxlArr;
-		pxlArr = diffPixels;*/
 		
 		bsPixels = grayDiff.getPixels();
 		
@@ -274,7 +273,6 @@ void module_filter::apply(unsigned char * pxlArr)
 			}
 		}
 		delete[] realBsPixels;
-		//delete[] imgPixels;
 		
 	} else {
 		

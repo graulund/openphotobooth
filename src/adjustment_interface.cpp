@@ -2,6 +2,17 @@
 #include <cmath>
 #include <map>
 
+/*************************************************
+ File: adjustment_interface.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: This is the IAdjustment class: It's the abstract parent class of every image adjustment class. Here's where the common (or default) functionality is defined. Methods that are abstract, and so are only defined in the child classes, can only be seen in the header file belonging to this class.
+ *************************************************/
+
 // IAdjustment::IAdjustment()
 // {
 

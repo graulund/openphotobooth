@@ -667,11 +667,11 @@ bool Model::saveToFacebook(std::string imgName, int imgWidth,
        APP ACCESS TOKEN, DONT USE SIGNS NOT ALLOWED AS URL, USE %		
        ENTER AN VALID ACCESS_TOKEN HERE 								*/
 	string access_token = 
-   	"AAAFg85KzpIIBAGMFPF4pHUPjcv1BgVGedNIjoTvqojGG0FARt6YtNnv3drTI1ZCc8BeyzZABNfnr0nlREHzame9dpc0C8wgSK2piqgUj41VW4LKITT";
+   	"AAAFg85KzpIIBACrTp6tq8xmv8hHeJUJAJBZB7ZBxVdua2guPXSjZAzFJDflIneEZC8X2ytjZCPJQayZAHz0L7h7ziYkprsT4ZBq6suJZAx17jQZDZD";
 
     /* WHERE YOU WANT TO UPLOAD THE PICTURES							*/
     std::string url;
-	url.append("https://graph.facebook.com/USER_NAME/photos");
+	url.append("https://graph.facebook.com/graulund/photos");
 	// url.append("https://graph.facebook.com/oauth/access_token?");
 	// url.append("https://graph.facebook.com/app?access_token=");
 	// url.append(access_token);

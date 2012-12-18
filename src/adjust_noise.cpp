@@ -1,5 +1,16 @@
 #include "adjust_noise.h"
 
+/*************************************************
+ File: adjust_noise.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: This is the image adjustment object for the noise adjustment.
+ *************************************************/
+
 #include <cmath>
 
 adjustNoise::adjustNoise(int newSize, int newAdjust)
