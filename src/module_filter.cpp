@@ -239,7 +239,7 @@ void module_filter::apply(unsigned char * pxlArr)
 		colorImg.setFromPixels(pxlArr, 640,480);
 		grayImage = colorImg;
 		if (bsSampleBackground_){
-			grayBg = grayImage;		// the = sign copys the pixels from grayImage into grayBg (operator overloading)
+			grayBg = grayImage; // the = sign copies the pixels (operator overloading)
 			bsSampleBackground_ = false;
 		}
 		grayDiff.absDiff(grayBg, grayImage);
@@ -247,8 +247,6 @@ void module_filter::apply(unsigned char * pxlArr)
 		// Find contours: Finds those which are between the size of 20 pixels and 1/3 the width times height pixels.
 		// "Find holes" is set to true, so we will get interior contours as well.
 		contourFinder.findContours(grayDiff, 20, (640*480)/3, 10, true);
-		
-		std::cout << "IMAGE DIMENSIONS " << colorImg.getWidth() << "x" << colorImg.getHeight() << ", " << grayImage.getWidth() << "x" << grayImage.getHeight() << ", " << grayDiff.getWidth() << "x" << grayDiff.getHeight() << std::endl;
 		
 		// --> Combination: This is the new part.
 		//     Combines pixels from one array (live camera) with another (background image) based on the difference
