@@ -1,5 +1,16 @@
 #include "FilterView.h"
 
+/*************************************************
+ File: FilterView.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: The view for the filter grid state. This class (which is a part of the MVC paradigm) determines how the filter grid state looks in terms of live thumbnails, filter name overlays and selection rectangles.
+ *************************************************/
+
 /**
  * Copy Constrcutor. Uses an old View to get the Settings and Initialized
  * a new Filter Class with those settings.
