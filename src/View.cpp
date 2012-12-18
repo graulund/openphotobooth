@@ -1,3 +1,17 @@
+/*************************************************
+ File: View.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Follows the MVC/Mediator Pattern. It does hold all the 
+ Style Elements for the Scene. Gets the Data injected form the 
+ Controller. Unlikely other MVCs it holds the Buttons it self. This is
+ due a characteristic from ofxUI
+ *************************************************/
+
 #include "View.h"
 #include "Controller.h"
 
@@ -6,6 +20,9 @@ View::View(std::string iconURL, int width, int height, ofxUICanvas * canvas)
 	init(iconURL, width, height, canvas);
 }
 
+/**
+ * Copy constructor, called when View switched back from another one
+ */
 View::View(View * oldView, std::string iconURL, int width, int height)
 {
 	buttonLeft_ = oldView->buttonLeft_;
@@ -27,6 +44,13 @@ View::View(View * oldView, std::string iconURL, int width, int height)
 	// init(iconURL, width, height, false);
 }
 
+/**
+ * Initial Method. Called when the Application starts
+ * @param iconURL Image for the Middle Button
+ * @param width   width of the Camera/Scene/Window
+ * @param height  Height of the Camera/Scene/Window
+ * @param canvas  Canvas element from ofxUICanvas, to draw buttons on it
+ */
 void View::init(std::string iconURL, int width, int height, ofxUICanvas * canvas)
 {
 	buttonLeft_      = new ofxUILabelToggle(
@@ -72,6 +96,14 @@ void View::drawVideoGrabber(ofVideoGrabber * vidGrabber,
 	View::drawVideoGrabber(vidGrabber, w, h, 0, 0);
 }
 
+/**
+ * Draw the video grabber
+ * @param vidGrabber VideoGrabber Object
+ * @param w          width of the videograbber
+ * @param h          height of the videograbber
+ * @param x          x position on the scene
+ * @param y          y position on the scene
+ */
 void View::drawVideoGrabber(ofVideoGrabber * vidGrabber,
 							float w, float h, float x, float y)
 {
@@ -137,6 +169,13 @@ void View::setButtonLabel(int btnNbr, std::string btnLbl)
 	}
 }
 
+/**
+ * Set the button at index to status to zero. We use this since we have
+ * some Toggle Buttons in the Application which dont clear the status
+ * when we change the scene, that would have the effect that the buttons
+ * are still highlighted.
+ * @param btnNbr Index of the Button which should be cleared
+ */
 void View::clearButtonStatus(int btnNbr)
 {
 	if (btnNbr == 1)
@@ -157,6 +196,11 @@ void View::clearButtonStatus(int btnNbr)
 	}
 }
 
+/**
+ * Set the Name (Not LABEL!) of a Button selected by Index
+ * @param btnNbr  Button Index
+ * @param btnName New Name of the Button
+ */
 void View::setButtonName(int btnNbr, std::string btnName)
 {
 	if (btnNbr == 1)
@@ -177,6 +221,11 @@ void View::setButtonName(int btnNbr, std::string btnName)
 	}
 }
 
+/**
+ * Draws the Filter to the Main Scene
+ * @param texture Teture which should be drawn. Must be updated by 
+ * another method (mostly update method in a Model)
+ */
 void View::drawFilter(ofTexture texture)
 {
 	texture.draw(0, 0, 640, 480);

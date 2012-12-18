@@ -1,3 +1,17 @@
+/*************************************************
+ File: PreviewView.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Follows the MVC/Mediator Pattern. It does hold all the 
+ Style Elements for the Scene. Gets the Data injected form the 
+ Controller. Unlikely other MVCs it holds the Buttons it self. This is
+ due a characteristic from ofxUI. Nothing new expect the drawWordBubble
+ *************************************************/
+
 #include "PreviewView.h"
 
 PreviewView::PreviewView(View * oldView, std::string iconURL,

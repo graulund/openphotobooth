@@ -1,4 +1,17 @@
-#include "Controller.h"
+/*************************************************
+ File: Controller.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Controller for the main Scene/state. Holds the Required 
+ models as a Reference. First controller Called when the Applicatation 
+ starts. Base Controller. All Controllers are derived from this
+ *************************************************/
+
+ #include "Controller.h"
 
 /**
  * Default Constructor for the First Call
@@ -53,6 +66,9 @@ void Controller::init()
 	initName();
 }
 
+/**
+ * Initilize all the Button names for the specific state.
+ */
 void Controller::initName()
 {
 	view_->setButtonLabel(1, model_->getButtonLabel(1));
@@ -128,10 +144,13 @@ void Controller::keyPressed(int key)
 	}
 }
 
-void Controller::mousePressed(int x, int y, int button)
-{
-
-}
+/**
+ * Not needed yet
+ * @param x      [description]
+ * @param y      [description]
+ * @param button [description]
+ */
+void Controller::mousePressed(int x, int y, int button) {}
 
 /**
  * Controlls all Events happens in the Current View
@@ -200,6 +219,13 @@ View * Controller::getView()
 	return view_;
 }
 
+/**
+ * Verifies if the x and y position, the user clicked, is filled with
+ * a fiter, if so it returns true
+ * @param  x [description]
+ * @param  y [description]
+ * @return   [description]
+ */
 bool Controller::isSelectable(int x, int y)
 {
 	return model_->selectImage(x, y);

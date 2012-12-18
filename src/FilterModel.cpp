@@ -1,3 +1,16 @@
+/*************************************************
+ File: FilterModel.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Follows the MVC/Mediator Pattern. It does hold all the 
+ Data and Business logic. Called from the Controller. Model derived from
+ the Main Model. New Methods for the Filter drawing and selecting.
+ *************************************************/
+
 #include "FilterModel.h"
 #include <fstream>
 #include <string>

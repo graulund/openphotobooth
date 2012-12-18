@@ -1,15 +1,38 @@
+/*************************************************
+ File: Model.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Follows the MVC/Mediator Pattern. It does hold all the 
+ Data and Business logic. Called from the Controller. Primary Model,
+ all other models are derived form this.
+ *************************************************/
+
 #include "Model.h"
 
 #include <ctime>
 
 #define CAM_SUBPIXELS 640 * 480 * 3
 
+
+/**
+ * Default Constructor. Just called when the Application starts
+ */
 Model::Model()
 {
 	init();
 	init(0, 0, 0);
 }
 
+/**
+ * Copy Constructor. Copies all needed references to the new Model and
+ * delete the old one after wards. Since we use new OBJECT to 
+ * instantiate all the MVC objects needed, we have to delete them all
+ * if we dont need them anymore. Otherwise we would have a Memory leak
+ */
 Model::Model(Model * oldModel, bool delOld)
 {
 	vidGrabber_ = oldModel->getVideoGrabber();
@@ -43,6 +66,13 @@ void Model::init()
 	btnNameR_ = BTN_NAME_R;
 }
 
+/**
+ * Initializer Method used by different Contructors to remove dublicated
+ * core
+ * @param imgCnt      amount of Images
+ * @param imgIndex    current Image Index
+ * @param imgSelector current Position of the Thumbnail Selector
+ */
 void Model::init(int imgCnt, int imgIndex, int imgSelector)
 {
 	imgCnt_ = imgCnt;
@@ -213,6 +243,10 @@ void Model::saveToThumbnail(std::string name)
 	updateImgCount();
 }
 
+/**
+ * Saves the ofImage to the thumbnail array.
+ * @param newImage Image Object that holds the new Thumbnail
+ */
 void Model::saveToThumbnail(ofImage newImage)
 {
 	thumbArr_[imgIndex_] = newImage;
@@ -525,6 +559,12 @@ ofImage * Model::getThumbnails()
 	return thumbArr_;
 }
 
+/**
+ * Calculates the Image index on a X, Y Position given
+ * @param  x mouse position
+ * @param  y mouse position
+ * @return   true if there is an Image
+ */
 bool Model::selectImage(int x, int y)
 {
 	bool isSelectable = false;
@@ -563,7 +603,10 @@ bool Model::selectImage(int x, int y)
 	return isSelectable;
 }
 
-
+/**
+ * Returns the filter which is in use right now
+ * @return the filter 
+ */
 module_filter * Model::getCurrentFilter()
 {
 	if (filterSelector_ <= 0 || filterVector_->size() <= 0) {
@@ -645,6 +688,13 @@ void Model::processOpenFileSelection(ofFileDialogResult openFileResult){
 	}
 }
 
+/**
+ * Saves a Image to Facebook. Requires a Valid access_token and username
+ * @param  imgName   Filename of the Image which should be uploaded
+ * @param  imgWidth  Width of the Image
+ * @param  imgHeight Height of the Image
+ * @return           true if upload was successfull
+ */
 bool Model::saveToFacebook(std::string imgName, int imgWidth, 
 	int imgHeight)
 {

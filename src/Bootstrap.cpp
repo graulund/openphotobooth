@@ -52,12 +52,18 @@ void Bootstrap::mousePressed(int x, int y, int button)
 	}
 }
 
+/**
+ * The only Method in the whole App that is responsible for switching 
+ * between the Cotrollers.
+ * @param newEvent events fired by the ofxUI as soon a Button is presed
+ */
 void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 {
 	string buttonName = newEvent.widget->getName();
 	ofxUIButton * button = (ofxUIButton *) newEvent.widget;
 
-	std::cout << button->getValue() << " BUTTON NAME " << buttonName << std::endl;
+	std::cout << button->getValue() 
+		<< " BUTTON NAME " << buttonName << std::endl;
 
 	if (buttonName == "MAINRIGHT")
 	{
@@ -68,12 +74,6 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 			controller_ = new FilterController(controller_, currentOffset);
 			lockModel_ = false;
 		}
-		// else if (button->getValue() == 0)
-		// {
-			// controller_ = new Controller(controller_, true);
-			// button->setValue(1);
-			// lockModel_ = false;
-		// }
 	}
 	if (buttonName == "PREVMIDDLE")
 	{
@@ -99,7 +99,9 @@ void Bootstrap::guiEvent(ofxUIEventArgs & newEvent)
 	{
 		if (button->getValue() == 1) {
 			int offset = controller_->getFilterOffset(), page = 8;
-			if (offset < 0 || offset + page > static_cast<FilterModel*>(controller_->getModel())->getFilterCount()) {
+			/* no andy, NO! It's an MVC!!!								*/
+			if (offset < 0 || offset + page > static_cast<FilterModel*>(
+				controller_->getModel())->getFilterCount()) {
 				offset = 0; // Loop around
 			} else {
 				offset += page;

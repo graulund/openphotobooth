@@ -1,5 +1,21 @@
+/*************************************************
+ File: PreviewController.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Controller for the Preview/state. Holds the Required 
+ models as a Reference. derived from the Main Controller. Adds specidif
+ Methods needed for the Preview.
+ *************************************************/
+
 #include "PreviewController.h"
 
+/**
+ * Copy Constructor to grep the Model and View from the Old Controller
+ */
 PreviewController::PreviewController(Controller * oldController) :
 	Controller(oldController)
 {
@@ -12,6 +28,10 @@ PreviewController::PreviewController(Controller * oldController) :
 	delete oldController;
 }
 
+/**
+ * Greps all the things needed for the State out of the Current Model
+ * then calls the required Methods in the View to draw it to the scene
+ */
 void PreviewController::draw()
 {
 	static_cast<PreviewView*>(view_)->drawPreview(
@@ -30,6 +50,10 @@ void PreviewController::draw()
 
 }
 
+/**
+ * [PreviewController::keyPressed description]
+ * @param key [description]
+ */
 void PreviewController::keyPressed(int key)
 {
 	static_cast<PreviewModel*>(model_)->editBubbleString(key);
@@ -46,6 +70,12 @@ void PreviewController::keyPressed(int key)
 	}
 }
 
+/**
+ * [PreviewController::mousePressed description]
+ * @param x      [description]
+ * @param y      [description]
+ * @param button [description]
+ */
 void PreviewController::mousePressed(int x, int y, int button)
 {
 	if (x < 640 && y < 480)
@@ -53,6 +83,10 @@ void PreviewController::mousePressed(int x, int y, int button)
 	isSelectable(x, y);
 }
 
+/**
+ * Gui events specific for the Preview State
+ * @param newEvent Event Object fired by ofxUI (mostly buttons)
+ */
 void PreviewController::guiEvent(ofxUIEventArgs & newEvent)
 {
 	string buttonName = newEvent.widget->getName();
@@ -82,6 +116,12 @@ void PreviewController::guiEvent(ofxUIEventArgs & newEvent)
 	}
 }
 
+/**
+ * Saves the Picture with the Word Bubble on it. I think there is no
+ * easyer way arround than this.
+ * @param  option Options defined in the Header File!
+ * @return        Filename of the new Image
+ */
 std::string PreviewController::saveWordBubble(int option)
 {
 	ofFbo fbo;

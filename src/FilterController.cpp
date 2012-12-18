@@ -1,20 +1,27 @@
+/*************************************************
+ File: FilterController.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Controller for the Filter-state. Holds the Required 
+ model(s) as a Reference. derived from the Main Controller. Adds 
+specific Methods needed for the Preview.
+ *************************************************/
+
 #include "FilterController.h"
 
 FilterController::FilterController(Controller * oldController, int offset) :
 	Controller(oldController), filterOffset_(offset)
 {
-	std::cout << "FILTER CONTROLLER CREATED WITH OFFSET " << filterOffset_ << std::endl;
-	
 	model_ = new FilterModel(oldController->getModel(), filterOffset_);
 	view_ = new FilterView(oldController->getView(), model_->getIconURL(), 
 		model_->getCamWidth(), model_->getCamHeight(), filterOffset_);
 
 	view_->setButtonLabel(1, model_->getButtonLabel(1));
 	view_->setButtonLabel(2, model_->getButtonLabel(2));
-
-	// view_->clearButtonStatus(1);
-	// view_->clearButtonStatus(2);
-	// view_->clearButtonStatus(3);
 
 	initName();
 
@@ -23,6 +30,10 @@ FilterController::FilterController(Controller * oldController, int offset) :
 	delete oldController;
 }
 
+/**
+ * Default Deconstrucor. Didnt fint a way so far to safe delete the old
+ * Model and View.
+ */
 FilterController::~FilterController()
 {
 	// delete model_;
@@ -37,8 +48,6 @@ void FilterController::update()
 void FilterController::mousePressed(int x, int y, int button)
 {
 	static_cast<FilterModel*>(model_)->selectFilter(x, y);
-	// std::cout << model_->getFilterSelector() << std::endl;
-	// Controller::mousePressed(x, y, button);
 }
 
 void FilterController::draw()

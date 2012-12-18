@@ -1,17 +1,31 @@
+/*************************************************
+ File: PreviewModel.cpp
+ By: Andy Graulund and Marcel Koglin
+ Date: 2012-12-17
+ 
+ Compile: Compiled using OpenFrameworks in Xcode environment, with ofxOpenCV, ofxUI and cURL
+ System: Runs on any system supporting OpenFrameworks (the compiled version on a Mac)
+ 
+ Description: Follows the MVC/Mediator Pattern. It does hold all the 
+ Data and Business logic. Called from the Controller. Model derived from
+ the Main Model. The only new Operation is to edit the Word Bubble string
+ *************************************************/
+
 #include "PreviewModel.h"
 
 PreviewModel::PreviewModel(Model * oldModel) : Model(oldModel, true)
 {
 	wordBubble_ = new module_wordBubble();
 	wordBubbleStr_ = new string("Enter Text Here");
-
-	// imgSelector_;
 	
 	bFirst_ = true;
 	showBubble_ = false;
 	init();
 }
 
+/**
+ * Initializer method to set the Button Names and Labels
+ */
 void PreviewModel::init()
 {
 	btnLabelL_ = BTN_LABL_L;
